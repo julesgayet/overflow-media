@@ -21,7 +21,7 @@ export function Cta() {
               <span className="text-gradient">quelques milliers de vues</span>
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-mist">
-              Dis-nous ce que tu veux pousser et sur quel budget. On te revient sous 24 h avec
+              Dis-nous ce que tu veux pousser et sur quel budget. On te revient sous 24 h avec
               une estimation de vues, un CPM cible et un calendrier.
             </p>
 

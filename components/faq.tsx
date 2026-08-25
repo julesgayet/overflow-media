@@ -15,7 +15,7 @@ export function Faq() {
                 <span className="text-gradient">savoir</span>
               </>
             }
-            subtitle="Il en manque une ? Écris-nous, on répond sous 24 h."
+            subtitle="Il en manque une ? Écris-nous, on répond sous 24 h."
           />
         </Reveal>
 

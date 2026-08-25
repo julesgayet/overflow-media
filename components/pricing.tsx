@@ -24,10 +24,15 @@ export function Pricing() {
                 À partir de {site.pricing.from}
                 <br className="hidden sm:block" /> {site.pricing.unit}.
               </h2>
-              <ul className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-white/85">
+              <ul className="mt-8 flex flex-col gap-2.5 text-sm text-white/85 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-2">
                 {site.pricing.bullets.map((b, i) => (
                   <li key={b} className="flex items-center gap-3">
-                    {i > 0 && <span aria-hidden className="text-white/35">/</span>}
+                    {i > 0 && (
+                      <span aria-hidden className="hidden text-white/35 sm:inline">
+                        /
+                      </span>
+                    )}
+                    <span aria-hidden className="size-1 shrink-0 rounded-full bg-white/45 sm:hidden" />
                     {b}
                   </li>
                 ))}

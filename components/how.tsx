@@ -31,8 +31,8 @@ function BriefPanel() {
   const rows = [
     ["Objectif", "Trafic & notoriété"],
     ["Plateformes", "TikTok · Reels · Shorts"],
-    ["CPM cible", "0,90 €"],
-    ["Budget", "5 000 €"],
+    ["CPM cible", "0,90 €"],
+    ["Budget", "5 000 €"],
   ];
   return (
     <div className="rounded-2xl border border-line-2 bg-surface-2 p-6">
@@ -89,10 +89,10 @@ function SpreadPanel() {
 
 function PayoutPanel() {
   const rows = [
-    ["@clip.marco", "1,2 M", "1 080 €"],
-    ["@edits.lina", "740 K", "666 €"],
-    ["@shorts.yanis", "410 K", "369 €"],
-    ["@vertical.co", "205 K", "184 €"],
+    ["@clip.marco", "1,2 M", "1 080 €"],
+    ["@edits.lina", "740 K", "666 €"],
+    ["@shorts.yanis", "410 K", "369 €"],
+    ["@vertical.co", "205 K", "184 €"],
   ];
   return (
     <div className="rounded-2xl border border-line-2 bg-surface-2 p-6">

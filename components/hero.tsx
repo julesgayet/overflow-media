@@ -97,7 +97,7 @@ export function Hero() {
                 <YouTube className="size-4" /> YouTube Shorts
               </span>
               <span className="hidden h-3 w-px bg-line-2 sm:block" />
-              <span>En ligne en 48 h · sans engagement</span>
+              <span>En ligne en 48 h · sans engagement</span>
             </div>
           </Reveal>
         </div>

@@ -147,7 +147,7 @@ export function Simulator() {
           <div className="mx-auto mt-12 max-w-5xl">
             {/* Sélecteur de mode */}
             <div
-              role="tablist"
+              role="group"
               aria-label="Point de vue du simulateur"
               className="mx-auto mb-6 flex w-fit rounded-full border border-line bg-surface/70 p-1 backdrop-blur"
             >
@@ -159,10 +159,10 @@ export function Simulator() {
               ).map(([key, label]) => (
                 <button
                   key={key}
-                  role="tab"
-                  aria-selected={mode === key}
+                  type="button"
+                  aria-pressed={mode === key}
                   onClick={() => setMode(key)}
-                  className={`rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 ${
+                  className={`rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-2 ${
                     mode === key
                       ? "bg-brand text-white shadow-[0_6px_24px_-8px_rgba(124,92,255,.9)]"
                       : "text-mist hover:text-white"
@@ -202,7 +202,7 @@ export function Simulator() {
                           max={S.cpmMax}
                           step={S.cpmStep}
                           onChange={setCpm}
-                          display={`${nfCpm.format(cpm)} / 1 000 vues`}
+                          display={`${nfCpm.format(cpm)} / 1 000 vues`}
                         />
                       </>
                     ) : (
@@ -225,7 +225,7 @@ export function Simulator() {
                           max={S.cpmMax}
                           step={S.cpmStep}
                           onChange={setClipperCpm}
-                          display={`${nfCpm.format(clipperCpm)} / 1 000 vues`}
+                          display={`${nfCpm.format(clipperCpm)} / 1 000 vues`}
                         />
                       </>
                     )}
@@ -236,6 +236,7 @@ export function Simulator() {
                         {S.nichePresets.map((n) => (
                           <button
                             key={n.key}
+                            type="button"
                             onClick={() => setNiche(n.key)}
                             aria-pressed={niche === n.key}
                             className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
@@ -253,7 +254,7 @@ export function Simulator() {
                 </div>
 
                 {/* Résultats */}
-                <div className="relative bg-surface p-7 md:p-9">
+                <div className="relative bg-surface p-7 md:p-9" aria-live="polite">
                   <div
                     aria-hidden
                     className="pointer-events-none absolute -right-20 -top-20 size-56 rounded-full bg-brand/15 blur-3xl"

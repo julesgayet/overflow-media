@@ -20,7 +20,7 @@ const beats = [
   {
     value: "4,5",
     unit: "millions de vues",
-    text: "Ce que produisent 300 clips à 15 000 vues de moyenne. Le contenu n'a pas changé — sa surface de contact, si.",
+    text: "Ce que produisent 300 clips à 15 000 vues de moyenne. Le contenu n'a pas changé — sa surface de contact, si.",
     tone: "accent" as const,
   },
 ];
@@ -83,11 +83,11 @@ function ReachVisual({ on }: { on: boolean }) {
       <div className="rounded-2xl border border-line-2 bg-surface-2 p-6">
         <div className="flex items-end justify-between">
           <div>
-            <div className="nums text-3xl font-semibold tracking-tight text-white">4 500 000</div>
+            <div className="nums text-3xl font-semibold tracking-tight text-white">4 500 000</div>
             <p className="mt-1 text-xs text-mist-2">vues cumulées sur 30 jours</p>
           </div>
           <span className="nums rounded-full border border-lime/30 bg-lime/10 px-2.5 py-1 text-[11px] font-medium text-lime">
-            +4,5 M
+            +4,5 M
           </span>
         </div>
         <div className="mt-7 flex h-32 items-end gap-1.5">

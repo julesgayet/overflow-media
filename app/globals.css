@@ -10,7 +10,7 @@
   --color-line-2: #2a2a42;
 
   --color-mist: #a5a5c0;
-  --color-mist-2: #6f6f8c;
+  --color-mist-2: #7c7c9a;
 
   --color-brand: #7c5cff;
   --color-brand-2: #a78bfa;
@@ -55,6 +55,14 @@ body {
 section[id] { scroll-margin-top: 90px; }
 
 ::selection { background: var(--color-brand); color: #fff; }
+
+/* Focus clavier visible partout (thème sombre) */
+:focus-visible {
+  outline: 2px solid var(--color-brand-2);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
