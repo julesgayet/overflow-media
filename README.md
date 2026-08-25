@@ -1,4 +1,4 @@
-# ClipForge — landing page
+# OverFlow Media — landing page
 
 Site vitrine d'agence de clipping, en français, prêt à déployer sur Vercel.
 Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · 100 % statique.
@@ -22,7 +22,7 @@ Tout le contenu éditable est dans un seul fichier : **`site.config.ts`**.
 
 | À remplacer | Où |
 |---|---|
-| Nom de l'agence (`ClipForge`) | `site.name`, `site.legalName` |
+| Nom de l'agence (`OverFlow Media`) | `site.name`, `site.legalName` |
 | Domaine et e-mail | `site.domain`, `site.email` |
 | **Liens Whop** (`https://whop.com/ton-whop`) | `site.links.whopClippers`, `site.links.whopBrands` |
 | Discord, TikTok, Instagram, X, YouTube | `site.links.*` |
@@ -45,7 +45,7 @@ Pour retirer une section : commente son composant dans `app/page.tsx`.
 ### Option A — via GitHub (recommandé, redéploie à chaque push)
 
 ```bash
-git remote add origin git@github.com:TON-COMPTE/clipforge.git
+git remote add origin git@github.com:TON-COMPTE/overflow-media.git
 git push -u origin main
 ```
 

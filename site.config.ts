@@ -9,19 +9,19 @@
 
 export const site = {
   // ── Identité ──────────────────────────────────────────────────────────────
-  name: "ClipForge",
-  legalName: "ClipForge", // raison sociale pour les mentions légales
+  name: "OverFlow Media",
+  legalName: "OverFlow Media", // raison sociale pour les mentions légales
   tagline: "L'agence de clipping qui transforme ton contenu en millions de vues",
   description:
     "Agence de clipping française. On recrute, on forme et on rémunère des centaines de clippeurs pour propulser ton contenu sur TikTok, Reels et Shorts. Paiements automatisés via Whop.",
-  domain: "clipforge.fr",
-  email: "contact@clipforge.fr",
+  domain: "overflowmedia.fr",
+  email: "contact@overflowmedia.fr",
 
   // ── Liens (⚠️ remplace par tes vraies URL Whop) ───────────────────────────
   links: {
     whopClippers: "https://whop.com/ton-whop", // page Whop pour les clippeurs
     whopBrands: "https://whop.com/ton-whop", // ou lien Calendly / formulaire marques
-    calendly: "mailto:contact@clipforge.fr?subject=Lancer%20une%20campagne%20de%20clipping",
+    calendly: "mailto:contact@overflowmedia.fr?subject=Lancer%20une%20campagne%20de%20clipping",
     discord: "https://discord.gg/ton-invite",
     tiktok: "https://www.tiktok.com/@ton-compte",
     instagram: "https://www.instagram.com/ton-compte",
