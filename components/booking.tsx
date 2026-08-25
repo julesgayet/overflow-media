@@ -33,7 +33,11 @@ export function Booking() {
           hideEventTypeDetails: false,
           cssVarsPerTheme: {
             light: { "cal-brand": "#7c5cff" },
-            dark: { "cal-brand": "#a78bfa" },
+            dark: {
+              "cal-brand": "#a78bfa",
+              "cal-bg": "#0d0d17",
+              "cal-bg-emphasis": "#1e1e30",
+            },
           },
         });
 
@@ -93,8 +97,13 @@ export function Booking() {
       <Cal
         namespace={NAMESPACE}
         calLink={CAL_LINK}
-        style={{ width: "100%", height: "100%", overflow: "scroll" }}
-        config={{ layout: "month_view", theme: "dark" }}
+        style={{ width: "100%" }}
+        config={{
+          layout: "month_view",
+          theme: "dark",
+          // Sans ça, le canevas du document embarqué reste blanc sous le calendrier
+          "ui.color-scheme": "dark",
+        }}
       />
     </div>
   );

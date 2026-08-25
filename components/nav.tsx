@@ -80,7 +80,7 @@ export function Nav() {
           >
             Devenir clippeur
           </a>
-          <Button href="#contact" variant="light" arrow>
+          <Button href="/reserver" variant="light" arrow>
             Lancer une campagne
           </Button>
         </div>
@@ -130,7 +130,7 @@ export function Nav() {
             </a>
           ))}
           <div className="mt-4 flex flex-col gap-3">
-            <Button href="#contact" variant="light" size="lg" arrow>
+            <Button href="/reserver" variant="light" size="lg" arrow>
               Lancer une campagne
             </Button>
             <Button href={site.links.whopClippers} variant="outline" size="lg">

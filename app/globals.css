@@ -163,6 +163,15 @@ input[type="range"].of-range:focus-visible::-webkit-slider-thumb {
   box-shadow: 0 0 0 9px rgba(124, 92, 255, 0.4);
 }
 
+/* ── Calendrier Cal.com ─────────────────────────────────────────────────── */
+/*  Le document servi dans l'iframe a un fond transparent : sans ça, le blanc
+    par défaut du navigateur apparaît sous le calendrier.                     */
+.cal-inline-container,
+.cal-inline-container iframe {
+  background: var(--color-surface);
+  color-scheme: dark;
+}
+
 /* ── Chiffres tabulaires pour les compteurs ─────────────────────────────── */
 @utility nums {
   font-variant-numeric: tabular-nums;

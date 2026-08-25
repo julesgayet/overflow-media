@@ -35,7 +35,7 @@ const cols = [
     title: "Contact",
     links: [
       { href: `mailto:${site.email}`, label: site.email },
-      { href: "#contact", label: "Lancer une campagne" },
+      { href: "/reserver", label: "Lancer une campagne" },
       { href: "/mentions-legales", label: "Mentions légales" },
     ],
   },

@@ -76,7 +76,7 @@ export function Hero() {
 
           <Reveal delay={240}>
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button href="#contact" variant="light" size="lg" arrow>
+              <Button href="/reserver" variant="light" size="lg" arrow>
                 Lancer une campagne
               </Button>
               <Button href="#simulateur" variant="outline" size="lg">

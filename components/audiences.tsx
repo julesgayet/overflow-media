@@ -23,7 +23,7 @@ export function Audiences() {
           {site.niches.map((n, i) => (
             <Reveal key={n.title} delay={i * 70}>
               <a
-                href="#contact"
+                href="/reserver"
                 className="group flex items-center gap-5 border-b border-line py-6 transition-colors hover:bg-white/[0.02] md:gap-8 md:py-7"
               >
                 <span className="nums w-7 shrink-0 text-xs text-mist-2 transition-colors group-hover:text-brand-2">
