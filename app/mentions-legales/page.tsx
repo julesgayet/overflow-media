@@ -63,10 +63,18 @@ export default function MentionsLegales() {
             <h2 className="mb-3 text-base font-semibold text-white">Données personnelles</h2>
             <p>
               Ce site ne dépose aucun cookie de mesure d&apos;audience ni de traceur publicitaire.
-              Les seules données traitées sont celles que vous nous transmettez volontairement par
-              e-mail, utilisées uniquement pour répondre à votre demande. Conformément au RGPD,
-              vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression que
-              vous pouvez exercer à l&apos;adresse {site.email}.
+              La page de réservation intègre un calendrier fourni par <strong>Cal.com</strong> : à
+              son chargement, votre navigateur se connecte aux serveurs de Cal.com, qui peut
+              déposer les cookies nécessaires à son fonctionnement et traiter les informations que
+              vous saisissez pour réserver un créneau (nom, e-mail, créneau choisi). Ce traitement
+              est régi par la politique de confidentialité de Cal, Inc.
+            </p>
+            <p className="mt-4">
+              Les autres données traitées sont celles que vous nous transmettez volontairement par
+              e-mail, utilisées uniquement pour répondre à votre demande et conservées le temps de
+              l&apos;échange commercial. Conformément au RGPD, vous disposez d&apos;un droit
+              d&apos;accès, de rectification, d&apos;opposition et de suppression, que vous pouvez
+              exercer à l&apos;adresse {site.email}.
             </p>
           </section>
 

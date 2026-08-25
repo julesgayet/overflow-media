@@ -21,12 +21,21 @@ export const site = {
   links: {
     whopClippers: "https://whop.com/ton-whop",
     whopBrands: "https://whop.com/ton-whop",
-    calendly: "mailto:contact@overflowmedia.fr?subject=Lancer%20une%20campagne%20de%20clipping",
     discord: "https://discord.gg/ton-invite",
     tiktok: "https://www.tiktok.com/@ton-compte",
     instagram: "https://www.instagram.com/ton-compte",
     x: "https://x.com/ton-compte",
     youtube: "https://www.youtube.com/@ton-compte",
+  },
+
+  // ── Cal.com ───────────────────────────────────────────────────────────────
+  //   Le calendrier est intégré dans la section « contact » en bas de page.
+  //   `event` doit correspondre au slug de ton type d'événement Cal.com :
+  //   cal.com/{username}/{event} — ici cal.com/overflow-media/campagne-clipping
+  calcom: {
+    username: "overflow-media",
+    event: "campagne-clipping",
+    duration: "15 min",
   },
 
   // ── Bandeau de chiffres du hero (PLACEHOLDERS) ────────────────────────────

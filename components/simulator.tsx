@@ -333,7 +333,7 @@ export function Simulator() {
                   la qualité des montages.
                 </p>
                 <Button
-                  href={mode === "brand" ? site.links.calendly : site.links.whopClippers}
+                  href={mode === "brand" ? "#contact" : site.links.whopClippers}
                   variant={mode === "brand" ? "light" : "primary"}
                   arrow
                   className="w-full shrink-0 sm:w-auto"
