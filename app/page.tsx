@@ -1,10 +1,13 @@
 import { site } from "@/site.config";
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
-import { Stats } from "@/components/stats";
-import { Offer } from "@/components/offer";
-import { Method } from "@/components/method";
+import { FeedMath } from "@/components/feed-math";
+import { Audiences } from "@/components/audiences";
+import { How } from "@/components/how";
+import { Simulator } from "@/components/simulator";
+import { Pricing } from "@/components/pricing";
 import { Campaigns } from "@/components/campaigns";
+import { Verification } from "@/components/verification";
 import { Clippers } from "@/components/clippers";
 import { Testimonials } from "@/components/testimonials";
 import { Faq } from "@/components/faq";
@@ -40,10 +43,13 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Stats />
-        <Offer />
-        <Method />
+        <FeedMath />
+        <Audiences />
+        <How />
+        <Simulator />
+        <Pricing />
         <Campaigns />
+        <Verification />
         <Clippers />
         <Testimonials />
         <Faq />

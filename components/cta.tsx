@@ -26,7 +26,7 @@ export function Cta() {
             </p>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button href={site.links.calendly} size="lg" arrow>
+              <Button href={site.links.calendly} variant="light" size="lg" arrow>
                 Lancer une campagne
               </Button>
               <Button href={site.links.whopClippers} variant="outline" size="lg">

@@ -21,7 +21,15 @@ export function Campaigns() {
           {site.campaigns.map((c, i) => (
             <Reveal key={c.client} delay={i * 90}>
               <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface/70 p-6 transition-colors hover:border-brand/40">
-                <div className="flex items-start justify-between gap-3">
+                {/* Filigrane */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -right-4 top-16 select-none text-6xl font-bold tracking-tighter text-white/[0.03] transition-transform duration-500 group-hover:scale-105"
+                >
+                  {c.client.split(" ")[0]}
+                </span>
+
+                <div className="relative flex items-start justify-between gap-3">
                   <div>
                     <h3 className="text-base font-semibold tracking-tight">{c.client}</h3>
                     <p className="mt-1 text-xs text-mist-2">{c.niche}</p>
@@ -37,23 +45,23 @@ export function Campaigns() {
                   </span>
                 </div>
 
-                <div className="mt-6 grid grid-cols-2 gap-4">
-                  <div>
-                    <div className="text-[10px] uppercase tracking-[0.16em] text-mist-2">CPM</div>
-                    <div className="mt-1 font-mono text-xl font-semibold text-white">{c.cpm}</div>
-                    <div className="text-[10px] text-mist-2">/ 1 000 vues</div>
-                  </div>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-[0.16em] text-mist-2">Budget</div>
-                    <div className="mt-1 font-mono text-xl font-semibold text-white">{c.budget}</div>
-                    <div className="text-[10px] text-mist-2">bloqué sur Whop</div>
-                  </div>
+                <div className="relative mt-6 grid grid-cols-3 gap-3">
+                  {[
+                    ["CPM", c.cpm],
+                    ["Budget", c.budget],
+                    ["Vues", c.views],
+                  ].map(([k, v]) => (
+                    <div key={k}>
+                      <div className="text-[10px] uppercase tracking-[0.14em] text-mist-2">{k}</div>
+                      <div className="nums mt-1 text-lg font-semibold text-white">{v}</div>
+                    </div>
+                  ))}
                 </div>
 
-                <div className="mt-6">
+                <div className="relative mt-6">
                   <div className="flex items-center justify-between text-[11px] text-mist-2">
                     <span>Budget consommé</span>
-                    <span className="font-mono text-mist">{c.progress}%</span>
+                    <span className="nums text-mist">{c.progress}%</span>
                   </div>
                   <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-line">
                     <div
@@ -63,7 +71,7 @@ export function Campaigns() {
                   </div>
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-1.5 border-t border-line pt-5">
+                <div className="relative mt-6 flex flex-wrap gap-1.5 border-t border-line pt-5">
                   {c.platforms.map((p) => (
                     <span
                       key={p}

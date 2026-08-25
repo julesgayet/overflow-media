@@ -14,8 +14,11 @@ const cols = [
   {
     title: "Agence",
     links: [
-      { href: "#offre", label: "L'offre" },
       { href: "#methode", label: "Méthode" },
+      { href: "#simulateur", label: "Simulateur" },
+      { href: "#tarifs", label: "Tarifs" },
+      { href: "#pour-qui", label: "Pour qui" },
+      { href: "#verification", label: "Vérification" },
       { href: "#campagnes", label: "Campagnes" },
       { href: "#faq", label: "FAQ" },
     ],

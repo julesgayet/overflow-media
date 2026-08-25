@@ -48,7 +48,7 @@ export function Reveal({
 type BtnProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "ghost" | "outline";
+  variant?: "primary" | "light" | "ghost" | "outline";
   size?: "md" | "lg";
   arrow?: boolean;
   className?: string;
@@ -66,6 +66,8 @@ export function Button({
   const variants = {
     primary:
       "bg-brand text-white shadow-[0_0_0_1px_rgba(167,139,250,.35),0_10px_40px_-10px_rgba(124,92,255,.9)] hover:bg-brand-2 hover:shadow-[0_0_0_1px_rgba(167,139,250,.6),0_14px_50px_-8px_rgba(124,92,255,1)]",
+    light:
+      "bg-white text-ink shadow-[0_0_0_1px_rgba(255,255,255,.2),0_10px_36px_-12px_rgba(255,255,255,.45)] hover:bg-white/90",
     outline:
       "border border-line-2 bg-white/[0.03] text-white backdrop-blur hover:border-brand/60 hover:bg-white/[0.06]",
     ghost: "text-mist hover:text-white",
@@ -128,9 +130,7 @@ export function SectionHeading({
   return (
     <div className={`max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
       {eyebrow && (
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-2">
-          {eyebrow}
-        </p>
+        <Eyebrow className={`mb-5 ${center ? "justify-center" : ""}`}>{eyebrow}</Eyebrow>
       )}
       <h2 className="text-balance text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl md:text-5xl">
         {title}
@@ -161,5 +161,88 @@ export function GlowCard({
       </div>
       <div className="relative">{children}</div>
     </div>
+  );
+}
+
+/* ── Eyebrow avec pastille lumineuse ─────────────────────────────────────── */
+export function Eyebrow({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <p
+      className={`flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-mist ${className}`}
+    >
+      <span className="relative flex size-1.5">
+        <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-60" />
+        <span className="relative inline-flex size-1.5 rounded-full bg-brand-2" />
+      </span>
+      {children}
+    </p>
+  );
+}
+
+/* ── Compteur animé au scroll ────────────────────────────────────────────── */
+export function CountUp({
+  to,
+  prefix = "",
+  suffix = "",
+  duration = 1600,
+  className = "",
+}: {
+  to: number;
+  prefix?: string;
+  suffix?: string;
+  duration?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setValue(to);
+      return;
+    }
+
+    let raf = 0;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        const start = performance.now();
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - start) / duration);
+          // easeOutExpo
+          const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+          setValue(to * eased);
+          if (t < 1) raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [to, duration]);
+
+  const display = to % 1 === 0 ? Math.round(value) : value.toFixed(1);
+
+  return (
+    <span ref={ref} className={`nums ${className}`}>
+      {prefix}
+      {display}
+      {suffix}
+    </span>
   );
 }

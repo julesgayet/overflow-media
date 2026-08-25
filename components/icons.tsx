@@ -24,8 +24,9 @@ export const Users = (p: P) => (
 );
 export const Wallet = (p: P) => (
   <svg {...base(p)}>
-    <path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h15a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5" />
-    <path d="M17 13h.01" />
+    <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6H18a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z" />
+    <path d="M3 8.5V7a2 2 0 0 1 1.4-1.91l9.4-2.95A1.4 1.4 0 0 1 15.6 3.5V6" />
+    <path d="M21 11.5h-3.5a1.5 1.5 0 0 0 0 3H21" />
   </svg>
 );
 export const Chart = (p: P) => (
