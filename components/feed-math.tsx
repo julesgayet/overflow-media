@@ -191,7 +191,7 @@ export function FeedMath() {
                           <span
                             className={`nums text-[4rem] font-semibold leading-[0.9] tracking-[-0.04em] transition-colors duration-500 sm:text-[5.5rem] ${
                               b.tone === "dim"
-                                ? "text-mist-2"
+                                ? "text-mist"
                                 : b.tone === "accent"
                                   ? "text-brand"
                                   : "text-ink"
