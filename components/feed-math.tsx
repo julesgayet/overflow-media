@@ -2,13 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Eyebrow } from "./ui";
-import { Play } from "./icons";
 
 const beats = [
   {
     value: "1",
-    unit: "vidéo",
-    text: "Votre podcast, votre live, votre vidéo YouTube. Un seul format, une seule audience, une seule chance de percer.",
+    unit: "brief",
+    text: "Podcasts, lives, vidéos YouTube, clips musicaux, interviews : tout ce que vous voulez diffuser, réuni dans un seul brief de campagne.",
     tone: "dim" as const,
   },
   {
@@ -27,27 +26,25 @@ const beats = [
 
 /* ── Visuels ─────────────────────────────────────────────────────────────── */
 
+const sourceFormats = ["Podcast", "Vidéo YouTube", "Live", "Clip musical", "Interview", "Replay"];
+
 function SourceVisual() {
   return (
     <div className="mx-auto w-full max-w-md">
-      <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink">
+      <div className="relative flex aspect-video flex-wrap content-center items-center justify-center gap-2 overflow-hidden rounded-2xl bg-ink p-7">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,.10),transparent_65%)]" />
-        <div className="absolute inset-0 grid place-items-center">
-          <span className="grid size-14 place-items-center rounded-full border border-white/20 bg-white/10 backdrop-blur">
-            <Play className="size-5 translate-x-0.5 text-white/80" />
+        {sourceFormats.map((f) => (
+          <span
+            key={f}
+            className="relative rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 text-xs text-white/80"
+          >
+            {f}
           </span>
-        </div>
-        <div className="absolute inset-x-5 bottom-5">
-          <div className="h-1 rounded-full bg-white/12">
-            <div className="h-full w-1/3 rounded-full bg-white/40" />
-          </div>
-          <div className="mt-2.5 flex justify-between text-[10px] text-white/40">
-            <span className="nums">14:22</span>
-            <span className="nums">42:18</span>
-          </div>
-        </div>
+        ))}
       </div>
-      <p className="mt-4 text-center text-xs text-mist-2">1 vidéo source · 1 seule publication</p>
+      <p className="mt-4 text-center text-xs text-mist-2">
+        vos contenus, quel qu&apos;en soit le format
+      </p>
     </div>
   );
 }
