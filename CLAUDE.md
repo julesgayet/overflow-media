@@ -5,6 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Landing page d'OverFlow Media, agence de clipping française. Next.js 16 (App Router),
 React 19, Tailwind v4, TypeScript. 100 % statique, déployé sur Vercel.
 
+La page **s'adresse aux marques**, jamais aux clippeurs : aucun contenu de recrutement,
+et le réseau de diffusion ne se nomme pas « clippeurs » (« créateur » désigne déjà les
+clients). On dit « réseau », « comptes diffuseurs ». Vouvoiement partout dans la copie ;
+les commentaires et URL placeholder qui s'adressent au mainteneur gardent le tutoiement.
+
 **La langue du projet est le français** : copie de l'interface, commentaires et messages
 de commit. S'y tenir.
 
@@ -73,6 +78,20 @@ fait 66° — la resserrer referme la boucle optiquement et le symbole devient u
 
 - `components/ui.tsx` → `Reveal` : fondu + montée à l'entrée dans le viewport
   (IntersectionObserver, classes `.reveal` / `.is-visible`).
+- `components/proof-arc.tsx` → `ProofArc` : les vignettes de preuve se rassemblent en
+  cercle puis se déploient en arc au scroll. Seul endroit qui utilise **framer-motion**.
+
+  Trois contraintes à ne pas casser : la chorégraphie est pilotée par le **scroll réel**
+  (section haute + `sticky`), jamais par un scroll virtuel qui piégerait le visiteur ;
+  les positions passent par des `MotionValue`, pas par du state, sinon douze cartes
+  re-rendues par frame font tomber le défilement ; et l'origine du repère est le **centre**
+  de la scène (`place-items-center`), pas son coin haut-gauche — le rayon de l'arc s'en
+  déduit pour tenir dans l'écran, sinon les vignettes sortent du cadre.
+
+  Les vignettes bouclent sur une bande (« tapis roulant ») un peu plus large que l'arc
+  visible, et s'effacent aux extrémités : sans ce bouclage l'arc se vide en défilant, et
+  un mur de preuves qui se dépeuple ne prouve plus rien.
+
 - `components/tilt-card.tsx` → `TiltCard` : carte qui s'incline vers le curseur. **Le
   composant n'écrit que des variables CSS** ; la perspective, le halo et la garde
   `prefers-reduced-motion` vivent dans le bloc `.tilt-card` de `globals.css`. Sans ce CSS,

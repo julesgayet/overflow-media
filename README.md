@@ -1,7 +1,7 @@
 # OverFlow Media — landing page
 
 Site vitrine d'agence de clipping, en français, prêt à déployer sur Vercel.
-Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript · 100 % statique.
+Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · framer-motion · TypeScript · 100 % statique.
 
 ---
 
@@ -29,6 +29,7 @@ Tout le contenu éditable est dans un seul fichier : **`site.config.ts`**.
 | **Chiffres du bandeau** (120M+, 850+, 180K€…) | `site.stats` |
 | **Campagnes affichées** | `site.campaigns` |
 | **Témoignages** | `site.testimonials` |
+| **Vignettes du mur de preuves** | `site.proofs` |
 | SIRET, adresse, directeur de publication | `site.legal` |
 
 > Les chiffres, campagnes et témoignages livrés sont des **exemples de démonstration**.
@@ -87,7 +88,9 @@ components/
   icons.tsx             icônes SVG (aucune dépendance externe)
 ```
 
-Aucune dépendance en dehors de Next, React et Tailwind : rien à maintenir, rien qui casse.
+Une seule dépendance hors Next / React / Tailwind : **framer-motion**, qui pilote le mur
+de preuves (`components/proof-arc.tsx`). Tout le reste tient en CSS et en observateurs
+natifs.
 
 ---
 

@@ -1,44 +1,6 @@
 import { site } from "@/site.config";
 import { Badge, Button, CountUp, Reveal } from "./ui";
-import { Play, Sparkle, TikTok, Instagram, YouTube } from "./icons";
-
-/*  Les vignettes restent sombres : ce sont des aperçus vidéo, pas des cartes
- *  d'interface. La charte les traite comme de la matière filmée posée sur le
- *  fond clair — aucune couleur ajoutée, seul le compteur de vues les
- *  différencie.                                                              */
-const clips = [
-  { views: "2,4M", tag: "TikTok" },
-  { views: "870K", tag: "Reels" },
-  { views: "1,1M", tag: "Shorts" },
-  { views: "430K", tag: "TikTok" },
-  { views: "3,6M", tag: "Reels" },
-  { views: "620K", tag: "Shorts" },
-];
-
-function ClipCard({ c, i }: { c: (typeof clips)[number]; i: number }) {
-  return (
-    <div
-      className="group relative aspect-[9/16] w-[132px] shrink-0 overflow-hidden rounded-xl bg-ink sm:w-[152px]"
-      style={{ transform: `translateY(${(i % 3) * 10}px)` }}
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,.09),transparent_65%)]" />
-      <div className="absolute left-2.5 top-2.5 rounded-md bg-white/10 px-2 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
-        {c.tag}
-      </div>
-      <div className="absolute inset-0 grid place-items-center">
-        <span className="grid size-9 place-items-center rounded-full bg-white/15 backdrop-blur transition-transform duration-300 group-hover:scale-110">
-          <Play className="size-3.5 translate-x-px text-white" />
-        </span>
-      </div>
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-2.5 pt-8">
-        <div className="flex items-center gap-1.5">
-          <span className="nums text-xs font-medium text-white">{c.views}</span>
-          <span className="text-[10px] text-white/50">vues</span>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { Sparkle, TikTok, Instagram, YouTube } from "./icons";
 
 export function Hero() {
   return (
@@ -117,16 +79,6 @@ export function Hero() {
         </Reveal>
       </div>
 
-      {/* Bande de clips défilante */}
-      <div className="relative pb-20 md:pb-24">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-ground to-transparent md:w-48" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-ground to-transparent md:w-48" />
-        <div className="flex w-max animate-marquee gap-4 pr-4">
-          {[...clips, ...clips].map((c, i) => (
-            <ClipCard key={i} c={c} i={i} />
-          ))}
-        </div>
-      </div>
     </section>
   );
 }

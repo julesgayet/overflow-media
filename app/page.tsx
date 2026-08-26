@@ -1,6 +1,7 @@
 import { site } from "@/site.config";
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
+import { ProofArc } from "@/components/proof-arc";
 import { FeedMath } from "@/components/feed-math";
 import { Audiences } from "@/components/audiences";
 import { How } from "@/components/how";
@@ -42,6 +43,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <ProofArc />
         <FeedMath />
         <Audiences />
         <How />
