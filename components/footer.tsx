@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/site.config";
+import { Logo } from "./logo";
 import { Discord, Instagram, TikTok, XIcon, YouTube } from "./icons";
 
 const socials = [
@@ -43,16 +44,11 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-ink-2/60">
+    <footer className="border-t border-line bg-surface-2">
       <div className="container-x py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-accent">
-                <span className="size-2.5 rounded-[3px] bg-ink" />
-              </span>
-              <span className="text-[17px] font-semibold tracking-tight">{site.name}</span>
-            </div>
+            <Logo />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-mist">{site.tagline}.</p>
             <div className="mt-6 flex gap-2">
               {socials.map(({ href, label, Icon }) => (
@@ -62,7 +58,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="grid size-10 place-items-center rounded-lg border border-line text-mist transition-colors hover:border-line-2 hover:text-white"
+                  className="grid size-10 place-items-center rounded-lg border border-line text-mist transition-colors hover:border-line-2 hover:text-ink"
                 >
                   <Icon className="size-4" />
                 </a>
@@ -81,7 +77,7 @@ export function Footer() {
                     {l.href.startsWith("/") ? (
                       <Link
                         href={l.href}
-                        className="text-sm text-mist transition-colors hover:text-white"
+                        className="text-sm text-mist transition-colors hover:text-ink"
                       >
                         {l.label}
                       </Link>
@@ -90,7 +86,7 @@ export function Footer() {
                         href={l.href}
                         target={l.href.startsWith("http") ? "_blank" : undefined}
                         rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="text-sm text-mist transition-colors hover:text-white"
+                        className="text-sm text-mist transition-colors hover:text-ink"
                       >
                         {l.label}
                       </a>

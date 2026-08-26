@@ -5,11 +5,13 @@ export function Pricing() {
   return (
     <section
       id="tarifs"
-      className="relative overflow-hidden bg-[#5b34e6] bg-gradient-to-br from-[#6d4bf0] via-[#5b34e6] to-[#4726c9] py-20 md:py-28"
+      /*  Seul bandeau plein-cadre de la page : il sert d'ancrage sombre dans
+          le rythme clair, et concentre la seule vraie prise de parole. */
+      className="relative overflow-hidden bg-ink py-20 md:py-28"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.16] [background-image:radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:28px_28px]"
+        className="pointer-events-none absolute inset-0 opacity-[0.10] [background-image:radial-gradient(circle_at_1px_1px,#fff_1px,transparent_0)] [background-size:28px_28px]"
       />
 
       <div className="container-x relative">
@@ -44,7 +46,7 @@ export function Pricing() {
                 href="#simulateur"
                 size="lg"
                 arrow
-                className="!bg-white !text-[#4726c9] !shadow-[0_10px_40px_-12px_rgba(0,0,0,.6)] hover:!bg-white/90"
+                className="!bg-brand !text-white hover:!bg-accent"
               >
                 Estimer ma campagne
               </Button>

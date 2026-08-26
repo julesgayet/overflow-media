@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { site } from "@/site.config";
 import { Button } from "./ui";
+import { Logo } from "./logo";
 
 const links = [
   { href: "#methode", label: "Méthode" },
@@ -40,7 +41,7 @@ export function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "border-b border-line/80 bg-ink/75 backdrop-blur-xl" : "border-b border-transparent"
+        scrolled ? "border-b border-line bg-ground/85 backdrop-blur-xl" : "border-b border-transparent"
       }`}
     >
       {/* Barre de progression de lecture */}
@@ -52,10 +53,7 @@ export function Nav() {
 
       <nav className="container-x flex h-[72px] items-center justify-between gap-6">
         <a href="#top" className="flex shrink-0 items-center gap-2.5" aria-label={site.name}>
-          <span className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-accent">
-            <span className="size-2.5 rounded-[3px] bg-ink" />
-          </span>
-          <span className="text-[17px] font-semibold tracking-tight">{site.name}</span>
+          <Logo />
         </a>
 
         <ul className="hidden items-center gap-0.5 lg:flex">
@@ -63,7 +61,7 @@ export function Nav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="rounded-full px-3 py-2 text-sm text-mist transition-colors hover:bg-white/[0.05] hover:text-white"
+                className="rounded-full px-3 py-2 text-sm text-mist transition-colors hover:bg-surface-2 hover:text-ink"
               >
                 {l.label}
               </a>
@@ -76,7 +74,7 @@ export function Nav() {
             href={site.links.whopClippers}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-mist transition-colors hover:text-white"
+            className="text-sm text-mist transition-colors hover:text-ink"
           >
             Devenir clippeur
           </a>
@@ -94,17 +92,17 @@ export function Nav() {
         >
           <span className="relative block h-3.5 w-5">
             <span
-              className={`absolute left-0 h-px w-5 bg-white transition-all duration-300 ${
+              className={`absolute left-0 h-px w-5 bg-ink transition-all duration-300 ${
                 open ? "top-1.5 rotate-45" : "top-0"
               }`}
             />
             <span
-              className={`absolute left-0 top-1.5 h-px w-5 bg-white transition-opacity duration-200 ${
+              className={`absolute left-0 top-1.5 h-px w-5 bg-ink transition-opacity duration-200 ${
                 open ? "opacity-0" : "opacity-100"
               }`}
             />
             <span
-              className={`absolute left-0 h-px w-5 bg-white transition-all duration-300 ${
+              className={`absolute left-0 h-px w-5 bg-ink transition-all duration-300 ${
                 open ? "top-1.5 -rotate-45" : "top-3"
               }`}
             />
@@ -114,7 +112,7 @@ export function Nav() {
 
       {/* Menu mobile */}
       <div
-        className={`overflow-hidden border-t border-line bg-ink/95 backdrop-blur-xl transition-[max-height] duration-500 md:hidden ${
+        className={`overflow-hidden border-t border-line bg-ground/95 backdrop-blur-xl transition-[max-height] duration-500 md:hidden ${
           open ? "max-h-[560px]" : "max-h-0 border-t-transparent"
         }`}
       >
@@ -124,7 +122,7 @@ export function Nav() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-3 text-base text-mist transition-colors hover:bg-white/5 hover:text-white"
+              className="rounded-lg px-3 py-3 text-base text-mist transition-colors hover:bg-surface-2 hover:text-ink"
             >
               {l.label}
             </a>

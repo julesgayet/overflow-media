@@ -12,7 +12,6 @@ export function Cta() {
   return (
     <section id="contact" className="relative overflow-hidden py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-1/2 size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/[0.13] blur-[140px]" />
       </div>
 
       <div className="container-x">
@@ -56,7 +55,7 @@ export function Cta() {
               Ou écris-nous directement :
               <a
                 href={`mailto:${site.email}?subject=Lancer%20une%20campagne%20de%20clipping`}
-                className="group inline-flex items-center gap-1.5 font-medium text-white transition-colors hover:text-brand-2"
+                className="group inline-flex items-center gap-1.5 font-medium text-ink transition-colors hover:text-brand-2"
               >
                 {site.email}
                 <Arrow className="size-3.5 transition-transform group-hover:translate-x-1" />

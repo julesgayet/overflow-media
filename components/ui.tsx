@@ -63,18 +63,18 @@ export function Button({
   className = "",
 }: BtnProps) {
   const sizes = size === "lg" ? "h-14 px-8 text-[15px]" : "h-11 px-5 text-sm";
+  /*  La profondeur vient de la bordure et du contraste, pas du relief : plus
+   *  aucune ombre colorée ni halo, conformément à la charte.                 */
   const variants = {
-    primary:
-      "bg-brand text-white shadow-[0_0_0_1px_rgba(167,139,250,.35),0_10px_40px_-10px_rgba(124,92,255,.9)] hover:bg-brand-2 hover:shadow-[0_0_0_1px_rgba(167,139,250,.6),0_14px_50px_-8px_rgba(124,92,255,1)]",
-    light:
-      "bg-white text-ink shadow-[0_0_0_1px_rgba(255,255,255,.2),0_10px_36px_-12px_rgba(255,255,255,.45)] hover:bg-white/90",
-    outline:
-      "border border-line-2 bg-white/[0.03] text-white backdrop-blur hover:border-brand/60 hover:bg-white/[0.06]",
-    ghost: "text-mist hover:text-white",
+    primary: "bg-brand text-white hover:bg-brand-2",
+    // « light » = le bouton sombre, qui tranche le plus sur le fond perle.
+    light: "bg-ink text-white hover:bg-ink/90",
+    outline: "border border-line-2 bg-surface text-ink hover:border-mist-2 hover:bg-surface-2",
+    ghost: "text-mist hover:text-ink",
   }[variant];
 
   const external = href.startsWith("http") || href.startsWith("mailto:");
-  const cls = `group inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-all duration-300 ${sizes} ${variants} ${className}`;
+  const cls = `group inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-colors duration-200 ${sizes} ${variants} ${className}`;
 
   const inner = (
     <>
@@ -108,7 +108,7 @@ export function Badge({
   icon?: React.ReactNode;
 }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-line-2 bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-mist backdrop-blur">
+    <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-xs font-medium text-mist">
       {icon}
       {children}
     </span>
@@ -153,13 +153,12 @@ export function GlowCard({
   className?: string;
 }) {
   return (
+    /*  Le halo au survol appartenait au thème néon. Sur fond clair la carte se
+        signale par sa bordure qui se resserre — plus sobre, plus premium.    */
     <div
-      className={`group relative overflow-hidden rounded-2xl border border-line bg-surface/70 p-6 backdrop-blur transition-colors duration-300 hover:border-line-2 ${className}`}
+      className={`group relative overflow-hidden rounded-2xl border border-line bg-surface p-6 transition-colors duration-200 hover:border-mist-2 ${className}`}
     >
-      <div className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-        <div className="absolute -top-24 left-1/2 size-56 -translate-x-1/2 rounded-full bg-brand/20 blur-3xl" />
-      </div>
-      <div className="relative">{children}</div>
+      {children}
     </div>
   );
 }
@@ -176,10 +175,7 @@ export function Eyebrow({
     <p
       className={`flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-mist ${className}`}
     >
-      <span className="relative flex size-1.5">
-        <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-60" />
-        <span className="relative inline-flex size-1.5 rounded-full bg-brand-2" />
-      </span>
+      <span className="relative inline-flex size-1.5 shrink-0 rounded-full bg-brand" />
       {children}
     </p>
   );

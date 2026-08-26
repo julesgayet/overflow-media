@@ -15,7 +15,7 @@ export default function MentionsLegales() {
       <main className="container-x py-24 md:py-32">
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 text-sm text-mist transition-colors hover:text-white"
+          className="group inline-flex items-center gap-2 text-sm text-mist transition-colors hover:text-ink"
         >
           <Arrow className="size-4 rotate-180 transition-transform group-hover:-translate-x-1" />
           Retour à l&apos;accueil
@@ -27,7 +27,7 @@ export default function MentionsLegales() {
 
         <div className="mt-12 max-w-2xl space-y-10 text-sm leading-relaxed text-mist">
           <section>
-            <h2 className="mb-3 text-base font-semibold text-white">Éditeur du site</h2>
+            <h2 className="mb-3 text-base font-semibold text-ink">Éditeur du site</h2>
             <p>
               {site.legalName}
               <br />
@@ -45,12 +45,12 @@ export default function MentionsLegales() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-base font-semibold text-white">Hébergement</h2>
+            <h2 className="mb-3 text-base font-semibold text-ink">Hébergement</h2>
             <p>{site.legal.host}</p>
           </section>
 
           <section>
-            <h2 className="mb-3 text-base font-semibold text-white">Propriété intellectuelle</h2>
+            <h2 className="mb-3 text-base font-semibold text-ink">Propriété intellectuelle</h2>
             <p>
               L&apos;ensemble des contenus présents sur ce site (textes, éléments graphiques,
               identité visuelle) est la propriété de {site.legalName}, sauf mention contraire.
@@ -60,7 +60,7 @@ export default function MentionsLegales() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-base font-semibold text-white">Données personnelles</h2>
+            <h2 className="mb-3 text-base font-semibold text-ink">Données personnelles</h2>
             <p>
               Ce site ne dépose aucun cookie de mesure d&apos;audience ni de traceur publicitaire.
               La page de réservation intègre un calendrier fourni par <strong>Cal.com</strong> : à
@@ -79,7 +79,7 @@ export default function MentionsLegales() {
           </section>
 
           <section>
-            <h2 className="mb-3 text-base font-semibold text-white">Prestations</h2>
+            <h2 className="mb-3 text-base font-semibold text-ink">Prestations</h2>
             <p>
               Les campagnes de clipping et la rémunération des clippeurs sont opérées via la
               plateforme Whop, soumise à ses propres conditions générales. Les modalités précises

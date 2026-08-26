@@ -1,5 +1,6 @@
 import { site } from "@/site.config";
 import { Button, Reveal, SectionHeading } from "./ui";
+import { TiltCard } from "./tilt-card";
 
 export function Campaigns() {
   return (
@@ -20,11 +21,14 @@ export function Campaigns() {
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           {site.campaigns.map((c, i) => (
             <Reveal key={c.client} delay={i * 90}>
-              <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface/70 p-6 transition-colors hover:border-brand/40">
+              <TiltCard
+                className="group h-full rounded-2xl border border-line bg-surface p-6 hover:border-brand/40"
+                contentClassName="flex h-full flex-col"
+              >
                 {/* Filigrane */}
                 <span
                   aria-hidden
-                  className="pointer-events-none absolute -right-4 top-16 select-none text-6xl font-bold tracking-tighter text-white/[0.03] transition-transform duration-500 group-hover:scale-105"
+                  className="pointer-events-none absolute -right-4 top-16 select-none text-6xl font-bold tracking-tighter text-ink/[0.045] transition-transform duration-500 group-hover:scale-105"
                 >
                   {c.client.split(" ")[0]}
                 </span>
@@ -38,7 +42,7 @@ export function Campaigns() {
                     className={`shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-medium ${
                       c.status === "En cours"
                         ? "border-lime/30 bg-lime/10 text-lime"
-                        : "border-amber-400/30 bg-amber-400/10 text-amber-300"
+                        : "border-line-2 bg-surface-2 text-mist"
                     }`}
                   >
                     {c.status}
@@ -53,7 +57,7 @@ export function Campaigns() {
                   ].map(([k, v]) => (
                     <div key={k}>
                       <div className="text-[10px] uppercase tracking-[0.14em] text-mist-2">{k}</div>
-                      <div className="nums mt-1 text-lg font-semibold text-white">{v}</div>
+                      <div className="nums mt-1 text-lg font-semibold text-ink">{v}</div>
                     </div>
                   ))}
                 </div>
@@ -75,13 +79,13 @@ export function Campaigns() {
                   {c.platforms.map((p) => (
                     <span
                       key={p}
-                      className="rounded-md border border-line-2 bg-white/[0.03] px-2 py-1 text-[10px] text-mist"
+                      className="rounded-md border border-line-2 bg-surface px-2 py-1 text-[10px] text-mist"
                     >
                       {p}
                     </span>
                   ))}
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

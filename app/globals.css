@@ -1,21 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette — dark premium + néon */
-  --color-ink: #05050b;
-  --color-ink-2: #08080f;
-  --color-surface: #0d0d17;
-  --color-surface-2: #12121f;
-  --color-line: #1e1e30;
-  --color-line-2: #2a2a42;
+  /* ── Palette — charte v3 : gris neutres + un seul accent ──────────────────
+   *  Les neutres sont de vrais gris, sans teinte. Toute la couleur de la
+   *  marque tient dans le cobalt ; le vert ne sert qu'à valider un fait.
+   *  `ground` = fond de page, `ink` = texte. Ne pas les intervertir.
+   * ---------------------------------------------------------------------- */
+  --color-ground: #f3f3f4;
+  --color-surface: #ffffff;
+  --color-surface-2: #e9e9eb;
+  --color-line: #e3e3e6;
+  --color-line-2: #d3d3d8;
 
-  --color-mist: #a5a5c0;
-  --color-mist-2: #7c7c9a;
+  --color-ink: #17171a;
+  --color-mist: #56565e;
+  --color-mist-2: #64646e;
 
-  --color-brand: #7c5cff;
-  --color-brand-2: #a78bfa;
-  --color-accent: #22d3ee;
-  --color-lime: #b8ff3d;
+  --color-brand: #1f4fd8;
+  --color-brand-2: #1b3fae;
+  /* Variante claire du cobalt : uniquement pour les dégradés très courts. */
+  --color-accent: #3d6be8;
+  /* Vert « vérifié » — réservé aux faits confirmés (vues validées, paiements). */
+  --color-lime: #0f7b5f;
+  --color-on-brand: #ffffff;
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -40,13 +47,13 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--color-ink);
+  background: var(--color-ground);
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--color-ink);
-  color: #ffffff;
+  background: var(--color-ground);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -56,9 +63,9 @@ section[id] { scroll-margin-top: 90px; }
 
 ::selection { background: var(--color-brand); color: #fff; }
 
-/* Focus clavier visible partout (thème sombre) */
+/* Focus clavier visible partout */
 :focus-visible {
-  outline: 2px solid var(--color-brand-2);
+  outline: 2px solid var(--color-brand);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -66,9 +73,9 @@ section[id] { scroll-margin-top: 90px; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--color-ink); }
+::-webkit-scrollbar-track { background: var(--color-ground); }
 ::-webkit-scrollbar-thumb { background: var(--color-line-2); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-brand); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-mist-2); }
 
 @utility container-x {
   width: 100%;
@@ -77,24 +84,18 @@ section[id] { scroll-margin-top: 90px; }
   padding-inline: 1.25rem;
 }
 
-/* Texte dégradé */
+/*  Accent typographique : encre qui glisse vers le cobalt sur la fin du mot.
+    Remplace l'ancien dégradé néon — un seul accent, très courte transition.  */
 @utility text-gradient {
-  background: linear-gradient(100deg, #ffffff 20%, var(--color-brand-2) 55%, var(--color-accent) 90%);
+  background: linear-gradient(100deg, var(--color-ink) 35%, var(--color-brand) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Grain léger sur toute la page */
-.grain::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+/*  Le grain servait à réchauffer le fond noir. Sur un fond clair il salit la
+    page : neutralisé plutôt que supprimé, la classe reste posée dans layout. */
+.grain::after { content: none; }
 
 /* Reveal au scroll */
 .reveal {
@@ -145,7 +146,7 @@ input[type="range"].of-range::-webkit-slider-thumb {
   border-radius: 99px;
   background: #fff;
   border: 4px solid var(--color-brand);
-  box-shadow: 0 0 0 6px rgba(124, 92, 255, 0.18);
+  box-shadow: 0 0 0 6px rgba(31, 79, 216, 0.16);
   transition: box-shadow 0.2s;
 }
 input[type="range"].of-range::-moz-range-thumb {
@@ -154,13 +155,13 @@ input[type="range"].of-range::-moz-range-thumb {
   border-radius: 99px;
   background: #fff;
   border: 4px solid var(--color-brand);
-  box-shadow: 0 0 0 6px rgba(124, 92, 255, 0.18);
+  box-shadow: 0 0 0 6px rgba(31, 79, 216, 0.16);
 }
 input[type="range"].of-range:hover::-webkit-slider-thumb {
-  box-shadow: 0 0 0 9px rgba(124, 92, 255, 0.24);
+  box-shadow: 0 0 0 9px rgba(31, 79, 216, 0.22);
 }
 input[type="range"].of-range:focus-visible::-webkit-slider-thumb {
-  box-shadow: 0 0 0 9px rgba(124, 92, 255, 0.4);
+  box-shadow: 0 0 0 9px rgba(31, 79, 216, 0.38);
 }
 
 /* ── Calendrier Cal.com ─────────────────────────────────────────────────── */
@@ -169,7 +170,71 @@ input[type="range"].of-range:focus-visible::-webkit-slider-thumb {
 .cal-inline-container,
 .cal-inline-container iframe {
   background: var(--color-surface);
-  color-scheme: dark;
+  color-scheme: light;
+}
+
+/* ── Carte qui s'incline vers le curseur ────────────────────────────────────
+ *  Indispensable à `components/tilt-card.tsx` : le composant n'écrit que des
+ *  variables CSS au mousemove, toute la mise en forme vit ici. Les valeurs de
+ *  repos sont définies ci-dessous — la carte est donc correcte avant toute
+ *  interaction, et si le JS ne tourne pas.
+ * ------------------------------------------------------------------------ */
+/*  Typage des variables pilotées en JS. Confort, pas correctif : une valeur
+ *  mal formée resterait ainsi cantonnée à sa propriété, au lieu d'invalider
+ *  toute la déclaration `transform` et de faire disparaître la perspective.  */
+@property --tilt-x { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --tilt-y { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --tilt-lift { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --glow-x { syntax: "<percentage>"; inherits: false; initial-value: 50%; }
+@property --glow-y { syntax: "<percentage>"; inherits: false; initial-value: 50%; }
+@property --glow-opacity { syntax: "<number>"; inherits: false; initial-value: 0; }
+
+.tilt-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-lift: 0px;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-opacity: 0;
+  transform: perspective(700px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y))
+    translateY(var(--tilt-lift));
+  /*  Transition courte : au-delà, l'inclinaison traîne derrière le curseur et
+      donne une impression de latence.                                       */
+  transition:
+    transform 120ms ease-out,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+  will-change: transform;
+}
+.tilt-card:hover {
+  --tilt-lift: -4px;
+  /*  Seule entorse assumée au « pas de relief » de la charte : une carte qui
+      s'incline sans aucune ombre paraît décollée de la page. L'ombre reste
+      sous le seuil du décoratif, et n'existe qu'au survol.                  */
+  box-shadow: 0 10px 30px -12px rgba(23, 23, 26, 0.16);
+}
+.tilt-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--glow-x) var(--glow-y),
+    rgba(31, 79, 216, 0.09),
+    transparent 70%
+  );
+  opacity: var(--glow-opacity);
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+.tilt-card--no-glow::before { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card {
+    transform: none;
+    transition: box-shadow 220ms ease, border-color 220ms ease;
+  }
+  .tilt-card::before { display: none; }
 }
 
 /* ── Chiffres tabulaires pour les compteurs ─────────────────────────────── */

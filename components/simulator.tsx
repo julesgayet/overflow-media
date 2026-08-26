@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { site } from "@/site.config";
 import { Button, Eyebrow, Reveal, SectionHeading } from "./ui";
+import { TiltCard } from "./tilt-card";
 import { Bolt, Check } from "./icons";
 
 const S = site.simulator;
@@ -51,7 +52,7 @@ function Slider({
         <label htmlFor={id} className="text-sm text-mist">
           {label}
         </label>
-        <span className="nums text-base font-semibold text-white">{display}</span>
+        <span className="nums text-base font-semibold text-ink">{display}</span>
       </div>
       <input
         id={id}
@@ -81,7 +82,7 @@ function Result({
     <div>
       <div
         className={`nums text-2xl font-semibold tracking-tight sm:text-[28px] ${
-          accent ? "text-brand-2" : "text-white"
+          accent ? "text-brand-2" : "text-ink"
         }`}
       >
         {value}
@@ -126,7 +127,6 @@ export function Simulator() {
   return (
     <section id="simulateur" className="relative overflow-hidden py-24 md:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 size-[38rem] -translate-x-1/2 rounded-full bg-brand/[0.11] blur-[130px]" />
       </div>
 
       <div className="container-x">
@@ -149,7 +149,7 @@ export function Simulator() {
             <div
               role="group"
               aria-label="Point de vue du simulateur"
-              className="mx-auto mb-6 flex w-fit rounded-full border border-line bg-surface/70 p-1 backdrop-blur"
+              className="mx-auto mb-6 flex w-fit rounded-full border border-line bg-surface p-1"
             >
               {(
                 [
@@ -164,8 +164,8 @@ export function Simulator() {
                   onClick={() => setMode(key)}
                   className={`rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-2 ${
                     mode === key
-                      ? "bg-brand text-white shadow-[0_6px_24px_-8px_rgba(124,92,255,.9)]"
-                      : "text-mist hover:text-white"
+                      ? "bg-brand text-white"
+                      : "text-mist hover:text-ink"
                   }`}
                 >
                   {label}
@@ -173,7 +173,15 @@ export function Simulator() {
               ))}
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-line-2 bg-gradient-to-b from-surface-2 to-surface">
+            {/*  Carte à plat (`maxTilt={0}`) : elle contient les curseurs. Quelques
+                degrés d'inclinaison déplaceraient les bords de plusieurs dizaines
+                de pixels, et la piste se déroberait sous le doigt en plein
+                glissement. Il ne reste que le léger soulèvement au survol.  */}
+            <TiltCard
+              maxTilt={0}
+              glow={false}
+              className="overflow-hidden rounded-3xl border border-line-2 bg-gradient-to-b from-surface-2 to-surface"
+            >
               <div className="grid gap-px bg-line md:grid-cols-[1fr_1fr]">
                 {/* Contrôles */}
                 <div className="bg-surface-2 p-7 md:p-9">
@@ -241,8 +249,8 @@ export function Simulator() {
                             aria-pressed={niche === n.key}
                             className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
                               niche === n.key
-                                ? "border-brand/60 bg-brand/15 text-white"
-                                : "border-line-2 text-mist hover:border-line-2 hover:text-white"
+                                ? "border-brand/60 bg-brand/15 text-ink"
+                                : "border-line-2 text-mist hover:border-line-2 hover:text-ink"
                             }`}
                           >
                             {n.label}
@@ -257,14 +265,14 @@ export function Simulator() {
                 <div className="relative bg-surface p-7 md:p-9" aria-live="polite">
                   <div
                     aria-hidden
-                    className="pointer-events-none absolute -right-20 -top-20 size-56 rounded-full bg-brand/15 blur-3xl"
+                    className="pointer-events-none absolute -right-20 -top-20 size-56 rounded-full bg-brand/5 blur-3xl"
                   />
                   <div className="relative">
                     <Eyebrow className="mb-7">Estimation</Eyebrow>
 
                     {mode === "brand" ? (
                       <>
-                        <div className="nums text-5xl font-semibold leading-none tracking-tight text-white sm:text-6xl">
+                        <div className="nums text-5xl font-semibold leading-none tracking-tight text-ink sm:text-6xl">
                           {compact(brand.estViews)}
                         </div>
                         <p className="mt-3 text-sm text-mist">vues estimées sur la campagne</p>
@@ -278,11 +286,11 @@ export function Simulator() {
                           />
                         </div>
 
-                        <div className="mt-7 rounded-xl border border-line bg-white/[0.02] p-4">
+                        <div className="mt-7 rounded-xl border border-line bg-surface p-4">
                           <p className="text-sm leading-relaxed text-mist">
                             Pour ces {compact(brand.estViews)} vues, une campagne publicitaire
                             classique à {nfCpm.format(S.paidCpm)} de CPM coûterait{" "}
-                            <span className="nums font-semibold text-white">
+                            <span className="nums font-semibold text-ink">
                               {nfEur.format(brand.paidEquivalent)}
                             </span>
                             .
@@ -291,7 +299,7 @@ export function Simulator() {
                       </>
                     ) : (
                       <>
-                        <div className="nums text-5xl font-semibold leading-none tracking-tight text-white sm:text-6xl">
+                        <div className="nums text-5xl font-semibold leading-none tracking-tight text-ink sm:text-6xl">
                           {nfEur.format(clipper.earnings)}
                         </div>
                         <p className="mt-3 text-sm text-mist">de gains estimés sur le mois</p>
@@ -305,7 +313,7 @@ export function Simulator() {
                           />
                         </div>
 
-                        <div className="mt-7 rounded-xl border border-line bg-white/[0.02] p-4">
+                        <div className="mt-7 rounded-xl border border-line bg-surface p-4">
                           <ul className="space-y-2.5">
                             {[
                               "Aucun minimum d'abonnés pour participer",
@@ -326,7 +334,7 @@ export function Simulator() {
               </div>
 
               {/* Pied du simulateur */}
-              <div className="flex flex-col items-center gap-4 border-t border-line bg-ink-2/60 px-7 py-6 sm:flex-row sm:justify-between md:px-9">
+              <div className="flex flex-col items-center gap-4 border-t border-line bg-surface-2 px-7 py-6 sm:flex-row sm:justify-between md:px-9">
                 <p className="flex items-start gap-2.5 text-xs leading-relaxed text-mist-2">
                   <Bolt className="mt-px size-4 shrink-0 text-mist-2" />
                   Estimation indicative. Le volume réel dépend de la niche, du format source et de
@@ -341,7 +349,7 @@ export function Simulator() {
                   {mode === "brand" ? "Obtenir un devis exact" : "Rejoindre sur Whop"}
                 </Button>
               </div>
-            </div>
+            </TiltCard>
           </div>
         </Reveal>
       </div>

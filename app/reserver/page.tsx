@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/site.config";
+import { Logo } from "@/components/logo";
 import { Booking } from "@/components/booking";
 import { Eyebrow } from "@/components/ui";
 import { Arrow, Check, Instagram, TikTok, YouTube } from "@/components/icons";
@@ -26,7 +27,6 @@ export default function Reserver() {
   return (
     <div className="relative min-h-screen">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-1/2 top-[-20rem] size-[48rem] -translate-x-1/2 rounded-full bg-brand/[0.16] blur-[150px]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,.022)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.022)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_45%_at_50%_0%,#000,transparent)]" />
       </div>
 
@@ -34,14 +34,11 @@ export default function Reserver() {
       <header className="border-b border-line/70">
         <div className="container-x flex h-[72px] items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5" aria-label={`${site.name} — accueil`}>
-            <span className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-accent">
-              <span className="size-2.5 rounded-[3px] bg-ink" />
-            </span>
-            <span className="text-[17px] font-semibold tracking-tight">{site.name}</span>
+            <Logo />
           </Link>
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 text-sm text-mist transition-colors hover:text-white"
+            className="group inline-flex items-center gap-2 text-sm text-mist transition-colors hover:text-ink"
           >
             <Arrow className="size-4 rotate-180 transition-transform group-hover:-translate-x-1" />
             Retour au site
@@ -79,7 +76,7 @@ export default function Reserver() {
             Pas le bon moment ?
             <a
               href={`mailto:${site.email}?subject=Lancer%20une%20campagne%20de%20clipping`}
-              className="group inline-flex items-center gap-1.5 font-medium text-white transition-colors hover:text-brand-2"
+              className="group inline-flex items-center gap-1.5 font-medium text-ink transition-colors hover:text-brand-2"
             >
               {site.email}
               <Arrow className="size-3.5 transition-transform group-hover:translate-x-1" />

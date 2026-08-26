@@ -36,11 +36,9 @@ export function Clippers() {
   return (
     <section
       id="clippeurs"
-      className="relative overflow-hidden border-y border-line bg-ink-2/40 py-24 md:py-32"
+      className="relative overflow-hidden border-y border-line bg-surface-2 py-24 md:py-32"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-[-10rem] top-1/3 size-[32rem] rounded-full bg-accent/[0.07] blur-[130px]" />
-        <div className="absolute right-[-8rem] top-0 size-[28rem] rounded-full bg-brand/10 blur-[120px]" />
       </div>
 
       <div className="container-x">
@@ -73,7 +71,7 @@ export function Clippers() {
             </Reveal>
 
             <Reveal delay={200}>
-              <div className="mt-10 rounded-2xl border border-line bg-surface/60 p-6">
+              <div className="mt-10 rounded-2xl border border-line bg-surface p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-mist-2">
                   Ce qu&apos;il te faut
                 </p>
@@ -94,8 +92,8 @@ export function Clippers() {
               const Icon = p.icon;
               return (
                 <Reveal key={p.title} delay={i * 90}>
-                  <div className="h-full rounded-2xl border border-line bg-surface/70 p-6 transition-colors hover:border-line-2">
-                    <span className="mb-5 grid size-11 place-items-center rounded-xl border border-line-2 bg-white/[0.04] text-accent">
+                  <div className="h-full rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-line-2">
+                    <span className="mb-5 grid size-11 place-items-center rounded-xl border border-line-2 bg-surface text-accent">
                       <Icon className="size-5" />
                     </span>
                     <h3 className="text-base font-semibold tracking-tight">{p.title}</h3>

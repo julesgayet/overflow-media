@@ -30,10 +30,10 @@ const beats = [
 function SourceVisual() {
   return (
     <div className="mx-auto w-full max-w-md">
-      <div className="relative aspect-video overflow-hidden rounded-2xl border border-line-2 bg-surface-2">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(124,92,255,.18),transparent_65%)]" />
+      <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,.10),transparent_65%)]" />
         <div className="absolute inset-0 grid place-items-center">
-          <span className="grid size-14 place-items-center rounded-full border border-line-2 bg-white/[0.06] backdrop-blur">
+          <span className="grid size-14 place-items-center rounded-full border border-white/20 bg-white/10 backdrop-blur">
             <Play className="size-5 translate-x-0.5 text-white/80" />
           </span>
         </div>
@@ -80,10 +80,10 @@ const bars = [8, 14, 11, 22, 19, 34, 28, 46, 41, 63, 78, 100];
 function ReachVisual({ on }: { on: boolean }) {
   return (
     <div className="mx-auto w-full max-w-md">
-      <div className="rounded-2xl border border-line-2 bg-surface-2 p-6">
+      <div className="rounded-2xl border border-line bg-surface p-6">
         <div className="flex items-end justify-between">
           <div>
-            <div className="nums text-3xl font-semibold tracking-tight text-white">4 500 000</div>
+            <div className="nums text-3xl font-semibold tracking-tight text-ink">4 500 000</div>
             <p className="mt-1 text-xs text-mist-2">vues cumulées sur 30 jours</p>
           </div>
           <span className="nums rounded-full border border-lime/30 bg-lime/10 px-2.5 py-1 text-[11px] font-medium text-lime">
@@ -147,7 +147,7 @@ export function FeedMath() {
   ];
 
   return (
-    <section ref={sectionRef} id="mecanique" className="relative border-y border-line bg-ink-2/40">
+    <section ref={sectionRef} id="mecanique" className="relative border-y border-line bg-surface-2">
       {/* Piste de scroll : trois zones qui pilotent le temps fort affiché */}
       <div className="pointer-events-none absolute inset-0 flex flex-col" aria-hidden>
         {beats.map((_, i) => (
@@ -196,8 +196,8 @@ export function FeedMath() {
                               b.tone === "dim"
                                 ? "text-mist-2"
                                 : b.tone === "accent"
-                                  ? "text-brand-2 [text-shadow:0_0_60px_rgba(124,92,255,.55)]"
-                                  : "text-white"
+                                  ? "text-brand"
+                                  : "text-ink"
                             }`}
                           >
                             {b.value}

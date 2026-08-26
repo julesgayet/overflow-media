@@ -67,7 +67,7 @@ export function Booking() {
   if (state === "failed") {
     return (
       <div className="rounded-2xl border border-line bg-surface px-7 py-14 text-center">
-        <p className="text-lg font-medium text-white">
+        <p className="text-lg font-medium text-ink">
           Le calendrier est momentanément indisponible
         </p>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-mist">
@@ -75,7 +75,7 @@ export function Booking() {
         </p>
         <a
           href={`mailto:${site.email}?subject=Lancer%20une%20campagne%20de%20clipping`}
-          className="group mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-7 text-sm font-semibold text-ink transition-colors hover:bg-white/90"
+          className="group mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand px-7 text-sm font-semibold text-white transition-colors hover:bg-brand-2"
         >
           {site.email}
           <Arrow className="size-4 transition-transform group-hover:translate-x-1" />

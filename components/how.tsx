@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Reveal, SectionHeading } from "./ui";
 import { Check } from "./icons";
+import { TiltCard } from "./tilt-card";
 
 const steps = [
   {
@@ -35,9 +36,9 @@ function BriefPanel() {
     ["Budget", "5 000 €"],
   ];
   return (
-    <div className="rounded-2xl border border-line-2 bg-surface-2 p-6">
+    <TiltCard className="rounded-2xl border border-line-2 bg-surface-2 p-6">
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-2 text-sm font-medium text-white">
+        <span className="flex items-center gap-2 text-sm font-medium text-ink">
           <span className="size-1.5 rounded-full bg-brand-2" />
           Nouvelle campagne
         </span>
@@ -49,7 +50,7 @@ function BriefPanel() {
         {rows.map(([k, v]) => (
           <div key={k} className="flex items-center justify-between bg-surface px-4 py-3.5">
             <dt className="text-xs text-mist-2">{k}</dt>
-            <dd className="nums text-sm font-medium text-white">{v}</dd>
+            <dd className="nums text-sm font-medium text-ink">{v}</dd>
           </div>
         ))}
       </dl>
@@ -57,15 +58,15 @@ function BriefPanel() {
         <Check className="size-4 shrink-0" />
         Brief validé — prêt à publier
       </div>
-    </div>
+    </TiltCard>
   );
 }
 
 function SpreadPanel() {
   return (
-    <div className="rounded-2xl border border-line-2 bg-surface-2 p-6">
+    <TiltCard className="rounded-2xl border border-line-2 bg-surface-2 p-6">
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-2 text-sm font-medium text-white">
+        <span className="flex items-center gap-2 text-sm font-medium text-ink">
           <span className="size-1.5 animate-pulse rounded-full bg-lime" />
           Diffusion en cours
         </span>
@@ -75,7 +76,7 @@ function SpreadPanel() {
         {Array.from({ length: 32 }).map((_, i) => (
           <span
             key={i}
-            className="aspect-[9/16] rounded-[3px] bg-gradient-to-b from-brand/45 to-accent/15 animate-pulse-glow"
+            className="aspect-[9/16] rounded-[3px] bg-brand/25"
             style={{ animationDelay: `${(i % 8) * 160 + Math.floor(i / 8) * 90}ms` }}
           />
         ))}
@@ -83,7 +84,7 @@ function SpreadPanel() {
       <p className="mt-5 text-center text-[11px] text-mist-2">
         chaque carré = un clip publié sur un compte différent
       </p>
-    </div>
+    </TiltCard>
   );
 }
 
@@ -95,9 +96,9 @@ function PayoutPanel() {
     ["@vertical.co", "205 K", "184 €"],
   ];
   return (
-    <div className="rounded-2xl border border-line-2 bg-surface-2 p-6">
+    <TiltCard className="rounded-2xl border border-line-2 bg-surface-2 p-6">
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-2 text-sm font-medium text-white">
+        <span className="flex items-center gap-2 text-sm font-medium text-ink">
           <span className="size-1.5 rounded-full bg-lime" />
           Versements Whop
         </span>
@@ -109,7 +110,7 @@ function PayoutPanel() {
             <span className="grid size-7 shrink-0 place-items-center rounded-full bg-line-2 text-[10px] font-semibold text-mist">
               {who.slice(1, 3).toUpperCase()}
             </span>
-            <span className="min-w-0 flex-1 truncate text-xs text-white">{who}</span>
+            <span className="min-w-0 flex-1 truncate text-xs text-ink">{who}</span>
             <span className="nums text-xs text-mist-2">{views}</span>
             <span className="nums text-sm font-semibold text-lime">{amount}</span>
           </div>
@@ -118,7 +119,7 @@ function PayoutPanel() {
       <p className="mt-5 text-center text-[11px] text-mist-2">
         vues vérifiées avant chaque versement
       </p>
-    </div>
+    </TiltCard>
   );
 }
 
@@ -196,7 +197,9 @@ export function How() {
                   <span className="nums text-xs font-medium text-brand-2">{s.n}</span>
                   <h3
                     className={`mt-4 text-4xl font-semibold tracking-[-0.03em] transition-colors duration-500 sm:text-5xl ${
-                      active === i ? "text-white" : "text-mist-2 lg:text-line-2"
+                      /*  L'étape inactive s'efface, mais reste lisible : sur fond
+                          clair l'ancien gris de bordure tombait à 1,35:1.      */
+                      active === i ? "text-ink" : "text-mist-2"
                     }`}
                   >
                     {s.title}
