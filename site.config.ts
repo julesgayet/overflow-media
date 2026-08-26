@@ -209,12 +209,29 @@ export const site = {
     },
   ],
 
-  // ── Mentions légales ──────────────────────────────────────────────────────
+  // ── Identité légale de l'éditeur ─────────────────────────────────────────
+  //   OverFlow Media est une activité de la même entreprise individuelle que
+  //   Graft (même SIREN) : les mentions légales, CGV et politique de
+  //   confidentialité en dépendent directement (LCEN art. 6 III-1 ; art. 28
+  //   et 30 du RGPD pour la traçabilité du responsable de traitement).
+  //   ⚠️ `legalName` reprend l'abréviation « Augustin D. » déjà en usage sur
+  //   Graft. La LCEN exige le nom ET le prénom en toutes lettres pour une
+  //   personne physique : en l'état, ce n'est pas strictement conforme. Le
+  //   SIREN permet néanmoins l'identification via data.inpi.fr. À corriger en
+  //   nom complet avant tout litige.
   legal: {
-    siret: "À COMPLÉTER",
-    address: "À COMPLÉTER",
-    director: "À COMPLÉTER",
+    legalName: "Augustin D. — Entrepreneur individuel",
+    legalForm: "Entreprise individuelle (EI), régime micro-entreprise",
+    siren: "937 506 764",
+    siret: "937 506 764 00011",
+    rcs: "RCS Limoges 937 506 764",
+    vatNumber: "TVA non applicable, art. 293 B du CGI",
+    address: "14 bis avenue de la République, 87170 Isle, France",
+    director: "Augustin D.",
     host: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA",
+    hostRegion: "Union européenne",
+    court: "Tribunal de commerce de Limoges",
+    lastUpdated: "26 août 2026",
   },
 } as const;
 

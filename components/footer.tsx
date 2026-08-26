@@ -29,7 +29,14 @@ const cols = [
     links: [
       { href: `mailto:${site.email}`, label: site.email },
       { href: "/reserver", label: "Lancer une campagne" },
+    ],
+  },
+  {
+    title: "Légal",
+    links: [
       { href: "/mentions-legales", label: "Mentions légales" },
+      { href: "/cgv", label: "CGV" },
+      { href: "/confidentialite", label: "Confidentialité" },
     ],
   },
 ];
