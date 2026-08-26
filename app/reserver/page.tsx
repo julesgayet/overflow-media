@@ -8,19 +8,19 @@ import { Arrow, Check, Instagram, TikTok, YouTube } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Réserver un créneau",
-  description: `Réserve un appel de ${site.calcom.duration} avec ${site.name} : on cadre ton objectif, on estime tes vues et on te donne un CPM cible.`,
+  description: `Réserve un appel de ${site.calcom.duration} avec ${site.name} : on cadre votre objectif, on estime vos vues et on vous donne un CPM cible.`,
   alternates: { canonical: "/reserver" },
   openGraph: {
     title: `Réserver un créneau · ${site.name}`,
-    description: `Un appel de ${site.calcom.duration} pour cadrer ta campagne de clipping.`,
+    description: `Un appel de ${site.calcom.duration} pour cadrer votre campagne de clipping.`,
     url: `https://${site.domain}/reserver`,
   },
 };
 
 const points = [
-  "On cadre ton objectif et ta niche",
+  "On cadre votre objectif et votre niche",
   "On te donne une estimation de vues et un CPM",
-  "Tu repars avec un budget chiffré, sans engagement",
+  "Vous repartez avec un budget chiffré, sans engagement",
 ];
 
 export default function Reserver() {
@@ -50,10 +50,10 @@ export default function Reserver() {
         <div className="mx-auto max-w-3xl text-center">
           <Eyebrow className="justify-center">Réserver un créneau</Eyebrow>
           <h1 className="mt-5 text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl md:text-6xl">
-            Parlons de <span className="text-gradient">ta campagne</span>
+            Parlons de <span className="text-gradient">votre campagne</span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-mist md:text-lg">
-            {site.calcom.duration} au téléphone, et tu sais si le clipping vaut le coup pour toi.
+            {site.calcom.duration} au téléphone, et vous savez si le clipping vaut le coup pour vous.
             Choisis le créneau qui t&apos;arrange.
           </p>
         </div>

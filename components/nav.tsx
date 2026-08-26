@@ -10,7 +10,6 @@ const links = [
   { href: "#simulateur", label: "Simulateur" },
   { href: "#tarifs", label: "Tarifs" },
   { href: "#campagnes", label: "Campagnes" },
-  { href: "#clippeurs", label: "Clippeurs" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -71,12 +70,10 @@ export function Nav() {
 
         <div className="hidden shrink-0 items-center gap-4 md:flex">
           <a
-            href={site.links.whopClippers}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`mailto:${site.email}`}
             className="text-sm text-mist transition-colors hover:text-ink"
           >
-            Devenir clippeur
+            Nous écrire
           </a>
           <Button href="/reserver" variant="light" arrow>
             Lancer une campagne
@@ -131,8 +128,8 @@ export function Nav() {
             <Button href="/reserver" variant="light" size="lg" arrow>
               Lancer une campagne
             </Button>
-            <Button href={site.links.whopClippers} variant="outline" size="lg">
-              Devenir clippeur
+            <Button href={`mailto:${site.email}`} variant="outline" size="lg">
+              Nous écrire
             </Button>
           </div>
         </div>

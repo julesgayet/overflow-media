@@ -3,9 +3,9 @@ import { Button, Eyebrow, Reveal } from "./ui";
 import { Arrow, Check } from "./icons";
 
 const points = [
-  "On cadre ton objectif et ta niche",
+  "On cadre votre objectif et votre niche",
   "On te donne une estimation de vues et un CPM",
-  "Tu repars avec un budget chiffré, sans engagement",
+  "Vous repartez avec un budget chiffré, sans engagement",
 ];
 
 export function Cta() {
@@ -25,11 +25,11 @@ export function Cta() {
             <Eyebrow className="justify-center">Passer à l&apos;action</Eyebrow>
 
             <h2 className="mx-auto mt-6 max-w-2xl text-balance text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-4xl md:text-5xl">
-              Ton contenu mérite mieux que{" "}
+              Votre contenu mérite mieux que{" "}
               <span className="text-gradient">quelques milliers de vues</span>
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-mist">
-              {site.calcom.duration} au téléphone pour cadrer ta campagne, estimer tes vues et te
+              {site.calcom.duration} au téléphone pour cadrer votre campagne, estimer vos vues et vous
               donner un CPM cible. Sans engagement.
             </p>
 
@@ -46,8 +46,8 @@ export function Cta() {
               <Button href="/reserver" variant="light" size="lg" arrow>
                 Lancer une campagne
               </Button>
-              <Button href={site.links.whopClippers} variant="outline" size="lg">
-                Devenir clippeur
+              <Button href="#simulateur" variant="outline" size="lg">
+                Estimer mon budget
               </Button>
             </div>
 

@@ -8,7 +8,7 @@ const beats = [
   {
     value: "1",
     unit: "vidéo",
-    text: "Ton podcast, ton live, ta vidéo YouTube. Un seul format, une seule audience, une seule chance de percer.",
+    text: "Votre podcast, votre live, votre vidéo YouTube. Un seul format, une seule audience, une seule chance de percer.",
     tone: "dim" as const,
   },
   {

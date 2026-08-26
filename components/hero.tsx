@@ -67,8 +67,8 @@ export function Hero() {
 
           <Reveal delay={160}>
             <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-relaxed text-mist md:text-lg">
-              {site.name} découpe ton contenu long en centaines de clips verticaux, les diffuse via
-              une communauté de clippeurs vérifiés, et ne facture que les vues réellement générées.
+              {site.name} découpe votre contenu long en centaines de clips verticaux, les diffuse via
+              un réseau de comptes vérifiés, et ne facture que les vues réellement générées.
               À partir de {site.pricing.from} {site.pricing.unit}.
             </p>
           </Reveal>

@@ -25,14 +25,6 @@ const cols = [
     ],
   },
   {
-    title: "Clippeurs",
-    links: [
-      { href: "#clippeurs", label: "Devenir clippeur" },
-      { href: site.links.whopClippers, label: "Espace Whop" },
-      { href: site.links.discord, label: "Discord" },
-    ],
-  },
-  {
     title: "Contact",
     links: [
       { href: `mailto:${site.email}`, label: site.email },
@@ -102,7 +94,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {site.legalName}. Tous droits réservés.
           </p>
-          <p>Paiements des clippeurs opérés via Whop.</p>
+          <p>Rémunération du réseau de diffusion opérée via Whop.</p>
         </div>
       </div>
     </footer>

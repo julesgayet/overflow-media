@@ -14,7 +14,7 @@ export function Testimonials() {
                 <span className="text-gradient">les deux côtés</span>
               </>
             }
-            subtitle="Une campagne ne tient que si la marque et les clippeurs y trouvent leur compte."
+            subtitle="Ce que disent les marques qui nous ont confié leur contenu."
           />
         </Reveal>
 
@@ -22,15 +22,6 @@ export function Testimonials() {
           {site.testimonials.map((t, i) => (
             <Reveal key={t.author + i} delay={i * 90}>
               <figure className="flex h-full flex-col rounded-2xl border border-line bg-surface p-7">
-                <span
-                  className={`mb-5 w-fit rounded-full border px-2.5 py-1 text-[10px] font-medium ${
-                    t.side === "brand"
-                      ? "border-brand/30 bg-brand/10 text-brand-2"
-                      : "border-accent/30 bg-accent/10 text-accent"
-                  }`}
-                >
-                  {t.side === "brand" ? "Côté marque" : "Côté clippeur"}
-                </span>
                 <blockquote className="flex-1 text-[15px] leading-relaxed text-mist">
                   « {t.quote} »
                 </blockquote>

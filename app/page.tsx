@@ -8,7 +8,6 @@ import { Simulator } from "@/components/simulator";
 import { Pricing } from "@/components/pricing";
 import { Campaigns } from "@/components/campaigns";
 import { Verification } from "@/components/verification";
-import { Clippers } from "@/components/clippers";
 import { Testimonials } from "@/components/testimonials";
 import { Faq } from "@/components/faq";
 import { Cta } from "@/components/cta";
@@ -50,7 +49,6 @@ export default function Home() {
         <Pricing />
         <Campaigns />
         <Verification />
-        <Clippers />
         <Testimonials />
         <Faq />
         <Cta />

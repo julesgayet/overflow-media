@@ -14,7 +14,7 @@ export function Campaigns() {
                 Ce qui tourne <span className="text-gradient">en ce moment</span>
               </>
             }
-            subtitle="Chaque campagne est ouverte aux clippeurs validés. Le budget est bloqué à l'avance : si tu produis les vues, tu es payé."
+            subtitle="Un aperçu des campagnes en cours. Le budget est plafonné à l'avance, et seules les vues vérifiées sont facturées."
           />
         </Reveal>
 
@@ -92,11 +92,11 @@ export function Campaigns() {
 
         <Reveal delay={200}>
           <div className="mt-10 flex flex-col items-center gap-3 text-center">
-            <Button href={site.links.whopClippers} variant="outline" arrow>
-              Voir toutes les campagnes sur Whop
+            <Button href="/reserver" variant="outline" arrow>
+              Parler de votre campagne
             </Button>
             <p className="text-xs text-mist-2">
-              Les campagnes changent chaque semaine — l&apos;accès se fait via notre espace Whop.
+              Quinze minutes pour cadrer l&apos;objectif, le volume et le budget.
             </p>
           </div>
         </Reveal>

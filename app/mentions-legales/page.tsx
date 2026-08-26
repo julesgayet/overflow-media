@@ -81,7 +81,7 @@ export default function MentionsLegales() {
           <section>
             <h2 className="mb-3 text-base font-semibold text-ink">Prestations</h2>
             <p>
-              Les campagnes de clipping et la rémunération des clippeurs sont opérées via la
+              Les campagnes de clipping et la rémunération du réseau de diffusion sont opérées via la
               plateforme Whop, soumise à ses propres conditions générales. Les modalités précises
               de chaque campagne (CPM, budget, plateformes, durée) sont définies dans le brief
               contractuel remis avant son lancement.

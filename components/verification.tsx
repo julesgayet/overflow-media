@@ -51,13 +51,13 @@ export function Verification() {
               <Shield className="mt-0.5 size-5 shrink-0 text-lime" />
               <p className="text-sm leading-relaxed text-mist">
                 <span className="font-medium text-ink">Traçable.</span> Lien en bio et appel à
-                l&apos;action sur chaque clip : tu vois d&apos;où vient le trafic.
+                l&apos;action sur chaque clip : vous voyez d&apos;où vient le trafic.
               </p>
             </div>
             <div className="flex gap-4">
               <Shield className="mt-0.5 size-5 shrink-0 text-lime" />
               <p className="text-sm leading-relaxed text-mist">
-                <span className="font-medium text-ink">Sanctionné.</span> Un clippeur pris à
+                <span className="font-medium text-ink">Sanctionné.</span> Un compte pris à
                 gonfler ses vues est exclu et ses gains en attente sont annulés.
               </p>
             </div>

@@ -11,7 +11,7 @@ export function Faq() {
             eyebrow="FAQ"
             title={
               <>
-                Tout ce que tu veux{" "}
+                Tout ce que vous voulez{" "}
                 <span className="text-gradient">savoir</span>
               </>
             }

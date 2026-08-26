@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   keywords: [
     "agence de clipping",
     "clipping France",
-    "clippeur rémunéré",
+    "campagne de clipping pour marque",
     "campagne UGC",
     "TikTok",
     "Instagram Reels",

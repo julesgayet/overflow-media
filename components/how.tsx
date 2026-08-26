@@ -9,19 +9,19 @@ const steps = [
   {
     n: "01",
     title: "Brief.",
-    text: "Tu choisis l'objectif, les plateformes, le CPM cible et le budget. On prépare le kit clippeur : rushes, charte, hooks qui fonctionnent, do & don't.",
+    text: "Vous choisissez l'objectif, les plateformes, le CPM cible et le budget. Nous préparons le kit de diffusion : rushes, charte, hooks qui fonctionnent, do & don't.",
     meta: "Jour 1",
   },
   {
     n: "02",
     title: "Diffusion.",
-    text: "La campagne part sur Whop. Des centaines de clippeurs vérifiés montent, publient et testent des angles en parallèle sur TikTok, Reels et Shorts.",
+    text: "La campagne part sur Whop. Des centaines de comptes vérifiés montent, publient et testent des angles en parallèle sur TikTok, Reels et Shorts.",
     meta: "Jour 2 → J+30",
   },
   {
     n: "03",
     title: "Paiement.",
-    text: "Chaque clip est modéré, chaque vue est vérifiée. Les clippeurs sont payés au CPM automatiquement, et tu suis le budget consommé en direct.",
+    text: "Chaque clip est modéré, chaque vue est vérifiée. Le réseau est rémunéré automatiquement, et vous suivez le budget consommé en direct.",
     meta: "En continu",
   },
 ];

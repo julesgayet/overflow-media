@@ -11,15 +11,14 @@ export const site = {
   // ── Identité ──────────────────────────────────────────────────────────────
   name: "OverFlow Media",
   legalName: "OverFlow Media",
-  tagline: "L'agence de clipping qui transforme ton contenu en millions de vues",
+  tagline: "L'agence de clipping qui transforme votre contenu en millions de vues",
   description:
-    "Agence de clipping française. On recrute, on brief et on rémunère des centaines de clippeurs pour propulser ton contenu sur TikTok, Reels et Shorts. Paiement au CPM, vues vérifiées, versements automatisés via Whop.",
+    "Agence de clipping française pour les marques. Nous découpons votre contenu long en clips verticaux et les diffusons sur des centaines de comptes : TikTok, Reels, Shorts. Facturation au CPM, vues vérifiées, budget plafonné à l'avance.",
   domain: "overflowmedia.fr",
   email: "contact@overflowmedia.fr",
 
   // ── Liens (⚠️ remplace par tes vraies URL) ────────────────────────────────
   links: {
-    whopClippers: "https://whop.com/ton-whop",
     whopBrands: "https://whop.com/ton-whop",
     discord: "https://discord.gg/ton-invite",
     tiktok: "https://www.tiktok.com/@ton-compte",
@@ -42,8 +41,8 @@ export const site = {
   //   `to` = valeur finale animée, `suffix`/`prefix` = habillage
   stats: [
     { to: 120, suffix: "M+", label: "vues générées", hint: "toutes campagnes confondues" },
-    { to: 850, suffix: "+", label: "clippeurs actifs", hint: "comptes vérifiés" },
-    { to: 180, suffix: "K€", label: "reversés aux clippeurs", hint: "versements via Whop" },
+    { to: 850, suffix: "+", label: "comptes diffuseurs", hint: "vérifiés avant campagne" },
+    { to: 180, suffix: "K€", label: "de budget géré", hint: "toutes campagnes confondues" },
     { to: 48, suffix: "h", label: "pour lancer", hint: "du brief au premier clip" },
   ],
 
@@ -61,7 +60,6 @@ export const site = {
 
   // ── Simulateur : bornes et hypothèses (⚠️ cale-les sur ta réalité) ────────
   simulator: {
-    // Mode « marque » : budget alloué à la campagne
     budgetMin: 500,
     budgetMax: 25000,
     budgetStep: 250,
@@ -73,11 +71,6 @@ export const site = {
     cpmDefault: 0.9,
     // CPM moyen d'une campagne publicitaire classique, pour la comparaison
     paidCpm: 14,
-    // Mode « clippeur » : volume de vues produites sur le mois
-    viewsMin: 50_000,
-    viewsMax: 5_000_000,
-    viewsStep: 10_000,
-    viewsDefault: 800_000,
     // Vues moyennes par clip selon la niche — sert à estimer le nombre de clips
     nichePresets: [
       { key: "business", label: "Business & finance", viewsPerClip: 9_000 },
@@ -102,7 +95,7 @@ export const site = {
     {
       phase: "Avant",
       title: "Audit des comptes",
-      text: "Chaque clippeur est vérifié avant d'entrer : historique du compte, audience, régularité.",
+      text: "Chaque compte diffuseur est vérifié avant d'entrer en campagne : historique, audience, régularité.",
     },
     {
       phase: "Pendant",
@@ -154,24 +147,15 @@ export const site = {
   testimonials: [
     {
       quote:
-        "On est passés de 40K à 3,2M de vues mensuelles en six semaines. Le vrai gain, c'est de ne plus gérer 200 clippeurs à la main.",
+        "On est passés de 40K à 3,2M de vues mensuelles en six semaines. Le vrai gain, c'est de ne plus rien avoir à coordonner : un seul interlocuteur, une seule facture.",
       author: "Prénom N.",
       role: "Créateur, 400K abonnés",
-      side: "brand" as const,
-    },
-    {
-      quote:
-        "Brief clair, assets fournis, paiement tombé le jour dit sur Whop. C'est la première agence où je n'ai pas eu à relancer.",
-      author: "Prénom N.",
-      role: "Clippeur, 2 ans d'expérience",
-      side: "clipper" as const,
     },
     {
       quote:
         "Le tracking est transparent : je vois le CPM réel, les vues validées et ce que ça me coûte, en direct.",
       author: "Prénom N.",
       role: "Head of Growth, marque D2C",
-      side: "brand" as const,
     },
   ],
 
@@ -179,23 +163,19 @@ export const site = {
   faq: [
     {
       q: "C'est quoi exactement le clipping ?",
-      a: "Le clipping consiste à découper du contenu long (podcasts, lives, vidéos YouTube, interviews) en clips courts et verticaux, puis à les publier en masse sur TikTok, Reels et Shorts. Au lieu d'une seule vidéo qui fait 50 000 vues, tu as des centaines de clips qui totalisent plusieurs millions de vues et ramènent du trafic vers ton offre.",
+      a: "Le clipping consiste à découper du contenu long (podcasts, lives, vidéos YouTube, interviews) en clips courts et verticaux, puis à les publier en masse sur TikTok, Reels et Shorts. Au lieu d'une seule vidéo qui fait 50 000 vues, vous avez des centaines de clips qui totalisent plusieurs millions de vues et ramènent du trafic vers votre offre.",
     },
     {
       q: "Comment fonctionne la facturation ?",
-      a: "Au CPM : un montant fixe pour 1 000 vues générées, dans la limite d'un budget que tu fixes à l'avance. Pas d'enchères, pas d'abonnement, pas de frais cachés. Tu ne paies que les vues réellement produites et validées.",
+      a: "Au CPM : un montant fixe pour 1 000 vues générées, dans la limite d'un budget que vous fixez à l'avance. Pas d'enchères, pas d'abonnement, pas de frais cachés. Vous ne payez que les vues réellement produites et validées.",
     },
     {
-      q: "Comment les clippeurs sont-ils payés ?",
-      a: "Tout passe par Whop. Le clippeur soumet ses liens, les vues sont vérifiées, et le versement est déclenché automatiquement selon le CPM de la campagne. Aucun virement manuel, aucune relance.",
-    },
-    {
-      q: "Faut-il un minimum d'abonnés pour devenir clippeur ?",
-      a: "Non. On juge la qualité du montage, pas la taille du compte. Tu peux démarrer avec un compte neuf : ce qui compte, c'est de respecter le brief, la charte de la marque et le rythme de publication.",
+      q: "Qui rémunère le réseau de diffusion ?",
+      a: "Nous. Vous réglez un CPM unique à OverFlow Media, et nous rémunérons le réseau via Whop : les vues sont vérifiées, les versements se déclenchent automatiquement. Aucun contrat individuel à signer de votre côté, aucun virement à effectuer, aucune relance à traiter.",
     },
     {
       q: "Comment évitez-vous les vues achetées ou frauduleuses ?",
-      a: "En trois temps : audit du compte avant l'entrée en campagne, modération manuelle de chaque clip soumis, puis contrôle des pics de vues anormaux avant validation du paiement. Un clippeur pris en fraude est exclu et ses gains en attente sont annulés.",
+      a: "En trois temps : audit du compte avant l'entrée en campagne, modération manuelle de chaque clip soumis, puis contrôle des pics de vues anormaux avant facturation. Un compte pris en fraude est exclu, et les vues concernées ne vous sont pas facturées.",
     },
     {
       q: "Sous quel délai une campagne démarre-t-elle ?",
@@ -203,11 +183,11 @@ export const site = {
     },
     {
       q: "En quoi c'est différent du marketing d'influence ?",
-      a: "En influence, tu loues l'audience d'un créateur, à l'unité et à prix fixe, sans garantie de vues. En clipping, tu paies la performance : des centaines de comptes testent des dizaines d'angles en parallèle, et tu ne règles que les vues obtenues.",
+      a: "En influence, vous louez l'audience d'un créateur, à l'unité et à prix fixe, sans garantie de vues. En clipping, vous payez la performance : des centaines de comptes testent des dizaines d'angles en parallèle, et vous ne réglez que les vues obtenues.",
     },
     {
       q: "Je garde les droits sur mon contenu ?",
-      a: "Oui. Tu restes propriétaire de ton contenu source et des clips produits. La licence accordée aux clippeurs est limitée à la diffusion sur les plateformes prévues dans le brief, pour la durée de la campagne.",
+      a: "Oui. Vous restez propriétaire de votre contenu source et des clips produits. La licence accordée au réseau de diffusion est limitée aux plateformes prévues dans le brief, pour la durée de la campagne.",
     },
   ],
 
