@@ -19,8 +19,9 @@ export const metadata: Metadata = {
 
 const points = [
   "On cadre votre objectif et votre niche",
-  "On te donne une estimation de vues et un CPM",
+  "On vous donne une estimation de vues et un CPM",
   "Vous repartez avec un budget chiffré, sans engagement",
+  "Un lien de paiement Whop pour lancer la campagne",
 ];
 
 export default function Reserver() {

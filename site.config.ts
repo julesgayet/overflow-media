@@ -55,6 +55,7 @@ export const site = {
       "Vues humaines uniquement",
       "Budget plafonné à l'avance",
       "Sans engagement de durée",
+      "Paiement sécurisé via Whop",
     ],
   },
 
@@ -185,7 +186,7 @@ export const site = {
     },
     {
       q: "Comment fonctionne la facturation ?",
-      a: "Au CPM : un montant fixe pour 1 000 vues générées, dans la limite d'un budget que vous fixez à l'avance. Pas d'enchères, pas d'abonnement, pas de frais cachés. Vous ne payez que les vues réellement produites et validées.",
+      a: "Au CPM : un montant fixe pour 1 000 vues générées, dans la limite d'un budget que vous fixez à l'avance. Pas d'enchères, pas d'abonnement, pas de frais cachés. À l'issue de l'appel de cadrage, vous recevez un lien de paiement Whop pour le budget convenu : c'est ce paiement qui déclenche le lancement de la campagne. Vous ne payez que les vues réellement produites et validées.",
     },
     {
       q: "Qui rémunère le réseau de diffusion ?",
