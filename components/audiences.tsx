@@ -110,22 +110,27 @@ export function Audiences() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
-                {/*  Les guillemets sont posés en absolu : ils n'occupent donc
-                    aucune place au repos et le titre ne se décale pas quand
-                    ils apparaissent.                                        */}
-                <span className="relative min-w-0 flex-1 text-2xl font-semibold tracking-[-0.02em] text-ink transition-transform duration-300 group-hover:translate-x-1 sm:text-3xl md:text-4xl">
-                  <span
-                    aria-hidden
-                    className="absolute right-full mr-1.5 text-brand opacity-0 transition-opacity duration-300 group-focus-visible:opacity-100 group-hover:opacity-100"
-                  >
-                    «
-                  </span>
-                  {n.title}
-                  <span
-                    aria-hidden
-                    className="absolute left-full ml-1.5 text-brand opacity-0 transition-opacity duration-300 group-focus-visible:opacity-100 group-hover:opacity-100"
-                  >
-                    »
+                <span className="min-w-0 flex-1 text-2xl font-semibold tracking-[-0.02em] text-ink transition-transform duration-300 group-hover:translate-x-1 sm:text-3xl md:text-4xl">
+                  {/*  Les guillemets se calent sur ce span interne, à la largeur
+                      du texte — et non sur le span externe, qui est en `flex-1`
+                      et s'étire donc jusqu'à la colonne d'indice : le guillemet
+                      fermant s'y collait au texte de cette colonne.
+                      Posés en absolu, ils n'occupent aucune place au repos, donc
+                      le titre ne se décale pas quand ils apparaissent.        */}
+                  <span className="relative inline-block max-w-full align-bottom">
+                    <span
+                      aria-hidden
+                      className="absolute right-full mr-2 text-brand opacity-0 transition-opacity duration-300 group-focus-visible:opacity-100 group-hover:opacity-100"
+                    >
+                      «
+                    </span>
+                    {n.title}
+                    <span
+                      aria-hidden
+                      className="absolute left-full ml-2 text-brand opacity-0 transition-opacity duration-300 group-focus-visible:opacity-100 group-hover:opacity-100"
+                    >
+                      »
+                    </span>
                   </span>
                 </span>
 
