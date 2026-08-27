@@ -146,7 +146,7 @@ export const site = {
   // ── Campagnes en cours (PLACEHOLDERS) ─────────────────────────────────────
   campaigns: [
     {
-      client: "Créateur Business",
+      client: "Business",
       niche: "Business & finance",
       platforms: ["TikTok", "Reels"],
       cpm: "1,20 €",
@@ -156,7 +156,7 @@ export const site = {
       status: "En cours" as const,
     },
     {
-      client: "Label Musique FR",
+      client: "Musique FR",
       niche: "Musique / sortie d'album",
       platforms: ["TikTok", "Shorts"],
       cpm: "0,90 €",
@@ -166,7 +166,7 @@ export const site = {
       status: "En cours" as const,
     },
     {
-      client: "App Mobile SaaS",
+      client: "Mobile SaaS",
       niche: "Tech & productivité",
       platforms: ["Reels", "TikTok"],
       cpm: "1,50 €",
