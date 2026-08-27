@@ -1,7 +1,14 @@
+<!-- Favicon — reprend à la main le tracé de components/logo.tsx (LogoTile).
+     Monochrome blanc sur pastille cobalt : un seul ton, donc une seule passe.
+     Le <g> recentre la boîte englobante du tracé (3,7 · 2,3 · 40,6²) au milieu
+     de la grille 48 et la réduit à 78 % : 37,44 / 40,6 = 0,9222. Cet inset est
+     plus serré que celui de LogoTile : un favicon se lit à 16 px, où 72 %
+     laissaient la marque trop petite pour rester déchiffrable.
+     Modifier en même temps que logo.tsx et opengraph-image.tsx. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
   <rect width="48" height="48" rx="11" fill="#1f4fd8"/>
-  <g transform="translate(24 24) scale(0.72) translate(-24 -24)" fill="none" stroke="#fff" stroke-width="6.5" stroke-linecap="round">
-    <path d="M33.23 24.9 A12.5 12.5 0 1 1 23.6 15.27"/>
-    <path d="M23.6 15.27 C28.98 16.41 35 13 41 6"/>
+  <g transform="translate(24 24) scale(0.9222) translate(-24 -22.6)"
+     fill="none" stroke="#fff" stroke-width="5.8" stroke-linecap="round">
+    <path d="M33.41 29.02 A12.5 12.5 0 1 1 23.6 15.27 C26.90 15.97 33 12 39.5 5.2"/>
   </g>
 </svg>

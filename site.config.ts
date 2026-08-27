@@ -9,13 +9,13 @@
 
 export const site = {
   // ── Identité ──────────────────────────────────────────────────────────────
-  name: "OverFlow Media",
-  legalName: "OverFlow Media",
+  name: "Omniflux",
+  legalName: "Omniflux",
   tagline: "L'agence de clipping qui transforme votre contenu en millions de vues",
   description:
     "Agence de clipping française pour les marques. Nous découpons votre contenu long en clips verticaux et les diffusons sur des centaines de comptes : TikTok, Reels, Shorts. Facturation au CPM, vues vérifiées, budget plafonné à l'avance.",
-  domain: "overflowmedia.fr",
-  email: "contact@overflowmedia.fr",
+  domain: "omniflux.fr",
+  email: "contact@omniflux.fr",
 
   // ── Liens (⚠️ remplace par tes vraies URL) ────────────────────────────────
   links: {
@@ -30,9 +30,9 @@ export const site = {
   // ── Cal.com ───────────────────────────────────────────────────────────────
   //   Le calendrier est intégré dans la section « contact » en bas de page.
   //   `event` doit correspondre au slug de ton type d'événement Cal.com :
-  //   cal.com/{username}/{event} — ici cal.com/overflow-media/campagne-clipping
+  //   cal.com/{username}/{event} — ici cal.com/omniflux/campagne-clipping
   calcom: {
-    username: "overflow-media",
+    username: "omniflux",
     event: "campagne-clipping",
     duration: "15 min",
   },
@@ -217,7 +217,7 @@ export const site = {
     },
     {
       q: "Qui rémunère le réseau de diffusion ?",
-      a: "Nous. Vous réglez un CPM unique à OverFlow Media, et nous rémunérons le réseau via Whop : les vues sont vérifiées, les versements se déclenchent automatiquement. Aucun contrat individuel à signer de votre côté, aucun virement à effectuer, aucune relance à traiter.",
+      a: "Nous. Vous réglez un CPM unique à Omniflux, et nous rémunérons le réseau via Whop : les vues sont vérifiées, les versements se déclenchent automatiquement. Aucun contrat individuel à signer de votre côté, aucun virement à effectuer, aucune relance à traiter.",
     },
     {
       q: "Comment évitez-vous les vues achetées ou frauduleuses ?",
@@ -238,7 +238,7 @@ export const site = {
   ],
 
   // ── Identité légale de l'éditeur ─────────────────────────────────────────
-  //   OverFlow Media est une activité de la même entreprise individuelle que
+  //   Omniflux est une activité de la même entreprise individuelle que
   //   Graft (même SIREN) : les mentions légales, CGV et politique de
   //   confidentialité en dépendent directement (LCEN art. 6 III-1 ; art. 28
   //   et 30 du RGPD pour la traçabilité du responsable de traitement).

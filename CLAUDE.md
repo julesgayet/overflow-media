@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Landing page d'OverFlow Media, agence de clipping française. Next.js 16 (App Router),
+Landing page d'Omniflux, agence de clipping française. Next.js 16 (App Router),
 React 19, Tailwind v4, TypeScript. 100 % statique, déployé sur Vercel.
 
 La page **s'adresse aux marques**, jamais aux clippeurs : aucun contenu de recrutement,
