@@ -56,14 +56,16 @@ documentée hors dépôt ; l'essentiel tient dans le `@theme` et ses commentaire
 
 ### Les surfaces sombres sont voulues
 
-La page est claire, mais quatre zones restent sombres **par choix** — ne pas les « corriger » :
+La page est claire, mais trois zones restent sombres **par choix** — ne pas les « corriger » :
 
 - les vignettes de clips du hero et la maquette de lecteur de `feed-math.tsx` : ce sont des
   surfaces filmées, traitées comme de la matière vidéo ;
-- le bandeau tarifs (`pricing.tsx`), plein cadre en encre : l'ancrage sombre principal de la
-  page ;
-- la grille 3D d'avis (`testimonials.tsx`) : boîte en encre pour que les cartes tranchent
-  nettement sur le fond, comme dans la référence visuelle qui a guidé sa construction.
+- le bandeau tarifs (`pricing.tsx`), plein cadre en encre : seul ancrage sombre de la page.
+
+Le reste suit le fond clair, y compris quand un composant est repris d'une référence
+sombre : la grille 3D d'avis (`testimonials.tsx`) a été reconstruite en clair
+(`bg-surface-2`, cartes blanches) précisément parce que sa boîte en encre faisait tache
+dans la page.
 
 C'est le seul endroit où `text-white` est légitime. Partout ailleurs il trahit un reste du
 thème sombre d'origine.

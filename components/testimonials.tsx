@@ -19,17 +19,17 @@ function initials(name: string) {
 
 function TestimonialCard({ quote, author, role }: (typeof site.testimonials)[number]) {
   return (
-    <figure className="w-[210px] shrink-0 rounded-xl border border-white/10 bg-white/[0.04] p-4">
+    <figure className="w-[210px] shrink-0 rounded-xl border border-line bg-surface p-4">
       <div className="flex items-center gap-2.5">
-        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white/10 text-[10px] font-semibold text-white/80">
+        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-line-2 text-[10px] font-semibold text-mist">
           {initials(author)}
         </span>
         <div className="min-w-0">
-          <div className="truncate text-xs font-medium text-white">{author}</div>
-          <div className="truncate text-[10px] text-white/50">{role}</div>
+          <div className="truncate text-xs font-medium text-ink">{author}</div>
+          <div className="truncate text-[10px] text-mist-2">{role}</div>
         </div>
       </div>
-      <blockquote className="mt-3 text-xs leading-relaxed text-white/70">« {quote} »</blockquote>
+      <blockquote className="mt-3 text-xs leading-relaxed text-mist">« {quote} »</blockquote>
     </figure>
   );
 }
@@ -72,7 +72,7 @@ export function Testimonials() {
         <Reveal delay={100}>
           <div
             aria-hidden
-            className="relative mt-14 flex h-[420px] w-full items-center justify-center overflow-hidden rounded-3xl border border-line bg-ink [perspective:300px]"
+            className="relative mt-14 flex h-[420px] w-full items-center justify-center overflow-hidden rounded-3xl border border-line bg-surface-2 [perspective:300px]"
           >
             <div
               className="flex flex-row items-center gap-4"
@@ -98,10 +98,10 @@ export function Testimonials() {
               {/*  Dégradés de bord : enfants du même conteneur incliné que
                   les colonnes, pour suivre la perspective plutôt que de
                   rester plaqués à plat par-dessus.                          */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-ink to-transparent" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-ink to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-ink to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-ink to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-surface-2 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-surface-2 to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-surface-2 to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-surface-2 to-transparent" />
             </div>
           </div>
         </Reveal>
