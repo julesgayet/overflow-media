@@ -112,15 +112,27 @@ export const site = {
     {
       title: "Créateurs & infopreneurs",
       hint: "Podcasts, lives, formations",
-      media: null as string | null,
+      media: "/media/pour-qui/createurs.webm" as string | null,
     },
-    { title: "Marques D2C", hint: "Produits qui se démontrent", media: null as string | null },
-    { title: "Apps & SaaS", hint: "Installations à coût organique", media: null as string | null },
-    { title: "Labels & artistes", hint: "Sorties, extraits, snippets", media: null as string | null },
+    {
+      title: "Marques D2C",
+      hint: "Produits qui se démontrent",
+      media: "/media/pour-qui/marques-d2c.webm" as string | null,
+    },
+    {
+      title: "Apps & SaaS",
+      hint: "Installations à coût organique",
+      media: "/media/pour-qui/apps-saas.webm" as string | null,
+    },
+    {
+      title: "Labels & artistes",
+      hint: "Sorties, extraits, snippets",
+      media: "/media/pour-qui/labels-artistes.webm" as string | null,
+    },
     {
       title: "Médias & créateurs sport",
       hint: "Formats courts, réactions",
-      media: null as string | null,
+      media: "/media/pour-qui/sport.webm" as string | null,
     },
   ],
 
@@ -146,7 +158,7 @@ export const site = {
   // ── Campagnes en cours (PLACEHOLDERS) ─────────────────────────────────────
   campaigns: [
     {
-      client: "Business",
+      client: "Créateur",
       niche: "Business & finance",
       platforms: ["TikTok", "Reels"],
       cpm: "1,20 €",
@@ -156,7 +168,7 @@ export const site = {
       status: "En cours" as const,
     },
     {
-      client: "Musique FR",
+      client: "Label de musique",
       niche: "Musique / sortie d'album",
       platforms: ["TikTok", "Shorts"],
       cpm: "0,90 €",
@@ -166,7 +178,7 @@ export const site = {
       status: "En cours" as const,
     },
     {
-      client: "Mobile SaaS",
+      client: "App & SaaS",
       niche: "Tech & productivité",
       platforms: ["Reels", "TikTok"],
       cpm: "1,50 €",

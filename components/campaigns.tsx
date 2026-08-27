@@ -25,17 +25,9 @@ export function Campaigns() {
                 className="group h-full rounded-2xl border border-line bg-surface p-6 hover:border-brand/40"
                 contentClassName="flex h-full flex-col"
               >
-                {/* Filigrane */}
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-4 top-16 select-none text-6xl font-bold tracking-tighter text-ink/[0.045] transition-transform duration-500 group-hover:scale-105"
-                >
-                  {c.client.split(" ")[0]}
-                </span>
-
                 <div className="relative flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="text-base font-semibold tracking-tight">{c.client}</h3>
+                    <h3 className="text-lg font-semibold tracking-tight">{c.client}</h3>
                     <p className="mt-1 text-xs text-mist-2">{c.niche}</p>
                   </div>
                   <span

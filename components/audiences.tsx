@@ -35,6 +35,7 @@ function Preview({ media }: { media: string | null }) {
     return (
       <video
         src={media}
+        poster={media.replace(/\.(mp4|webm|mov)$/i, ".jpg")}
         muted
         loop
         playsInline
