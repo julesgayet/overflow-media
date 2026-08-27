@@ -86,17 +86,17 @@ export const site = {
   //   Alimente l'animation d'ouverture. Chaque entrée = une vignette de clip.
   //   ⚠️ Remplace par de vrais clips et de vrais compteurs avant publication.
   proofs: [
-    { platform: "TikTok", views: "2,4 M", client: "Créateur Business" },
+    { platform: "TikTok", views: "2,4 M", client: "Business" },
     { platform: "Reels", views: "870 K", client: "Marque D2C" },
-    { platform: "Shorts", views: "1,1 M", client: "App Mobile SaaS" },
-    { platform: "TikTok", views: "430 K", client: "Label Musique FR" },
-    { platform: "Reels", views: "3,6 M", client: "Créateur Business" },
+    { platform: "Shorts", views: "1,1 M", client: "Mobile SaaS" },
+    { platform: "TikTok", views: "430 K", client: "Musique FR" },
+    { platform: "Reels", views: "3,6 M", client: "Business" },
     { platform: "Shorts", views: "620 K", client: "Média Sport" },
     { platform: "TikTok", views: "1,8 M", client: "Marque D2C" },
-    { platform: "Reels", views: "295 K", client: "App Mobile SaaS" },
-    { platform: "Shorts", views: "2,1 M", client: "Label Musique FR" },
+    { platform: "Reels", views: "295 K", client: "Mobile SaaS" },
+    { platform: "Shorts", views: "2,1 M", client: "Musique FR" },
     { platform: "TikTok", views: "740 K", client: "Média Sport" },
-    { platform: "Reels", views: "1,3 M", client: "Créateur Business" },
+    { platform: "Reels", views: "1,3 M", client: "Business" },
     { platform: "Shorts", views: "510 K", client: "Marque D2C" },
   ],
 
