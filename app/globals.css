@@ -64,7 +64,10 @@ html {
 }
 
 body {
-  background: var(--color-ground);
+  /*  Pas de `background` ici : `html` porte déjà `--color-ground`. En poser un
+   *  sur `body` lui fait peindre sa propre boîte opaque, et tous les décors en
+   *  `-z-10` (grille + particules du héros, halos de `cta`, `simulator`,
+   *  `/reserver`) passent DERRIÈRE et deviennent invisibles.               */
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;

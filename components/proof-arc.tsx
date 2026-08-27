@@ -34,8 +34,6 @@ import { Play } from "./icons";
 const CARD_W = 68;
 const CARD_H = 120; // 9:16
 
-const N = site.proofs.length;
-
 /** Bornes des trois temps, en progression de scroll. */
 const ENTER_END = 0.12; // dispersion → cercle
 const MORPH_END = 0.52; // cercle → arc
@@ -48,18 +46,23 @@ type Geometry = { w: number; h: number };
 
 function ProofCard({
   i,
+  count,
   progress,
   geo,
   parallax,
   proof,
+  clip,
 }: {
   i: number;
+  count: number;
   progress: MotionValue<number>;
   geo: Geometry;
   parallax: MotionValue<number>;
   proof: (typeof site.proofs)[number];
+  clip: string | null;
 }) {
   const isMobile = geo.w < 768;
+  const N = count;
 
   /*  Position de dispersion : figée au premier rendu pour que la carte reparte
       toujours du même point si l'utilisateur remonte.                        */
@@ -167,15 +170,29 @@ function ProofCard({
           className="absolute inset-0 overflow-hidden rounded-lg bg-ink"
           style={{ backfaceVisibility: "hidden" }}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,.10),transparent_65%)]" />
+          {clip ? (
+            <video
+              src={clip}
+              muted
+              loop
+              playsInline
+              autoPlay
+              preload="none"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,.10),transparent_65%)]" />
+          )}
           <span className="absolute left-1.5 top-1.5 rounded bg-white/10 px-1.5 py-0.5 text-[7px] font-medium text-white/90">
             {proof.platform}
           </span>
-          <span className="absolute inset-0 grid place-items-center">
-            <span className="grid size-6 place-items-center rounded-full bg-white/15">
-              <Play className="size-2.5 translate-x-px text-white" />
+          {!clip && (
+            <span className="absolute inset-0 grid place-items-center">
+              <span className="grid size-6 place-items-center rounded-full bg-white/15">
+                <Play className="size-2.5 translate-x-px text-white" />
+              </span>
             </span>
-          </span>
+          )}
           <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-1.5 pb-1.5 pt-5">
             <span className="nums block text-[9px] font-semibold text-white">{proof.views}</span>
             <span className="block text-[7px] text-white/50">vues</span>
@@ -198,11 +215,20 @@ function ProofCard({
   );
 }
 
-export function ProofArc() {
+export function ProofArc({ clips = [] }: { clips?: string[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const [geo, setGeo] = useState<Geometry>({ w: 0, h: 0 });
   const reduce = useReducedMotion();
+
+  /*  Une carte par clip présent dans `public/media/preuves/` (découverts au
+      build). Les libellés — plateforme, vues, campagne — sont repris en boucle
+      sur `site.proofs`. Sans aucun clip, on retombe sur une carte par entrée de
+      `site.proofs`, vignette abstraite. */
+  const cards = (clips.length ? clips : site.proofs).map((_, i) => ({
+    clip: clips[i] ?? null,
+    proof: site.proofs[i % site.proofs.length],
+  }));
 
   useEffect(() => {
     const el = stageRef.current;
@@ -248,12 +274,23 @@ export function ProofArc() {
             Chaque campagne laisse une trace.
           </h2>
           <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {site.proofs.map((p, i) => (
+            {cards.map(({ clip, proof: p }, i) => (
               <li
                 key={i}
                 className="relative aspect-[9/16] overflow-hidden rounded-lg bg-ink p-2"
               >
-                <span className="text-[10px] font-medium text-white/80">{p.platform}</span>
+                {clip && (
+                  <video
+                    src={clip}
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                    preload="none"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                )}
+                <span className="relative text-[10px] font-medium text-white/80">{p.platform}</span>
                 <span className="absolute inset-x-2 bottom-2">
                   <span className="nums block text-xs font-semibold text-white">{p.views}</span>
                   <span className="block text-[9px] text-white/50">vues</span>
@@ -304,11 +341,13 @@ export function ProofArc() {
         {/* Scène */}
         <div className="absolute inset-0 grid place-items-center">
           {geo.w > 0 &&
-            site.proofs.map((proof, i) => (
+            cards.map(({ clip, proof }, i) => (
               <ProofCard
                 key={i}
                 i={i}
+                count={cards.length}
                 proof={proof}
+                clip={clip}
                 progress={progress}
                 geo={geo}
                 parallax={parallaxRaw}

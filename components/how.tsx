@@ -28,7 +28,9 @@ const steps = [
 
 /* ── Panneaux visuels ─────────────────────────────────────────────────────── */
 
-function BriefPanel() {
+type PanelProps = { clips?: string[] };
+
+function BriefPanel(_props: PanelProps) {
   const rows = [
     ["Objectif", "Trafic & notoriété"],
     ["Plateformes", "TikTok · Reels · Shorts"],
@@ -62,7 +64,14 @@ function BriefPanel() {
   );
 }
 
-function SpreadPanel() {
+/*  Grille « Diffusion en cours » : une case = un clip, alimentée par les
+ *  fichiers de `public/media/methode/` (découverts au build, cf. lib/media.ts).
+ *  Sans aucun fichier, la grille reste `PLACEHOLDER_CELLS` carrés abstraits.
+ */
+const PLACEHOLDER_CELLS = 32;
+
+function SpreadPanel({ clips = [] }: PanelProps) {
+  const count = clips.length || PLACEHOLDER_CELLS;
   return (
     <TiltCard className="rounded-2xl border border-line-2 bg-surface-2 p-6">
       <div className="flex items-center justify-between">
@@ -73,12 +82,24 @@ function SpreadPanel() {
         <span className="nums text-xs text-mist">320 comptes</span>
       </div>
       <div className="mt-6 grid grid-cols-8 gap-1.5">
-        {Array.from({ length: 32 }).map((_, i) => (
+        {Array.from({ length: count }).map((_, i) => (
           <span
             key={i}
-            className="aspect-[9/16] rounded-[3px] bg-brand/25"
+            className="group/cell relative aspect-[9/16] overflow-hidden rounded-[3px] bg-brand/25 transition-transform duration-200 ease-out hover:z-10 hover:scale-[1.5]"
             style={{ animationDelay: `${(i % 8) * 160 + Math.floor(i / 8) * 90}ms` }}
-          />
+          >
+            {clips[i] && (
+              <video
+                src={clips[i]}
+                muted
+                loop
+                playsInline
+                autoPlay
+                preload="none"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+          </span>
         ))}
       </div>
       <p className="mt-5 text-center text-[11px] text-mist-2">
@@ -88,7 +109,7 @@ function SpreadPanel() {
   );
 }
 
-function PayoutPanel() {
+function PayoutPanel(_props: PanelProps) {
   const rows = [
     ["@clip.marco", "1,2 M", "1 080 €"],
     ["@edits.lina", "740 K", "666 €"],
@@ -125,7 +146,7 @@ function PayoutPanel() {
 
 const panels = [BriefPanel, SpreadPanel, PayoutPanel];
 
-export function How() {
+export function How({ clips = [] }: { clips?: string[] }) {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
 
@@ -174,7 +195,7 @@ export function How() {
                     }`}
                     aria-hidden={active !== i}
                   >
-                    <Panel />
+                    <Panel clips={clips} />
                   </div>
                 ))}
               </div>
@@ -209,7 +230,7 @@ export function How() {
 
                   {/* Panneau inline (mobile) */}
                   <div className="mt-8 lg:hidden">
-                    <Panel />
+                    <Panel clips={clips} />
                   </div>
                 </div>
               );

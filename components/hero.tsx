@@ -1,14 +1,16 @@
 import { site } from "@/site.config";
 import { Badge, Button, CountUp, Reveal } from "./ui";
 import { Sparkle, TikTok, Instagram, YouTube } from "./icons";
+import { ParticleField } from "./particle-field";
 
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-[72px]">
-      {/*  Décor : une grille très pâle, rien d'autre. Les halos néon de la
-          version sombre viraient au gris sale sur fond clair.                */}
+      {/*  Décor : le seul réseau de particules cobalt. La grille pâle qui se
+          trouvait ici entrait en conflit avec le maillage — deux trames
+          régulières superposées, illisibles.                                 */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(23,23,26,.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(23,23,26,.05)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_70%_55%_at_50%_20%,#000,transparent)]" />
+        <ParticleField />
       </div>
 
       <div className="container-x pb-14 pt-20 md:pt-28">

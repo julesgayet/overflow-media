@@ -49,25 +49,48 @@ function SourceVisual() {
   );
 }
 
-function SpreadVisual({ on }: { on: boolean }) {
+/*  Grille de la 2ᵉ étape : une case = un clip, jamais de case répétée ni
+ *  fabriquée pour « remplir » (cf. règle du contenu de démonstration dans
+ *  CLAUDE.md). On affiche tous les fichiers présents ; sans aucun fichier la
+ *  grille reste un visuel abstrait de `PLACEHOLDER_CELLS` dégradés.
+ */
+const PLACEHOLDER_CELLS = 30;
+const SPREAD_COLS = 6;
+
+function SpreadVisual({ on, clips }: { on: boolean; clips: string[] }) {
+  const count = clips.length || PLACEHOLDER_CELLS;
+
   return (
     <div className="mx-auto w-full max-w-md">
-      <div className="grid grid-cols-12 gap-1.5">
-        {Array.from({ length: 72 }).map((_, i) => (
+      <div className="grid grid-cols-6 gap-2">
+        {Array.from({ length: count }).map((_, i) => (
           <span
             key={i}
-            className="aspect-[9/16] rounded-[2px] bg-gradient-to-b from-brand/60 to-accent/25 transition-all duration-500"
-            style={{
-              opacity: on ? 1 : 0,
-              transform: on ? "scale(1)" : "scale(0.4)",
-              transitionDelay: `${(i % 12) * 22 + Math.floor(i / 12) * 45}ms`,
-            }}
-          />
+            className="group/cell relative aspect-[9/16] transition-transform duration-200 ease-out hover:z-10 hover:scale-[1.9]"
+          >
+            <span
+              className="absolute inset-0 overflow-hidden rounded-[3px] bg-gradient-to-b from-brand/60 to-accent/25 transition-[transform,opacity] duration-500 group-hover/cell:shadow-[0_8px_20px_-6px_rgba(23,23,26,0.5)]"
+              style={{
+                opacity: on ? 1 : 0,
+                transform: on ? "scale(1)" : "scale(0.4)",
+                transitionDelay: `${(i % SPREAD_COLS) * 35 + Math.floor(i / SPREAD_COLS) * 70}ms`,
+              }}
+            >
+              {clips[i] && on && (
+                <video
+                  src={clips[i]}
+                  muted
+                  loop
+                  playsInline
+                  autoPlay
+                  preload="none"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              )}
+            </span>
+          </span>
         ))}
       </div>
-      <p className="mt-4 text-center text-xs text-mist-2">
-        chaque carré = un clip publié sur un compte différent
-      </p>
     </div>
   );
 }
@@ -105,7 +128,7 @@ function ReachVisual({ on }: { on: boolean }) {
   );
 }
 
-export function FeedMath() {
+export function FeedMath({ clips = [] }: { clips?: string[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const markers = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
@@ -139,7 +162,7 @@ export function FeedMath() {
 
   const visuals = [
     <SourceVisual key="a" />,
-    <SpreadVisual key="b" on={active === 1} />,
+    <SpreadVisual key="b" on={active === 1} clips={clips} />,
     <ReachVisual key="c" on={active === 2} />,
   ];
 
@@ -171,7 +194,7 @@ export function FeedMath() {
                 />
               </div>
 
-              <div className="grid min-w-0 flex-1 items-center gap-10 py-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
+              <div className="grid min-w-0 flex-1 items-center gap-10 py-10 md:grid-cols-[1fr_1fr] md:gap-10 lg:gap-16">
                 {/* Texte */}
                 <div>
                   <Eyebrow className="mb-9">La mécanique du clipping</Eyebrow>
@@ -221,12 +244,18 @@ export function FeedMath() {
                 </div>
 
                 {/* Visuel */}
-                <div className="relative hidden h-[24rem] lg:block" aria-hidden>
+                <div className="relative hidden h-[22rem] md:block lg:h-[24rem]" aria-hidden>
                   {visuals.map((v, i) => (
                     <div
                       key={i}
-                      className={`absolute inset-0 flex items-center transition-all duration-600 ease-out ${
-                        active === i ? "scale-100 opacity-100" : "scale-95 opacity-0"
+                      /*  `pointer-events-none` sur les visuels inactifs : ils
+                          restent empilés en absolu au-dessus du visuel actif et,
+                          invisibles mais présents, ils captaient sinon tous les
+                          survols de la grille de clips.                        */
+                      className={`absolute inset-0 flex items-center transition-all duration-500 ease-out ${
+                        active === i
+                          ? "scale-100 opacity-100"
+                          : "pointer-events-none scale-95 opacity-0"
                       }`}
                     >
                       <div className="w-full">{v}</div>
@@ -238,7 +267,7 @@ export function FeedMath() {
           </div>
         </div>
         {/* Distance de scroll pendant laquelle le panneau reste épinglé */}
-        <div className="h-[110vh] lg:h-[160vh]" aria-hidden />
+        <div className="h-[110vh] md:h-[160vh]" aria-hidden />
       </div>
     </section>
   );

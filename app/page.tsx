@@ -1,4 +1,5 @@
 import { site } from "@/site.config";
+import { listSectionMedia } from "@/lib/media";
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { ProofArc } from "@/components/proof-arc";
@@ -48,12 +49,12 @@ export default function Home() {
         <Hero />
         <Simulator />
         <Pricing />
-        <FeedMath />
+        <FeedMath clips={listSectionMedia("mecanique")} />
         <Audiences />
-        <How />
+        <How clips={listSectionMedia("methode")} />
         <Campaigns />
         <Verification />
-        <ProofArc />
+        <ProofArc clips={listSectionMedia("preuves")} />
         <Testimonials />
         <Faq />
         <Cta />
