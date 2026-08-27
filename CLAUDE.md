@@ -56,11 +56,14 @@ documentée hors dépôt ; l'essentiel tient dans le `@theme` et ses commentaire
 
 ### Les surfaces sombres sont voulues
 
-La page est claire, mais trois zones restent sombres **par choix** — ne pas les « corriger » :
+La page est claire, mais quatre zones restent sombres **par choix** — ne pas les « corriger » :
 
 - les vignettes de clips du hero et la maquette de lecteur de `feed-math.tsx` : ce sont des
   surfaces filmées, traitées comme de la matière vidéo ;
-- le bandeau tarifs (`pricing.tsx`), plein cadre en encre : seul ancrage sombre de la page.
+- le bandeau tarifs (`pricing.tsx`), plein cadre en encre : l'ancrage sombre principal de la
+  page ;
+- la grille 3D d'avis (`testimonials.tsx`) : boîte en encre pour que les cartes tranchent
+  nettement sur le fond, comme dans la référence visuelle qui a guidé sa construction.
 
 C'est le seul endroit où `text-white` est légitime. Partout ailleurs il trahit un reste du
 thème sombre d'origine.
@@ -100,6 +103,21 @@ fait 66° — la resserrer referme la boucle optiquement et le symbole devient u
   Régler `maxTilt={0}` dès qu'une carte contient des commandes : sur un panneau large,
   quelques degrés déplacent les bords de dizaines de pixels et la piste d'un curseur se
   dérobe sous le doigt (cas du simulateur).
+
+- `components/marquee.tsx` → `Marquee` : bande qui défile en boucle (`testimonials.tsx`
+  l'utilise en 4 colonnes verticales, sous perspective 3D). Piloter `duration` et `gap` par
+  les **props dédiées**, jamais par une classe Tailwind arbitraire du type
+  `[--duration:Xs]` sur l'instance : une propriété de thème (`--animate-marquee`) contenant
+  un `var(--duration)` imbriqué ne se résout pas de façon fiable une fois consommée sur un
+  descendant — vérifié en isolant le cas avant de conclure. La prop `duration` pose donc un
+  vrai `animationDuration` en style inline, qui n'a pas ce problème.
+
+  Le contenu répété par une `Marquee` doit être réel — ne jamais fabriquer d'entrées pour
+  « remplir » une boucle qui semblerait clairsemée avec peu d'éléments (mêmes règles que le
+  reste du contenu de démonstration, voir plus bas). Une grille de `Marquee` décorative
+  (comme la 3D d'avis) se marque `aria-hidden` et se double d'une liste accessible
+  (`.sr-only`) du même contenu, pour ne pas répéter les mêmes citations des dizaines de fois
+  au lecteur d'écran.
 
 ### Points de structure non évidents
 

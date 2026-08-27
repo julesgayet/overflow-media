@@ -19,22 +19,27 @@ function initials(name: string) {
 
 function TestimonialCard({ quote, author, role }: (typeof site.testimonials)[number]) {
   return (
-    <figure className="flex h-full w-[320px] shrink-0 flex-col rounded-2xl border border-line bg-surface p-6">
+    <figure className="w-[210px] shrink-0 rounded-xl border border-white/10 bg-white/[0.04] p-4">
       <div className="flex items-center gap-2.5">
-        <span className="grid size-9 shrink-0 place-items-center rounded-full bg-line-2 text-xs font-semibold text-mist">
+        <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white/10 text-[10px] font-semibold text-white/80">
           {initials(author)}
         </span>
         <div className="min-w-0">
-          <div className="truncate text-sm font-medium text-ink">{author}</div>
-          <div className="truncate text-xs text-mist-2">{role}</div>
+          <div className="truncate text-xs font-medium text-white">{author}</div>
+          <div className="truncate text-[10px] text-white/50">{role}</div>
         </div>
       </div>
-      <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-mist">
-        « {quote} »
-      </blockquote>
+      <blockquote className="mt-3 text-xs leading-relaxed text-white/70">« {quote} »</blockquote>
     </figure>
   );
 }
+
+/*  Colonnes : la 1re et la 3e défilent vers le bas, la 2e et la 4e vers le
+ *  haut (`reverse`). `repeat={4}` (au lieu de 3 dans la démo d'origine) :
+ *  avec seulement 2 avis réels, chaque copie est deux fois plus courte que
+ *  dans l'original à 9 avis — il faut plus de copies pour couvrir la
+ *  hauteur de la boîte sans laisser de trou pendant la boucle.             */
+const columns = [{ reverse: false }, { reverse: true }, { reverse: false }, { reverse: true }];
 
 export function Testimonials() {
   return (
@@ -52,21 +57,55 @@ export function Testimonials() {
             subtitle="Ce que disent les marques qui nous ont confié leur contenu."
           />
         </Reveal>
-      </div>
 
-      {/*  En dehors du container-x : la bande défile pleine largeur, le
-          dégradé de bord masque la coupe sur les côtés de l'écran.          */}
-      <Reveal delay={100}>
-        <div className="relative mt-14 w-full overflow-hidden">
-          <Marquee pauseOnHover duration="32s" className="py-2">
-            {site.testimonials.map((t, i) => (
-              <TestimonialCard key={t.author + i} {...t} />
-            ))}
-          </Marquee>
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-ground to-transparent sm:w-32" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-ground to-transparent sm:w-32" />
-        </div>
-      </Reveal>
+        {/*  Les avis réels, accessibles : la grille ci-dessous est purement
+            décorative (le même contenu y tourne en boucle et en double sur
+            4 colonnes) et masquée aux lecteurs d'écran.                     */}
+        <ul className="sr-only">
+          {site.testimonials.map((t) => (
+            <li key={t.author}>
+              « {t.quote} » — {t.author}, {t.role}
+            </li>
+          ))}
+        </ul>
+
+        <Reveal delay={100}>
+          <div
+            aria-hidden
+            className="relative mt-14 flex h-[420px] w-full items-center justify-center overflow-hidden rounded-3xl border border-line bg-ink [perspective:300px]"
+          >
+            <div
+              className="flex flex-row items-center gap-4"
+              style={{
+                transform:
+                  "translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)",
+              }}
+            >
+              {columns.map((c, i) => (
+                <Marquee
+                  key={i}
+                  vertical
+                  pauseOnHover
+                  reverse={c.reverse}
+                  duration={i % 2 === 0 ? "26s" : "31s"}
+                >
+                  {site.testimonials.map((t, j) => (
+                    <TestimonialCard key={t.author + j} {...t} />
+                  ))}
+                </Marquee>
+              ))}
+
+              {/*  Dégradés de bord : enfants du même conteneur incliné que
+                  les colonnes, pour suivre la perspective plutôt que de
+                  rester plaqués à plat par-dessus.                          */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-ink to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-ink to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-ink to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-ink to-transparent" />
+            </div>
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }
