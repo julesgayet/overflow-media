@@ -41,16 +41,19 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
+      {/*  L'ordre des sections est la seule chose que ce fichier décide.
+          Il doit rester aligné sur l'ordre des liens de `nav.tsx` et de la
+          colonne « Agence » du footer, sinon la navigation contredit la page. */}
       <main>
         <Hero />
-        <ProofArc />
+        <Simulator />
+        <Pricing />
         <FeedMath />
         <Audiences />
         <How />
-        <Simulator />
-        <Pricing />
         <Campaigns />
         <Verification />
+        <ProofArc />
         <Testimonials />
         <Faq />
         <Cta />

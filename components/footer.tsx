@@ -14,13 +14,15 @@ const socials = [
 const cols = [
   {
     title: "Agence",
+    // Même ordre que les sections dans `app/page.tsx`.
     links: [
-      { href: "#methode", label: "Méthode" },
       { href: "#simulateur", label: "Simulateur" },
       { href: "#tarifs", label: "Tarifs" },
+      { href: "#mecanique", label: "La mécanique" },
       { href: "#pour-qui", label: "Pour qui" },
-      { href: "#verification", label: "Vérification" },
+      { href: "#methode", label: "Méthode" },
       { href: "#campagnes", label: "Campagnes" },
+      { href: "#verification", label: "Vérification" },
       { href: "#faq", label: "FAQ" },
     ],
   },

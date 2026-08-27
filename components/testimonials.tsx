@@ -43,7 +43,7 @@ const columns = [{ reverse: false }, { reverse: true }, { reverse: false }, { re
 
 export function Testimonials() {
   return (
-    <section className="relative py-24 md:py-32">
+    <section id="avis" className="relative py-24 md:py-32">
       <div className="container-x">
         <Reveal>
           <SectionHeading

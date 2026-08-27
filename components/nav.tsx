@@ -5,10 +5,12 @@ import { site } from "@/site.config";
 import { Button } from "./ui";
 import { Logo } from "./logo";
 
+/*  Même ordre que les sections dans `app/page.tsx` : un menu qui ne suit pas
+    l'ordre de la page donne l'impression de sauter en arrière au clic.      */
 const links = [
-  { href: "#methode", label: "Méthode" },
   { href: "#simulateur", label: "Simulateur" },
   { href: "#tarifs", label: "Tarifs" },
+  { href: "#methode", label: "Méthode" },
   { href: "#campagnes", label: "Campagnes" },
   { href: "#faq", label: "FAQ" },
 ];
