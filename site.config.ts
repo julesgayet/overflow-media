@@ -30,10 +30,10 @@ export const site = {
   // ── Cal.com ───────────────────────────────────────────────────────────────
   //   Le calendrier est intégré dans la section « contact » en bas de page.
   //   `event` doit correspondre au slug de ton type d'événement Cal.com :
-  //   cal.com/{username}/{event} — ici cal.com/omniflux/campagne-clipping
+  //   cal.com/{username}/{event} — ici cal.com/augustin-durand-p4cx4w/decouverte-de-omniflux
   calcom: {
-    username: "omniflux",
-    event: "campagne-clipping",
+    username: "augustin-durand-p4cx4w",
+    event: "decouverte-de-omniflux",
     duration: "15 min",
   },
 
