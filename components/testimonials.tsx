@@ -62,8 +62,10 @@ export function Testimonials() {
             décorative (le même contenu y tourne en boucle et en double sur
             4 colonnes) et masquée aux lecteurs d'écran.                     */}
         <ul className="sr-only">
-          {site.testimonials.map((t) => (
-            <li key={t.author}>
+          {/*  Clé par index : les auteurs sont des placeholders qui portent
+              tous le même nom, `author` ne peut donc pas servir de clé.   */}
+          {site.testimonials.map((t, i) => (
+            <li key={t.author + i}>
               « {t.quote} » — {t.author}, {t.role}
             </li>
           ))}

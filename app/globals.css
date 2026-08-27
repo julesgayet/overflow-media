@@ -249,6 +249,16 @@ input[type="range"].of-range:focus-visible::-webkit-slider-thumb {
   .tilt-card::before { display: none; }
 }
 
+/*  Réservé aux pointeurs fins (souris, trackpad). Écrit en CSS plutôt qu'en
+ *  variante Tailwind arbitraire : `[@media(hover:hover)and(pointer:fine)]`
+ *  génère `@media (hover:hover)and(pointer:fine)` — sans espace avant `and`,
+ *  donc du CSS invalide qui fait échouer tout le fichier.
+ * ------------------------------------------------------------------------ */
+.pointer-fine-only { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .pointer-fine-only { display: block; }
+}
+
 /* ── Chiffres tabulaires pour les compteurs ─────────────────────────────── */
 @utility nums {
   font-variant-numeric: tabular-nums;

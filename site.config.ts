@@ -101,12 +101,27 @@ export const site = {
   ],
 
   // ── Pour qui (liste éditoriale) ───────────────────────────────────────────
+  //   `media` : aperçu 9:16 montré au survol de la ligne. Chemin d'un fichier
+  //   placé dans `public/` — image (.jpg, .png, .webp) ou vidéo (.mp4, .webm),
+  //   le composant choisit la balise selon l'extension.
+  //   ⚠️ `null` tant qu'il n'y a pas d'asset : la ligne affiche alors un cadre
+  //   vide au bon format. Ne jamais y mettre une image d'illustration
+  //   empruntée ou générique — sur une section « pour qui », elle passerait
+  //   pour un vrai extrait de campagne.
   niches: [
-    { title: "Créateurs & infopreneurs", hint: "Podcasts, lives, formations" },
-    { title: "Marques D2C", hint: "Produits qui se démontrent" },
-    { title: "Apps & SaaS", hint: "Installations à coût organique" },
-    { title: "Labels & artistes", hint: "Sorties, extraits, snippets" },
-    { title: "Médias & créateurs sport", hint: "Formats courts, réactions" },
+    {
+      title: "Créateurs & infopreneurs",
+      hint: "Podcasts, lives, formations",
+      media: null as string | null,
+    },
+    { title: "Marques D2C", hint: "Produits qui se démontrent", media: null as string | null },
+    { title: "Apps & SaaS", hint: "Installations à coût organique", media: null as string | null },
+    { title: "Labels & artistes", hint: "Sorties, extraits, snippets", media: null as string | null },
+    {
+      title: "Médias & créateurs sport",
+      hint: "Formats courts, réactions",
+      media: null as string | null,
+    },
   ],
 
   // ── Vérification anti-fraude ──────────────────────────────────────────────
