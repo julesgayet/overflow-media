@@ -27,14 +27,26 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
+  /*  Durée volontairement fixe ici : un `var(--duration)` imbriqué dans cette
+   *  propriété de thème ne se résout pas de façon fiable une fois consommé
+   *  via `animation: var(--animate-marquee)` sur un descendant (testé : même
+   *  un `--duration` posé en style inline direct sur l'élément animé retombe
+   *  sur la valeur de repli). `Marquee` pose donc `animationDuration` en
+   *  style inline sur chaque copie plutôt que de passer par cette variable.
+   */
   --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-vertical: marquee-vertical 40s linear infinite;
   --animate-float: float 7s ease-in-out infinite;
   --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
 }
 
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(calc(-100% - var(--gap, 1rem))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap, 1rem))); }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0deg)); }
