@@ -15,6 +15,29 @@ Référence toujours par chemin **absolu depuis la racine** : le fichier
 | `methode/`   | `#methode`   | « La méthode » (étape 2 – Diffusion) | `components/how.tsx` | grille « Diffusion en cours » |
 | `mecanique/` | `#mecanique` | « La mécanique du clipping » | `components/feed-math.tsx` | maquette de démonstration (grille de carrés) |
 
+## Compatibilité navigateurs — un clip, trois fichiers
+
+Chaque vidéo déposée doit exister sous **trois formes portant le même nom** :
+
+| Fichier | Rôle |
+|---|---|
+| `clip-01.mp4`  | H.264. Servi en premier : décodé en matériel sur tous les navigateurs. |
+| `clip-01.webm` | VP9. Servi en second, pour les navigateurs qui le préfèrent. |
+| `clip-01.jpg`  | Première image. Peinte avant tout décodage, et seule image affichée hors écran. |
+
+Le WebM seul ne suffit pas : Safari décode le VP9 en matériel sur Mac, Firefox
+retombe sur un décodage logiciel — la page affichait des vignettes noires et
+saccadait. `lib/media.ts` ne compte qu'un clip par nom, `components/clip.tsx`
+choisit l'encodage et ne lance que ce qui est à l'écran (10 lecteurs maximum).
+
+Après avoir déposé un fichier, générer les jumeaux manquants :
+
+```bash
+ffmpeg -i clip.webm -c:v libx264 -profile:v main -pix_fmt yuv420p \
+  -crf 26 -preset slow -movflags +faststart -an clip.mp4
+ffmpeg -i clip.webm -frames:v 1 -q:v 6 clip.jpg
+```
+
 ## État du câblage
 
 - **`pour-qui/`** — déjà branché. Remplacer les `media: null` dans

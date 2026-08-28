@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Reveal, SectionHeading } from "./ui";
 import { Check } from "./icons";
 import { TiltCard } from "./tilt-card";
+import { Clip } from "./clip";
 
 const steps = [
   {
@@ -89,15 +90,7 @@ function SpreadPanel({ clips = [] }: PanelProps) {
             style={{ animationDelay: `${(i % 8) * 160 + Math.floor(i / 8) * 90}ms` }}
           >
             {clips[i] && (
-              <video
-                src={clips[i]}
-                muted
-                loop
-                playsInline
-                autoPlay
-                preload="none"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+              <Clip src={clips[i]} className="absolute inset-0 h-full w-full object-cover" />
             )}
           </span>
         ))}

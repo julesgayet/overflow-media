@@ -9,13 +9,28 @@ const VIDEO = /\.(mp4|webm|mov)$/i;
  *  reprend jamais la place d'un binaire une fois commité, d'où le pool.       */
 const SHARED = "clips";
 
+/*  Un clip = un nom de fichier, pas une extension. Chaque vidéo existe en
+ *  deux encodages jumeaux — `clip-01.webm` et `clip-01.mp4` — plus son image
+ *  `clip-01.jpg` (cf. `public/media/README.md`). Sans ce regroupement, la
+ *  section afficherait deux fois chaque clip. C'est `components/clip.tsx`
+ *  qui choisit l'encodage servi au navigateur ; on ne renvoie ici qu'un
+ *  chemin par clip, le WebM de préférence.
+ */
+const PREFERRED = [".webm", ".mp4", ".mov"];
+
 function read(section: string): string[] {
   try {
     const dir = path.join(process.cwd(), "public", "media", section);
-    return readdirSync(dir)
-      .filter((f) => VIDEO.test(f))
-      .sort()
-      .map((f) => `/media/${section}/${f}`);
+    const byName = new Map<string, string>();
+    for (const f of readdirSync(dir).filter((f) => VIDEO.test(f)).sort()) {
+      const base = f.replace(VIDEO, "");
+      const kept = byName.get(base);
+      const rank = (n: string) => PREFERRED.indexOf(path.extname(n).toLowerCase());
+      if (!kept || rank(f) < rank(kept)) byName.set(base, f);
+    }
+    return [...byName.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([, f]) => `/media/${section}/${f}`);
   } catch {
     return [];
   }

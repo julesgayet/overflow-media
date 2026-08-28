@@ -5,6 +5,7 @@ import { useReducedMotion } from "framer-motion";
 import { site } from "@/site.config";
 import { Reveal, SectionHeading } from "./ui";
 import { Arrow } from "./icons";
+import { Clip } from "./clip";
 
 /** Largeur de l'aperçu, en px. La hauteur en découle : format 9:16. */
 const PREVIEW_W = 168;
@@ -36,18 +37,9 @@ function Preview({ media }: { media: string | null }) {
 
   if (isVideo(media)) {
     return (
-      <video
-        src={media}
-        poster={media.replace(/\.(mp4|webm|mov)$/i, ".jpg")}
-        muted
-        loop
-        playsInline
-        /*  Pas de lecture automatique si l'utilisateur a demandé moins de
-            mouvement : la vidéo reste sur sa première image.               */
-        autoPlay={!reduce}
-        preload="metadata"
-        className="h-full w-full rounded-xl object-cover"
-      />
+      /*  Pas de lecture automatique si l'utilisateur a demandé moins de
+          mouvement : la vidéo reste sur sa première image.                 */
+      <Clip src={media} play={!reduce} className="h-full w-full rounded-xl object-cover" />
     );
   }
 

@@ -12,6 +12,7 @@ import {
 import { site } from "@/site.config";
 import { Eyebrow } from "./ui";
 import { Play } from "./icons";
+import { Clip } from "./clip";
 
 /* ── Mur de preuves ─────────────────────────────────────────────────────────
  *  Les vignettes se rassemblent en cercle, puis se déploient en arc au fil du
@@ -171,15 +172,7 @@ function ProofCard({
           style={{ backfaceVisibility: "hidden" }}
         >
           {clip ? (
-            <video
-              src={clip}
-              muted
-              loop
-              playsInline
-              autoPlay
-              preload="none"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+            <Clip src={clip} className="absolute inset-0 h-full w-full object-cover" />
           ) : (
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,.10),transparent_65%)]" />
           )}
@@ -280,13 +273,9 @@ export function ProofArc({ clips = [] }: { clips?: string[] }) {
                 className="relative aspect-[9/16] overflow-hidden rounded-lg bg-ink p-2"
               >
                 {clip && (
-                  <video
+                  <Clip
                     src={clip}
-                    muted
-                    loop
-                    playsInline
-                    autoPlay
-                    preload="none"
+                    play={false}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 )}
