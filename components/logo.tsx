@@ -76,7 +76,7 @@ export function Logo({ className = "" }: { className?: string }) {
     <span className={`flex items-center gap-3 ${className}`}>
       <LogoMark className="size-10" />
       <span className="text-[22px] font-semibold tracking-tight">
-        Omni<span className="font-normal text-mist">flux</span>
+        Omni<span className="font-normal text-brand">flux</span>
       </span>
     </span>
   );
