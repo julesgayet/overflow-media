@@ -1,6 +1,6 @@
 import { site } from "@/site.config";
-import { Badge, Button, CountUp, Reveal } from "./ui";
-import { Sparkle, TikTok, Instagram, YouTube } from "./icons";
+import { Button, CountUp, Reveal } from "./ui";
+import { TikTok, Instagram, YouTube } from "./icons";
 import { ParticleField } from "./particle-field";
 
 export function Hero() {
@@ -15,14 +15,8 @@ export function Hero() {
 
       <div className="container-x pb-14 pt-20 md:pt-28">
         <div className="mx-auto max-w-4xl text-center">
-          <Reveal>
-            <Badge icon={<Sparkle className="size-3.5 text-brand" />}>
-              Agence de clipping française · Facturation au CPM
-            </Badge>
-          </Reveal>
-
           <Reveal delay={80}>
-            <h1 className="mt-7 text-balance text-[2.6rem] font-semibold leading-[1.03] tracking-[-0.035em] sm:text-6xl md:text-7xl">
+            <h1 className="text-balance text-[2.6rem] font-semibold leading-[1.03] tracking-[-0.035em] sm:text-6xl md:text-7xl">
               Votre marque, partout.
               <br />
               <span className="text-gradient">Sur tous les écrans, tout le temps.</span>
