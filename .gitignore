@@ -43,6 +43,5 @@ next-env.d.ts
 # claude code
 /.claude/
 
-# Sources vidéo brutes (trop volumineuses pour git)
+# Rushes 4K bruts (trop volumineux pour git) — commiter la version compressée
 public/media/sources/*.mov
-public/media/sources/*.mp4
