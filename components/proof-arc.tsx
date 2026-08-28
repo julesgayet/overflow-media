@@ -15,8 +15,8 @@ import { Play } from "./icons";
 import { Clip } from "./clip";
 
 /* ── Mur de preuves ─────────────────────────────────────────────────────────
- *  Les vignettes se rassemblent en cercle, puis se déploient en arc au fil du
- *  scroll, avant de défiler une à une.
+ *  Les vignettes arrivent dispersées, se rangent sur l'arc, puis l'arc défile
+ *  au fil du scroll.
  *
  *  Trois écarts assumés par rapport au composant d'origine :
  *
@@ -35,10 +35,21 @@ import { Clip } from "./clip";
 const CARD_W = 68;
 const CARD_H = 120; // 9:16
 
-/** Bornes des trois temps, en progression de scroll. */
-const ENTER_END = 0.12; // dispersion → cercle
-const MORPH_END = 0.52; // cercle → arc
-// au-delà : l'arc défile
+/** Fin du rangement des vignettes, en progression de scroll ; au-delà, l'arc défile. */
+const ENTER_END = 0.42;
+
+/*  Fin de l'apparition, distincte de la fin du rangement. Lier les deux vidait
+ *  l'écran : les vignettes ne devenaient franches qu'une fois posées, si bien
+ *  qu'on ne voyait presque rien arriver. Elles sont donc toutes là très tôt,
+ *  et le reste du trajet se fait à pleine opacité — c'est le rangement qu'on
+ *  regarde, pas une apparition.                                              */
+const FADE_END = 0.1;
+
+/*  Inclinaison de départ, en degrés. Les vignettes arrivaient d'abord avec une
+ *  rotation aléatoire d'un demi-tour, et passaient par un cercle complet avant
+ *  de s'ouvrir en arc : elles tournoyaient. Le cercle a sauté, et il ne reste
+ *  ici qu'un léger désordre — des cartes jetées sur la table, qui se rangent. */
+const SCATTER_TILT = 22;
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const lerp = (a: number, b: number, t: number) => a * (1 - t) + b * t;
@@ -70,16 +81,8 @@ function ProofCard({
   const scatter = useRef({
     x: (Math.random() - 0.5) * (geo.w || 1200) * 1.1,
     y: (Math.random() - 0.5) * (geo.h || 800) * 1.1,
-    r: (Math.random() - 0.5) * 180,
+    r: (Math.random() - 0.5) * 2 * SCATTER_TILT,
   }).current;
-
-  // ── Cercle ──
-  const circleRadius = Math.min(Math.min(geo.w, geo.h) * 0.32, 300);
-  const circleAngle = (i / N) * 360;
-  const circleRad = (circleAngle * Math.PI) / 180;
-  const cx = Math.cos(circleRad) * circleRadius;
-  const cy = Math.sin(circleRad) * circleRadius;
-  const cRot = circleAngle + 90;
 
   /* ── Arc « arc-en-ciel », convexe vers le haut ───────────────────────────
    *  Le repère a son origine au CENTRE de la scène (`place-items-center`) et
@@ -112,8 +115,8 @@ function ProofCard({
 
   const geometry = (p: number) => {
     const enter = clamp01(p / ENTER_END);
-    const morph = clamp01((p - ENTER_END) / (MORPH_END - ENTER_END));
-    const shuffle = clamp01((p - MORPH_END) / (1 - MORPH_END));
+    const appear = clamp01(p / FADE_END);
+    const shuffle = clamp01((p - ENTER_END) / (1 - ENTER_END));
 
     const offset = (((i * step - shuffle * belt) % belt) + belt) % belt;
     const angle = beltStart + offset;
@@ -121,19 +124,21 @@ function ProofCard({
     const ax = Math.cos(rad) * arcRadius;
     const ay = Math.sin(rad) * arcRadius + arcCenterY;
 
-    // dispersion → cercle, puis cercle → arc
-    const ex = lerp(scatter.x, cx, enter);
-    const ey = lerp(scatter.y, cy, enter);
-    const eRot = lerp(scatter.r, cRot, enter);
-
     const edgeFade = Math.min(offset / margin, (belt - offset) / margin, 1);
 
+    /*  Un seul trajet : de la dispersion à la place définitive sur l'arc. La
+        vignette vise sa place dès la première image, elle n'a donc pas de
+        détour à faire — et sa rotation ne fait que se redresser vers
+        l'inclinaison de l'arc, sans jamais repasser par un tour complet.    */
     return {
-      x: lerp(ex, ax, morph),
-      y: lerp(ey, ay, morph),
-      rotate: lerp(eRot, angle + 90, morph),
-      scale: lerp(lerp(0.6, 1, enter), arcScale, morph),
-      opacity: enter * lerp(1, clamp01(edgeFade), morph),
+      x: lerp(scatter.x, ax, enter),
+      y: lerp(scatter.y, ay, enter),
+      rotate: angle + 90 + scatter.r * (1 - enter),
+      scale: lerp(0.65, arcScale, enter),
+      /*  Le fondu de bord n'a de sens qu'une fois sur l'arc : appliqué dès la
+          dispersion, il rendrait invisible d'un bout à l'autre la vignette qui
+          se range juste à l'entrée du tapis.                                */
+      opacity: appear * lerp(1, clamp01(edgeFade), enter),
     };
   };
 
