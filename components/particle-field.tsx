@@ -55,9 +55,20 @@ export function ParticleField() {
       }));
     };
 
+    // Sur mobile, l'apparition/disparition de la barre d'URL au scroll change la
+    // hauteur du viewport et déclenchait `resize` en rafale : chaque appel
+    // relançait `seed()` et le maillage « sautait ». On ne réagit donc qu'à un
+    // vrai changement de largeur (rotation, redimensionnement de fenêtre).
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
+      if (Math.abs(rect.width - width) < 1) {
+        // hauteur seule : on étire le canvas sans re-semer
+        height = rect.height;
+        canvas.height = Math.round(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return;
+      }
       width = rect.width;
       height = rect.height;
       canvas.width = Math.round(width * dpr);
@@ -119,6 +130,9 @@ export function ParticleField() {
     };
 
     const onPointerMove = (e: PointerEvent) => {
+      // Le doigt qui fait défiler la page émet des `pointermove` : les prendre
+      // en compte faisait fuir les particules à chaque scroll tactile.
+      if (e.pointerType === "touch") return;
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
