@@ -17,23 +17,23 @@ export function Hero() {
         <div className="mx-auto max-w-4xl text-center">
           <Reveal>
             <Badge icon={<Sparkle className="size-3.5 text-brand" />}>
-              Agence de clipping française · Paiements via Whop
+              Agence de clipping française · Facturation au CPM
             </Badge>
           </Reveal>
 
           <Reveal delay={80}>
             <h1 className="mt-7 text-balance text-[2.6rem] font-semibold leading-[1.03] tracking-[-0.035em] sm:text-6xl md:text-7xl">
-              Des millions de vues.
+              Votre marque, partout.
               <br />
-              <span className="text-gradient">Payées à la performance.</span>
+              <span className="text-gradient">Sur tous les écrans, tout le temps.</span>
             </h1>
           </Reveal>
 
           <Reveal delay={160}>
             <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-relaxed text-mist md:text-lg">
-              {site.name} découpe votre contenu long en centaines de clips verticaux, les diffuse via
-              un réseau de comptes vérifiés, et ne facture que les vues réellement générées.
-              À partir de {site.pricing.from} {site.pricing.unit}.
+              {site.name} transforme votre contenu en centaines de clips verticaux et les diffuse
+              en continu sur TikTok, Reels et Shorts. Votre marque est partout — et vous ne payez
+              que les vues générées, à partir de {site.pricing.from} {site.pricing.unit}.
             </p>
           </Reveal>
 
