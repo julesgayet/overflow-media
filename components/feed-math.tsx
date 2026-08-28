@@ -28,19 +28,42 @@ const beats = [
 
 const sourceFormats = ["Podcast", "Vidéo YouTube", "Live", "Clip musical", "Interview", "Replay"];
 
-function SourceVisual() {
+/*  Tant que `public/media/sources/` est vide, on garde le nuage de pastilles
+ *  de formats (aucune vidéo à fabriquer pour « remplir », cf. CLAUDE.md). Dès
+ *  qu'un fichier y est déposé, il remplace le nuage : la vidéo tourne plein
+ *  cadre en 16:9, en boucle — le contenu qui entre dans le brief avant d'être
+ *  redécoupé par `SpreadVisual`, juste à côté au scroll suivant. Un seul
+ *  fichier attendu ; s'il y en a plusieurs, seul le premier (tri par nom)
+ *  s'affiche.                                                               */
+function SourceVisual({ sources }: { sources: string[] }) {
+  const source = sources[0];
+
   return (
     <div className="mx-auto w-full max-w-md">
       <div className="relative flex aspect-video flex-wrap content-center items-center justify-center gap-2 overflow-hidden rounded-2xl bg-ink p-7">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,.10),transparent_65%)]" />
-        {sourceFormats.map((f) => (
-          <span
-            key={f}
-            className="relative rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 text-xs text-white/80"
-          >
-            {f}
-          </span>
-        ))}
+        {source ? (
+          <video
+            src={source}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="none"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,.10),transparent_65%)]" />
+            {sourceFormats.map((f) => (
+              <span
+                key={f}
+                className="relative rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 text-xs text-white/80"
+              >
+                {f}
+              </span>
+            ))}
+          </>
+        )}
       </div>
       <p className="mt-4 text-center text-xs text-mist-2">
         vos contenus, quel qu&apos;en soit le format
@@ -128,7 +151,7 @@ function ReachVisual({ on }: { on: boolean }) {
   );
 }
 
-export function FeedMath({ clips = [] }: { clips?: string[] }) {
+export function FeedMath({ clips = [], sources = [] }: { clips?: string[]; sources?: string[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const markers = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
@@ -161,7 +184,7 @@ export function FeedMath({ clips = [] }: { clips?: string[] }) {
   }, []);
 
   const visuals = [
-    <SourceVisual key="a" />,
+    <SourceVisual key="a" sources={sources} />,
     <SpreadVisual key="b" on={active === 1} clips={clips} />,
     <ReachVisual key="c" on={active === 2} />,
   ];

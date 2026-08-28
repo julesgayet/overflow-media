@@ -66,7 +66,7 @@ export default async function OpengraphImage() {
           <span style={{ color: "#d3d3d8" }}>|</span>
           <span>TikTok · Reels · Shorts</span>
           <span style={{ color: "#d3d3d8" }}>|</span>
-          <span>Paiements via Whop</span>
+          <span>Facturation au CPM</span>
         </div>
       </div>
     ),

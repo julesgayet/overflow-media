@@ -8,6 +8,9 @@ import { Arrow } from "./icons";
 
 /** Largeur de l'aperçu, en px. La hauteur en découle : format 9:16. */
 const PREVIEW_W = 168;
+const PREVIEW_H = (PREVIEW_W * 16) / 9;
+/** Marge entre le curseur et le bord du cadre. */
+const GAP = 28;
 
 const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
 
@@ -68,12 +71,21 @@ export function Audiences() {
     const el = previewRef.current;
     if (!list || !el) return;
     const rect = list.getBoundingClientRect();
-    //  Bridé aux bords de la liste : sans ça, l'aperçu déborde de la section
-    //  dès que le curseur approche du bord droit ou gauche.
-    const half = PREVIEW_W / 2;
-    const x = Math.min(Math.max(event.clientX - rect.left, half), rect.width - half);
+    const cx = event.clientX - rect.left;
+    const cy = event.clientY - rect.top;
+
+    //  Le cadre se pose à côté du curseur, jamais dessous : centré sur le
+    //  pointeur, il masquait la ligne qu'on est justement en train de lire.
+    //  Par défaut à droite ; il bascule à gauche quand la place manque.
+    let x = cx + GAP;
+    if (x + PREVIEW_W > rect.width) x = cx - GAP - PREVIEW_W;
+    //  Bridé aux bords de la liste : sans ça, l'aperçu déborde de la section.
+    x = Math.min(Math.max(x, 0), Math.max(rect.width - PREVIEW_W, 0));
+
+    const y = Math.min(Math.max(cy - PREVIEW_H / 2, 0), Math.max(rect.height - PREVIEW_H, 0));
+
     el.style.setProperty("--x", `${x}px`);
-    el.style.setProperty("--y", `${event.clientY - rect.top}px`);
+    el.style.setProperty("--y", `${y}px`);
   }
 
   return (
@@ -150,8 +162,8 @@ export function Audiences() {
           <div
             ref={previewRef}
             aria-hidden
-            style={{ left: "var(--x, 50%)", top: "var(--y, 50%)", width: PREVIEW_W }}
-            className={`pointer-fine-only pointer-events-none absolute z-20 aspect-[9/16] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl border border-line-2 bg-surface-2 shadow-[0_18px_40px_-16px_rgba(23,23,26,0.35)] transition-[opacity,scale] duration-200 ${
+            style={{ left: "var(--x, 60%)", top: "var(--y, 0px)", width: PREVIEW_W }}
+            className={`pointer-fine-only pointer-events-none absolute z-20 aspect-[9/16] overflow-hidden rounded-xl border border-line-2 bg-surface-2 shadow-[0_18px_40px_-16px_rgba(23,23,26,0.35)] transition-[opacity,scale,left,top] duration-200 ease-out ${
               active === null ? "scale-95 opacity-0" : "scale-100 opacity-100"
             }`}
           >

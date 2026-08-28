@@ -333,8 +333,7 @@ export function ProofArc({ clips = [] }: { clips?: string[] }) {
             Des clips, pas des <span className="text-gradient">promesses</span>.
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-mist">
-            Chaque vignette est un clip publié sur un compte vérifié. Seules les vues validées
-            entrent dans votre facturation.
+            Seules les vues validées entrent dans votre facturation.
           </p>
         </motion.div>
 

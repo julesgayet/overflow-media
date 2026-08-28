@@ -21,7 +21,6 @@ export const metadata: Metadata = {
     "TikTok",
     "Instagram Reels",
     "YouTube Shorts",
-    "Whop",
   ],
   openGraph: {
     type: "website",

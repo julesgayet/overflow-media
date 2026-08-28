@@ -42,3 +42,7 @@ next-env.d.ts
 
 # claude code
 /.claude/
+
+# Sources vidéo brutes (trop volumineuses pour git)
+public/media/sources/*.mov
+public/media/sources/*.mp4

@@ -19,7 +19,6 @@ export const site = {
 
   // ── Liens (⚠️ remplace par tes vraies URL) ────────────────────────────────
   links: {
-    whopBrands: "https://whop.com/ton-whop",
     discord: "https://discord.gg/ton-invite",
     tiktok: "https://www.tiktok.com/@ton-compte",
     instagram: "https://www.instagram.com/ton-compte",
@@ -55,7 +54,7 @@ export const site = {
       "Vues humaines uniquement",
       "Budget plafonné à l'avance",
       "Sans engagement de durée",
-      "Paiement sécurisé via Whop",
+      "Paiement sécurisé en ligne",
     ],
   },
 
@@ -213,11 +212,11 @@ export const site = {
     },
     {
       q: "Comment fonctionne la facturation ?",
-      a: "Au CPM : un montant fixe pour 1 000 vues générées, dans la limite d'un budget que vous fixez à l'avance. Pas d'enchères, pas d'abonnement, pas de frais cachés. À l'issue de l'appel de cadrage, vous recevez un lien de paiement Whop pour le budget convenu : c'est ce paiement qui déclenche le lancement de la campagne. Vous ne payez que les vues réellement produites et validées.",
+      a: "Au CPM : un montant fixe pour 1 000 vues générées, dans la limite d'un budget que vous fixez à l'avance. Pas d'enchères, pas d'abonnement, pas de frais cachés. À l'issue de l'appel de cadrage, vous recevez un lien de paiement sécurisé pour le budget convenu : c'est ce paiement qui déclenche le lancement de la campagne. Vous ne payez que les vues réellement produites et validées.",
     },
     {
       q: "Qui rémunère le réseau de diffusion ?",
-      a: "Nous. Vous réglez un CPM unique à Omniflux, et nous rémunérons le réseau via Whop : les vues sont vérifiées, les versements se déclenchent automatiquement. Aucun contrat individuel à signer de votre côté, aucun virement à effectuer, aucune relance à traiter.",
+      a: "Nous. Vous réglez un CPM unique à Omniflux, et nous rémunérons le réseau : les vues sont vérifiées, les versements se déclenchent automatiquement. Aucun contrat individuel à signer de votre côté, aucun virement à effectuer, aucune relance à traiter.",
     },
     {
       q: "Comment évitez-vous les vues achetées ou frauduleuses ?",
@@ -225,7 +224,7 @@ export const site = {
     },
     {
       q: "Sous quel délai une campagne démarre-t-elle ?",
-      a: "Comptez 48 h entre la validation du brief et les premiers clips en ligne : on prépare les assets, on publie la campagne sur Whop et la communauté se met au travail immédiatement.",
+      a: "Comptez 48 h entre la validation du brief et les premiers clips en ligne : on prépare les assets, on lance la campagne et le réseau se met au travail immédiatement.",
     },
     {
       q: "En quoi c'est différent du marketing d'influence ?",

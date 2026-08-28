@@ -49,7 +49,10 @@ export default function Home() {
         <Hero />
         <Simulator />
         <Pricing />
-        <FeedMath clips={listSectionMedia("mecanique")} />
+        <FeedMath
+          clips={listSectionMedia("mecanique")}
+          sources={listSectionMedia("sources", false)}
+        />
         <Audiences />
         <How clips={listSectionMedia("methode")} />
         <Campaigns />

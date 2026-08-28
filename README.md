@@ -24,7 +24,6 @@ Tout le contenu éditable est dans un seul fichier : **`site.config.ts`**.
 |---|---|
 | Nom de l'agence (`Omniflux`) | `site.name`, `site.legalName` |
 | Domaine et e-mail | `site.domain`, `site.email` |
-| **Liens Whop** (`https://whop.com/ton-whop`) | `site.links.whopClippers`, `site.links.whopBrands` |
 | Discord, TikTok, Instagram, X, YouTube | `site.links.*` |
 | **Chiffres du bandeau** (120M+, 850+, 180K€…) | `site.stats` |
 | **Campagnes affichées** | `site.campaigns` |

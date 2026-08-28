@@ -29,6 +29,12 @@ function read(section: string): string[] {
  *  et c'est tout ou rien : dès qu'une section contient une vidéo, elle
  *  n'affiche plus que les siennes.
  *
+ *  `fallbackToShared: false` désactive ce repli — cas des sections dont le
+ *  format ne correspond pas au pool `clips/` (`sources`, par exemple, qui
+ *  attend des formats longs 16:9 et non des clips verticaux) : mieux vaut
+ *  rester vide et déclencher le visuel abstrait du composant qu'afficher des
+ *  clips verticaux dans un cadre pensé pour du format long.
+ *
  *  Aucune convention de nom : tout fichier vidéo du dossier est pris, trié par
  *  nom. Lu au build (module serveur, jamais importé côté client) — déposer un
  *  fichier et relancer le build suffit, il n'y a rien à câbler dans
@@ -37,7 +43,8 @@ function read(section: string): string[] {
  *  Renvoie des chemins absolus prêts à poser dans un `src` :
  *  `["/media/clips/a.webm", …]`. Rien nulle part → `[]`.
  */
-export function listSectionMedia(section: string): string[] {
+export function listSectionMedia(section: string, fallbackToShared = true): string[] {
   const own = read(section);
-  return own.length > 0 ? own : read(SHARED);
+  if (own.length > 0 || !fallbackToShared) return own;
+  return read(SHARED);
 }

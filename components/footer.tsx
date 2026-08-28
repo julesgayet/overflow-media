@@ -103,7 +103,6 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {site.legalName}. Tous droits réservés.
           </p>
-          <p>Paiement des campagnes et rémunération du réseau opérés via Whop.</p>
         </div>
       </div>
     </footer>

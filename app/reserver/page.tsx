@@ -21,7 +21,7 @@ const points = [
   "On cadre votre objectif et votre niche",
   "On vous donne une estimation de vues et un CPM",
   "Vous repartez avec un budget chiffré, sans engagement",
-  "Un lien de paiement Whop pour lancer la campagne",
+  "Un lien de paiement sécurisé pour lancer la campagne",
 ];
 
 export default function Reserver() {

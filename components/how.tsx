@@ -15,7 +15,7 @@ const steps = [
   {
     n: "02",
     title: "Diffusion.",
-    text: "La campagne part sur Whop. Des centaines de comptes vérifiés montent, publient et testent des angles en parallèle sur TikTok, Reels et Shorts.",
+    text: "La campagne est lancée. Des centaines de comptes vérifiés montent, publient et testent des angles en parallèle sur TikTok, Reels et Shorts.",
     meta: "Jour 2 → J+30",
   },
   {
@@ -102,9 +102,6 @@ function SpreadPanel({ clips = [] }: PanelProps) {
           </span>
         ))}
       </div>
-      <p className="mt-5 text-center text-[11px] text-mist-2">
-        chaque carré = un clip publié sur un compte différent
-      </p>
     </TiltCard>
   );
 }
@@ -121,7 +118,7 @@ function PayoutPanel(_props: PanelProps) {
       <div className="flex items-center justify-between">
         <span className="flex items-center gap-2 text-sm font-medium text-ink">
           <span className="size-1.5 rounded-full bg-lime" />
-          Versements Whop
+          Versements au réseau
         </span>
         <span className="text-[10px] uppercase tracking-[0.16em] text-mist-2">Automatique</span>
       </div>

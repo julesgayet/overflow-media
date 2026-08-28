@@ -65,9 +65,9 @@ export default function Cgv() {
           Chaque campagne est un engagement ponctuel, sans reconduction automatique : aucun
           abonnement récurrent n&apos;est souscrit du seul fait d&apos;une première campagne. À
           l&apos;issue de la validation du brief, l&apos;Agence transmet au Client un lien de
-          paiement Whop (whop.com) correspondant au budget convenu ; la campagne démarre à
-          réception du paiement. Whop agit en qualité de prestataire de paiement pour cette
-          transaction, dans les conditions de ses propres conditions d&apos;utilisation.
+          paiement sécurisé correspondant au budget convenu ; la campagne démarre à
+          réception du paiement. Le paiement est encaissé via un prestataire de paiement tiers,
+          dans les conditions de ses propres conditions d&apos;utilisation.
         </p>
       </LegalSection>
 
