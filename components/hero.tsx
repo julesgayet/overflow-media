@@ -3,6 +3,11 @@ import { Button, CountUp, Reveal } from "./ui";
 import { TikTok, Instagram, YouTube } from "./icons";
 import { ParticleField } from "./particle-field";
 
+/*  Calculé plutôt que codé en dur : le multiplicateur affiché ne peut jamais
+ *  se désynchroniser du CPM affiché juste à côté (`site.pricing.from`). Arrondi
+ *  à l'entier inférieur pour rester une affirmation vraie, jamais gonflée.   */
+const cheaperMultiplier = Math.floor(site.simulator.paidCpm / site.pricing.fromValue);
+
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-[72px]">
@@ -25,9 +30,9 @@ export function Hero() {
 
           <Reveal delay={160}>
             <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-relaxed text-mist md:text-lg">
-              {site.name} transforme votre contenu en centaines de clips verticaux et les diffuse
-              en continu sur TikTok, Reels et Shorts. Votre marque est partout — et vous ne payez
-              que les vues générées, à partir de {site.pricing.from} {site.pricing.unit}.
+              {site.name} transforme votre contenu en millions de vues, diffusées en continu sur
+              TikTok, Reels et Shorts. Votre marque est partout — à partir de {site.pricing.from} de
+              CPM, {cheaperMultiplier}x moins cher que la pub payante.
             </p>
           </Reveal>
 

@@ -47,7 +47,13 @@ export const site = {
 
   // ── Tarif public ──────────────────────────────────────────────────────────
   pricing: {
-    from: "0,75 €",
+    // `from` = affichage ; `fromValue` = même nombre en brut, pour calculer le
+    // multiplicateur "Nx moins cher que la pub" (hero) sans jamais le
+    // désynchroniser du CPM affiché. Aligné sur le prix d'appel réel (niche la
+    // moins chère du simulateur, cf. `simulator.nichePresets`), pas sur un
+    // plancher théorique que peu de campagnes atteignent réellement.
+    from: "0,85 €",
+    fromValue: 0.85,
     unit: "les 1 000 vues",
     bullets: [
       "CPM fixe, pas d'enchères",
