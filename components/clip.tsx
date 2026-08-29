@@ -109,6 +109,20 @@ export function Clip({
   const [armed, setArmed] = useState(false);
   const { poster, sources } = variants(src);
 
+  /*  Un `<video>` ne relit jamais ses `<source>` tout seul quand ils changent :
+      sans ce `load()`, la vignette reste sur son poster au premier armement —
+      et surtout, si `src` change sur un élément déjà monté (cas de l'aperçu
+      unique de `pour-qui`, déplacé d'une ligne à l'autre), elle continue de
+      jouer la source chargée en premier, quelle que soit la nouvelle.
+
+      Cet effet est déclaré **avant** celui de lecture pour que `load()` parte
+      systématiquement en premier : les effets s'exécutent dans l'ordre de
+      déclaration, et jouer une source qu'on s'apprête à réinitialiser
+      interromprait la lecture sans jamais la relancer.                      */
+  useEffect(() => {
+    if (armed) ref.current?.load();
+  }, [armed, src]);
+
   /*  Pose les `<source>` à l'approche du viewport, puis lance/arrête la
    *  lecture selon la visibilité réelle. Deux seuils distincts : on précharge
    *  large (300 px) pour que l'image soit prête, on ne joue qu'à l'écran.   */
@@ -158,23 +172,16 @@ export function Clip({
       document.removeEventListener("visibilitychange", onVisible);
       release(scope, start);
     };
-    /*  `armed` est dans les dépendances à dessein : quand `mécanique` ou
-        `preuves` révèlent leurs vignettes en scroll pinné, elles sont déjà
-        « à l'écran » dès le montage — `near` (300 px de marge) et `onScreen`
-        se déclenchent alors quasi simultanément. Sans `armed` ici, `onScreen`
-        pouvait appeler `play()` sur une vidéo sans encore de `<source>`, puis
-        l'effet `load()` ci-dessous réinitialisait l'élément et interrompait
-        ce `play()` — sans qu'aucun nouvel événement de visibilité ne vienne
-        jamais le relancer, la vignette restait figée sur son poster. Inclure
-        `armed` force à recréer `onScreen` une fois les sources posées, donc à
-        retenter `play()` après le `load()`, jamais avant.                   */
-  }, [play, scope, armed]);
-
-  /*  Les `<source>` ajoutés après coup ne sont pas relus tout seuls : sans ce
-      `load()`, la vidéo resterait indéfiniment sur son poster.             */
-  useEffect(() => {
-    if (armed) ref.current?.load();
-  }, [armed]);
+    /*  `armed` et `src` sont dans les dépendances à dessein : chacun déclenche
+        un `load()` dans l'effet ci-dessus, qui réinitialise l'élément et
+        interromprait une lecture en cours. Les recréer ici force à retenter
+        `play()` après ce `load()`, jamais avant — c'est ce qui empêche les
+        vignettes de `mécanique` et `preuves` (déjà « à l'écran » dès le
+        montage en scroll pinné, où `near` et `onScreen` se déclenchent quasi
+        simultanément) de rester figées sur leur poster, et ce qui relance
+        l'aperçu de `pour-qui` sur sa nouvelle source à chaque changement de
+        ligne survolée.                                                      */
+  }, [play, scope, armed, src]);
 
   return (
     <video
