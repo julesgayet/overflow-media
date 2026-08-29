@@ -27,7 +27,11 @@ import { useEffect, useRef, useState } from "react";
  *     suivantes, qui restaient figées sur leur image fixe.
  */
 
-const MAX_PLAYING = 24;
+/*  24 pour la plus grande grille documentée (`SpreadVisual`/`ProofArc`), + une
+ *  marge : la scope "mecanique" a en réalité 25 vignettes actives ensemble
+ *  (24 de la grille + 1 du panneau source, monté en permanence à côté),
+ *  jamais toutes les 24 vignettes "au plafond pile" d'une grille seule. */
+const MAX_PLAYING = 30;
 
 /*  Une file par section : `playing` tient les lecteurs qui occupent une
  *  place dans cette section, `waiting` ceux qui en réclament une dans
@@ -154,7 +158,17 @@ export function Clip({
       document.removeEventListener("visibilitychange", onVisible);
       release(scope, start);
     };
-  }, [play, scope]);
+    /*  `armed` est dans les dépendances à dessein : quand `mécanique` ou
+        `preuves` révèlent leurs vignettes en scroll pinné, elles sont déjà
+        « à l'écran » dès le montage — `near` (300 px de marge) et `onScreen`
+        se déclenchent alors quasi simultanément. Sans `armed` ici, `onScreen`
+        pouvait appeler `play()` sur une vidéo sans encore de `<source>`, puis
+        l'effet `load()` ci-dessous réinitialisait l'élément et interrompait
+        ce `play()` — sans qu'aucun nouvel événement de visibilité ne vienne
+        jamais le relancer, la vignette restait figée sur son poster. Inclure
+        `armed` force à recréer `onScreen` une fois les sources posées, donc à
+        retenter `play()` après le `load()`, jamais avant.                   */
+  }, [play, scope, armed]);
 
   /*  Les `<source>` ajoutés après coup ne sont pas relus tout seuls : sans ce
       `load()`, la vidéo resterait indéfiniment sur son poster.             */
