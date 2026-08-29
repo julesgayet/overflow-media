@@ -94,13 +94,26 @@ function Result({
 
 export function Simulator() {
   const [budget, setBudget] = useState<number>(S.budgetDefault);
-  const [cpm, setCpm] = useState<number>(S.cpmDefault);
   const [niche, setNiche] = useState<string>(S.nichePresets[0].key);
 
   const preset = useMemo(
     () => S.nichePresets.find((n) => n.key === niche) ?? S.nichePresets[0],
     [niche],
   );
+
+  /*  Le CPM n'a pas de plage unique : chaque niche a la sienne (cf.
+      `site.config.ts`). On le recale sur `cpmDefault` de la niche à chaque
+      changement plutôt que de clamper la valeur précédente — un simple
+      clamp aurait pu retomber sur une borne au lieu d'un CPM représentatif
+      de la niche, et aurait rendu le changement de niche invisible si la
+      valeur précédente était déjà dans la nouvelle plage.                  */
+  const [cpm, setCpm] = useState<number>(preset.cpmDefault);
+
+  function selectNiche(key: string) {
+    setNiche(key);
+    const next = S.nichePresets.find((n) => n.key === key);
+    if (next) setCpm(next.cpmDefault);
+  }
 
   const brand = useMemo(() => {
     const estViews = (budget / cpm) * 1000;
@@ -157,25 +170,19 @@ export function Simulator() {
                       onChange={setBudget}
                       display={nfEur.format(budget)}
                     />
-                    <Slider
-                      id="sim-cpm"
-                      label="CPM cible"
-                      value={cpm}
-                      min={S.cpmMin}
-                      max={S.cpmMax}
-                      step={S.cpmStep}
-                      onChange={setCpm}
-                      display={`${nfCpm.format(cpm)} / 1 000 vues`}
-                    />
-
                     <div>
                       <span className="text-sm text-mist">Niche</span>
-                      <div className="mt-2.5 flex flex-wrap gap-2">
+                      {/*  Grille à colonnes égales plutôt que `flex-wrap` : la largeur
+                          d'une pastille en flex suit la longueur de son libellé
+                          (« Business & finance » contre « Sport »), donc les lignes ne
+                          s'alignaient jamais — la grille impose la même largeur de
+                          cellule partout et rend les rangées symétriques.           */}
+                      <div className="mt-2.5 grid grid-cols-2 gap-2 sm:grid-cols-3">
                         {S.nichePresets.map((n) => (
                           <button
                             key={n.key}
                             type="button"
-                            onClick={() => setNiche(n.key)}
+                            onClick={() => selectNiche(n.key)}
                             aria-pressed={niche === n.key}
                             className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
                               niche === n.key
@@ -188,6 +195,21 @@ export function Simulator() {
                         ))}
                       </div>
                     </div>
+
+                    {/*  Plage et valeur par défaut dépendent de la niche choisie
+                        ci-dessus (cf. `nichePresets` dans `site.config.ts`) : le
+                        curseur se recale entièrement — bornes et valeur — au
+                        changement de niche via `selectNiche`.                    */}
+                    <Slider
+                      id="sim-cpm"
+                      label="CPM cible"
+                      value={cpm}
+                      min={preset.cpmMin}
+                      max={preset.cpmMax}
+                      step={S.cpmStep}
+                      onChange={setCpm}
+                      display={`${nfCpm.format(cpm)} / 1 000 vues`}
+                    />
                   </div>
                 </div>
 

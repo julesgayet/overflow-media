@@ -47,7 +47,7 @@ export const site = {
 
   // ── Tarif public ──────────────────────────────────────────────────────────
   pricing: {
-    from: "0,80 €",
+    from: "0,75 €",
     unit: "les 1 000 vues",
     bullets: [
       "CPM fixe, pas d'enchères",
@@ -64,20 +64,68 @@ export const site = {
     budgetMax: 25000,
     budgetStep: 250,
     budgetDefault: 5000,
-    // CPM facturé à la marque (€ pour 1 000 vues)
-    cpmMin: 0.5,
-    cpmMax: 2.5,
+    // Pas commun à toutes les niches ; les bornes, elles, dépendent de la niche
+    // (cf. `nichePresets` ci-dessous) — impossible de viser 0,60 € de CPM sur
+    // du Business & finance, une audience plus rare et plus chère à toucher
+    // que la Musique, qui tolère un CPM bien plus bas.
     cpmStep: 0.05,
-    cpmDefault: 0.9,
     // CPM moyen d'une campagne publicitaire classique, pour la comparaison
     paidCpm: 14,
-    // Vues moyennes par clip selon la niche — sert à estimer le nombre de clips
+    // Vues moyennes par clip et plage de CPM réaliste, selon la niche. Le CPM
+    // facturé à la marque (€ pour 1 000 vues) est borné par niche : le curseur
+    // se recale sur `cpmDefault` et ses propres bornes dès qu'on change de
+    // niche, plutôt que de laisser une plage unique valable pour toutes.
+    //
+    // `cpmDefault` est le prix d'appel : ~20-25 % de marge sur le coût
+    // d'achat, volontairement proche du plancher pour accrocher un prospect
+    // qui compare des prix — pas le point médian de la plage. `cpmMax` reste
+    // à ~65-67 % : le tarif d'un client récurrent, qui n'a pas besoin d'être
+    // visible en premier. `cpmMin` est un plancher soutenable (~15 % de
+    // marge), jamais en dessous du coût d'achat. Le coût d'achat lui-même
+    // n'apparaît nulle part dans ce dépôt — il n'a rien à faire dans un code
+    // source, a fortiori public : seul le CPM facturé à la marque est une
+    // donnée du site.
     nichePresets: [
-      { key: "business", label: "Business & finance", viewsPerClip: 9_000 },
-      { key: "divertissement", label: "Divertissement", viewsPerClip: 18_000 },
-      { key: "musique", label: "Musique", viewsPerClip: 24_000 },
-      { key: "tech", label: "Tech & SaaS", viewsPerClip: 11_000 },
-      { key: "sport", label: "Sport", viewsPerClip: 16_000 },
+      {
+        key: "business",
+        label: "Business & finance",
+        viewsPerClip: 9_000,
+        cpmMin: 1.7,
+        cpmMax: 4.5,
+        cpmDefault: 1.95,
+      },
+      {
+        key: "divertissement",
+        label: "Divertissement",
+        viewsPerClip: 18_000,
+        cpmMin: 1.15,
+        cpmMax: 3.0,
+        cpmDefault: 1.3,
+      },
+      {
+        key: "musique",
+        label: "Musique",
+        viewsPerClip: 24_000,
+        cpmMin: 0.75,
+        cpmMax: 1.95,
+        cpmDefault: 0.85,
+      },
+      {
+        key: "tech",
+        label: "Tech & SaaS",
+        viewsPerClip: 11_000,
+        cpmMin: 1.7,
+        cpmMax: 4.5,
+        cpmDefault: 1.95,
+      },
+      {
+        key: "sport",
+        label: "Sport",
+        viewsPerClip: 16_000,
+        cpmMin: 1.15,
+        cpmMax: 3.0,
+        cpmDefault: 1.3,
+      },
     ],
   },
 
