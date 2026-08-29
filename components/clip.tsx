@@ -15,35 +15,52 @@ import { useEffect, useRef, useState } from "react";
  *  2. Rien ne se charge hors écran. `preload="none"` + poster : la vignette
  *     est peinte sans ouvrir de décodeur, les `<source>` ne sont posés qu'à
  *     l'approche du viewport, et la lecture s'arrête dès la sortie.
- *  3. Un plafond de décodeurs simultanés. Une grille peut afficher 24 cases
- *     à l'écran en même temps : au-delà de `MAX_PLAYING`, les suivantes
- *     restent sur leur poster et prennent la main quand une place se libère.
+ *  3. Un plafond de décodeurs simultanés, **par section** (`scope`). Une
+ *     grille peut afficher jusqu'à 24 cases à l'écran en même temps : au-delà
+ *     de `MAX_PLAYING`, les suivantes de la même section restent sur leur
+ *     poster et prennent la main quand une place s'y libère.
+ *
+ *     Le plafond est scindé par `scope` plutôt que partagé sur toute la page :
+ *     une seule file globale faisait qu'une section en scroll pinné (donc
+ *     considérée « à l'écran » tout du long par son `IntersectionObserver`)
+ *     gardait ses places indéfiniment et affamait toutes les sections
+ *     suivantes, qui restaient figées sur leur image fixe.
  */
 
-const MAX_PLAYING = 10;
+const MAX_PLAYING = 24;
 
-/*  File d'attente des vignettes visibles. `playing` tient les lecteurs qui
- *  occupent une place, `waiting` ceux qui en réclament une dans l'ordre où
- *  ils sont entrés à l'écran.                                              */
-const playing = new Set<() => void>();
-const waiting: Array<() => void> = [];
+/*  Une file par section : `playing` tient les lecteurs qui occupent une
+ *  place dans cette section, `waiting` ceux qui en réclament une dans
+ *  l'ordre où ils sont entrés à l'écran.                                   */
+const queues = new Map<string, { playing: Set<() => void>; waiting: Array<() => void> }>();
 
-function acquire(start: () => void) {
-  if (playing.size < MAX_PLAYING) {
-    playing.add(start);
+function queueFor(scope: string) {
+  let q = queues.get(scope);
+  if (!q) {
+    q = { playing: new Set(), waiting: [] };
+    queues.set(scope, q);
+  }
+  return q;
+}
+
+function acquire(scope: string, start: () => void) {
+  const q = queueFor(scope);
+  if (q.playing.size < MAX_PLAYING) {
+    q.playing.add(start);
     start();
-  } else if (!waiting.includes(start)) {
-    waiting.push(start);
+  } else if (!q.waiting.includes(start)) {
+    q.waiting.push(start);
   }
 }
 
-function release(start: () => void) {
-  playing.delete(start);
-  const i = waiting.indexOf(start);
-  if (i >= 0) waiting.splice(i, 1);
-  const next = waiting.shift();
-  if (next && playing.size < MAX_PLAYING) {
-    playing.add(next);
+function release(scope: string, start: () => void) {
+  const q = queueFor(scope);
+  q.playing.delete(start);
+  const i = q.waiting.indexOf(start);
+  if (i >= 0) q.waiting.splice(i, 1);
+  const next = q.waiting.shift();
+  if (next && q.playing.size < MAX_PLAYING) {
+    q.playing.add(next);
     next();
   }
 }
@@ -73,11 +90,16 @@ export function Clip({
       supprimer l'image supprimerait la preuve et pas seulement l'animation. */
   play = true,
   poster: posterProp,
+  /*  Section à laquelle rattacher cette vignette dans la file de lecture
+      (voir le commentaire en tête de fichier) : les vignettes d'une même
+      section se disputent le même plafond, indépendamment des autres.      */
+  scope = "default",
 }: {
   src: string;
   className?: string;
   play?: boolean;
   poster?: string;
+  scope?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [armed, setArmed] = useState(false);
@@ -99,12 +121,12 @@ export function Clip({
       el.play().catch(() => {
         /*  Lecture refusée (politique d'autoplay, onglet en arrière-plan) :
             le poster reste, et la place est rendue à la file.              */
-        release(start);
+        release(scope, start);
       });
     };
 
     const onVisible = () => {
-      if (!document.hidden && wanted && el.paused) acquire(start);
+      if (!document.hidden && wanted && el.paused) acquire(scope, start);
     };
     document.addEventListener("visibilitychange", onVisible);
 
@@ -115,10 +137,10 @@ export function Clip({
     const onScreen = new IntersectionObserver(
       ([e]) => {
         wanted = e.isIntersecting && play;
-        if (wanted) acquire(start);
+        if (wanted) acquire(scope, start);
         else {
           el.pause();
-          release(start);
+          release(scope, start);
         }
       },
       { threshold: 0.01 },
@@ -130,9 +152,9 @@ export function Clip({
       near.disconnect();
       onScreen.disconnect();
       document.removeEventListener("visibilitychange", onVisible);
-      release(start);
+      release(scope, start);
     };
-  }, [play]);
+  }, [play, scope]);
 
   /*  Les `<source>` ajoutés après coup ne sont pas relus tout seuls : sans ce
       `load()`, la vidéo resterait indéfiniment sur son poster.             */

@@ -43,7 +43,7 @@ function SourceVisual({ sources }: { sources: string[] }) {
     <div className="mx-auto w-full max-w-md">
       <div className="relative flex aspect-video flex-wrap content-center items-center justify-center gap-2 overflow-hidden rounded-2xl bg-ink p-7">
         {source ? (
-          <Clip src={source} className="absolute inset-0 h-full w-full object-cover" />
+          <Clip src={source} scope="mecanique" className="absolute inset-0 h-full w-full object-cover" />
         ) : (
           <>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,.10),transparent_65%)]" />
@@ -93,7 +93,7 @@ function SpreadVisual({ on, clips }: { on: boolean; clips: string[] }) {
               }}
             >
               {clips[i] && on && (
-                <Clip src={clips[i]} className="absolute inset-0 h-full w-full object-cover" />
+                <Clip src={clips[i]} scope="mecanique" className="absolute inset-0 h-full w-full object-cover" />
               )}
             </span>
           </span>

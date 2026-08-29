@@ -177,7 +177,7 @@ function ProofCard({
           style={{ backfaceVisibility: "hidden" }}
         >
           {clip ? (
-            <Clip src={clip} className="absolute inset-0 h-full w-full object-cover" />
+            <Clip src={clip} scope="preuves" className="absolute inset-0 h-full w-full object-cover" />
           ) : (
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,.10),transparent_65%)]" />
           )}

@@ -90,7 +90,7 @@ function SpreadPanel({ clips = [] }: PanelProps) {
             style={{ animationDelay: `${(i % 8) * 160 + Math.floor(i / 8) * 90}ms` }}
           >
             {clips[i] && (
-              <Clip src={clips[i]} className="absolute inset-0 h-full w-full object-cover" />
+              <Clip src={clips[i]} scope="methode" className="absolute inset-0 h-full w-full object-cover" />
             )}
           </span>
         ))}
