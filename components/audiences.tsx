@@ -39,7 +39,12 @@ function Preview({ media }: { media: string | null }) {
     return (
       /*  Pas de lecture automatique si l'utilisateur a demandé moins de
           mouvement : la vidéo reste sur sa première image.                 */
-      <Clip src={media} play={!reduce} className="h-full w-full rounded-xl object-cover" />
+      <Clip
+        src={media}
+        play={!reduce}
+        scope="pour-qui"
+        className="h-full w-full rounded-xl object-cover"
+      />
     );
   }
 
@@ -140,6 +145,15 @@ export function Audiences() {
                 </span>
 
                 <span className="hidden shrink-0 text-sm text-mist-2 sm:block">{n.hint}</span>
+
+                {/*  Équivalent mobile de l'aperçu au survol ci-dessous : sur
+                    tactile il n'y a pas de survol, donc pas d'aperçu du tout
+                    sans ce second rendu (même schéma que `how.tsx`, qui rend
+                    aussi deux fois — desktop au survol, mobile toujours visible). */}
+                <span className="h-14 w-9 shrink-0 overflow-hidden rounded-lg border border-line-2 bg-surface sm:hidden">
+                  <Preview media={n.media} />
+                </span>
+
                 <Arrow className="size-5 shrink-0 text-mist-2 transition-all duration-300 group-hover:translate-x-1 group-hover:text-brand" />
               </a>
             </Reveal>
