@@ -7,6 +7,7 @@ import { TiltCard } from "./tilt-card";
 import { Bolt, Check } from "./icons";
 
 const S = site.simulator;
+const A = S.audience;
 
 const nf = new Intl.NumberFormat("fr-FR");
 const nfEur = new Intl.NumberFormat("fr-FR", {
@@ -92,37 +93,86 @@ function Result({
   );
 }
 
+/*  Un axe de ciblage = un menu déroulant. Les pastilles occupaient trois
+    grilles entières dans une carte déjà dense ; trois `<select>` natifs
+    tiennent sur une seule ligne, et le sélecteur natif reste le meilleur
+    contrôle au doigt sur mobile.                                          */
+function Select({
+  id,
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  options: readonly { key: string; label: string }[];
+  value: string;
+  onChange: (key: string) => void;
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="text-sm text-mist">
+        {label}
+      </label>
+      <div className="relative mt-2.5">
+        <select
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          //  `appearance-none` retire la flèche système, qu'on redessine
+          //  ci-dessous : celle de macOS est claire et invisible sur le fond
+          //  sombre de la carte.
+          className="w-full appearance-none rounded-xl border border-line-2 bg-surface py-2.5 pl-3.5 pr-9 text-sm text-ink transition-colors hover:border-brand/50 focus:border-brand/60 focus:outline-none"
+        >
+          {options.map((o) => (
+            <option key={o.key} value={o.key} className="bg-surface text-ink">
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <svg
+          aria-hidden
+          viewBox="0 0 24 24"
+          className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-mist-2"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 export function Simulator() {
   const [budget, setBudget] = useState<number>(S.budgetDefault);
-  const [niche, setNiche] = useState<string>(S.nichePresets[0].key);
+  const [cpm, setCpm] = useState<number>(S.cpmDefault);
 
-  const preset = useMemo(
-    () => S.nichePresets.find((n) => n.key === niche) ?? S.nichePresets[0],
-    [niche],
-  );
-
-  /*  Le CPM n'a pas de plage unique : chaque niche a la sienne (cf.
-      `site.config.ts`). On le recale sur `cpmDefault` de la niche à chaque
-      changement plutôt que de clamper la valeur précédente — un simple
-      clamp aurait pu retomber sur une borne au lieu d'un CPM représentatif
-      de la niche, et aurait rendu le changement de niche invisible si la
-      valeur précédente était déjà dans la nouvelle plage.                  */
-  const [cpm, setCpm] = useState<number>(preset.cpmDefault);
-
-  function selectNiche(key: string) {
-    setNiche(key);
-    const next = S.nichePresets.find((n) => n.key === key);
-    if (next) setCpm(next.cpmDefault);
-  }
+  const [country, setCountry] = useState<string>(A.countries[0].key);
+  const [gender, setGender] = useState<string>(A.genders[0].key);
+  const [age, setAge] = useState<string>(A.ages[0].key);
 
   const brand = useMemo(() => {
+    const reach =
+      (A.countries.find((c) => c.key === country)?.reach ?? 1) *
+      (A.genders.find((g) => g.key === gender)?.reach ?? 1) *
+      (A.ages.find((a) => a.key === age)?.reach ?? 1);
+
+    /*  Le ciblage ne change pas le nombre de vues achetées — celui-ci ne
+        dépend que du budget et du CPM — mais il change le nombre de clips
+        nécessaires : sur une audience resserrée, un même clip rassemble
+        moins de vues, donc il en faut davantage pour le même volume.      */
     const estViews = (budget / cpm) * 1000;
-    const clips = Math.max(1, Math.round(estViews / preset.viewsPerClip));
+    const viewsPerClip = Math.max(1200, S.viewsPerClipBase * reach);
+    const clips = Math.max(1, Math.round(estViews / viewsPerClip));
     const paidEquivalent = (estViews / 1000) * S.paidCpm;
     const multiplier = S.paidCpm / cpm;
     return { estViews, clips, paidEquivalent, multiplier };
-  }, [budget, cpm, preset]);
-
+  }, [budget, cpm, country, gender, age]);
 
   return (
     <section id="simulateur" className="relative overflow-hidden py-24 md:py-32">
@@ -169,45 +219,45 @@ export function Simulator() {
                       onChange={setBudget}
                       display={nfEur.format(budget)}
                     />
-                    <div>
-                      <span className="text-sm text-mist">Niche</span>
-                      {/*  Grille à colonnes égales plutôt que `flex-wrap` : la largeur
-                          d'une pastille en flex suit la longueur de son libellé
-                          (« Business & finance » contre « Sport »), donc les lignes ne
-                          s'alignaient jamais — la grille impose la même largeur de
-                          cellule partout et rend les rangées symétriques.           */}
-                      <div className="mt-2.5 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                        {S.nichePresets.map((n) => (
-                          <button
-                            key={n.key}
-                            type="button"
-                            onClick={() => selectNiche(n.key)}
-                            aria-pressed={niche === n.key}
-                            className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
-                              niche === n.key
-                                ? "border-brand/60 bg-brand/15 text-ink"
-                                : "border-line-2 text-mist hover:border-line-2 hover:text-ink"
-                            }`}
-                          >
-                            {n.label}
-                          </button>
-                        ))}
-                      </div>
+
+                    {/*  Les trois axes sur une ligne : ils se lisent comme une
+                        seule phrase de ciblage, et la carte reste courte.  */}
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                      <Select
+                        id="sim-pays"
+                        label="Pays"
+                        options={A.countries}
+                        value={country}
+                        onChange={setCountry}
+                      />
+                      <Select
+                        id="sim-genre"
+                        label="Genre"
+                        options={A.genders}
+                        value={gender}
+                        onChange={setGender}
+                      />
+                      <Select
+                        id="sim-age"
+                        label="Âge"
+                        options={A.ages}
+                        value={age}
+                        onChange={setAge}
+                      />
                     </div>
 
-                    {/*  Plage et valeur par défaut dépendent de la niche choisie
-                        ci-dessus (cf. `nichePresets` dans `site.config.ts`) : le
-                        curseur se recale entièrement — bornes et valeur — au
-                        changement de niche via `selectNiche`.                    */}
+                    {/*  Plage unique, indépendante du ciblage : le CPM est ce que
+                        la marque décide de payer les 1 000 vues, pas une
+                        conséquence de l'audience choisie.                      */}
                     <Slider
                       id="sim-cpm"
                       label="CPM cible"
                       value={cpm}
-                      min={preset.cpmMin}
-                      max={preset.cpmMax}
+                      min={S.cpmMin}
+                      max={S.cpmMax}
                       step={S.cpmStep}
                       onChange={setCpm}
-                      display={`${nfCpm.format(cpm)} / 1 000 vues`}
+                      display={`${nfCpm.format(cpm)} / 1 000 vues`}
                     />
                   </div>
                 </div>
@@ -253,8 +303,8 @@ export function Simulator() {
               <div className="flex flex-col items-center gap-4 border-t border-line bg-surface-2 px-7 py-6 sm:flex-row sm:justify-between md:px-9">
                 <p className="flex items-start gap-2.5 text-xs leading-relaxed text-mist-2">
                   <Bolt className="mt-px size-4 shrink-0 text-mist-2" />
-                  Estimation indicative. Le volume réel dépend de la niche, du format source et de
-                  la qualité des montages.
+                  Estimation indicative. Le volume réel dépend de l'audience visée, du format source
+                  et de la qualité des montages.
                 </p>
                 <Button
                   href="/reserver"

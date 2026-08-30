@@ -49,11 +49,11 @@ export const site = {
   pricing: {
     // `from` = affichage ; `fromValue` = même nombre en brut, pour calculer le
     // multiplicateur "Nx moins cher que la pub" (hero) sans jamais le
-    // désynchroniser du CPM affiché. Aligné sur le prix d'appel réel (niche la
-    // moins chère du simulateur, cf. `simulator.nichePresets`), pas sur un
-    // plancher théorique que peu de campagnes atteignent réellement.
-    from: "0,85 €",
-    fromValue: 0.85,
+    // désynchroniser du CPM affiché. Aligné sur le plancher du simulateur
+    // (`simulator.cpmMin`) : le prix d'appel réel, sur l'audience la plus
+    // large et la moins chère à toucher.
+    from: "0,80 €",
+    fromValue: 0.8,
     unit: "les 1 000 vues",
     bullets: [
       "CPM fixe, pas d'enchères",
@@ -70,69 +70,54 @@ export const site = {
     budgetMax: 25000,
     budgetStep: 250,
     budgetDefault: 5000,
-    // Pas commun à toutes les niches ; les bornes, elles, dépendent de la niche
-    // (cf. `nichePresets` ci-dessous) — impossible de viser 0,60 € de CPM sur
-    // du Business & finance, une audience plus rare et plus chère à toucher
-    // que la Musique, qui tolère un CPM bien plus bas.
+
+    // CPM facturé à la marque (€ pour 1 000 vues). Plage unique : le prix ne
+    // dépend plus d'une niche imposée mais de ce que la marque vise, et le
+    // ciblage se règle à côté (pays / genre / âge). 0,80 € est un plancher
+    // soutenable, jamais en dessous du coût d'achat ; 3,00 € couvre les
+    // audiences les plus difficiles à toucher. Le coût d'achat lui-même
+    // n'apparaît nulle part dans ce dépôt — il n'a rien à faire dans un code
+    // source, a fortiori public.
+    cpmMin: 0.8,
+    cpmMax: 3,
     cpmStep: 0.05,
+    cpmDefault: 1.2,
+
     // CPM moyen d'une campagne publicitaire classique, pour la comparaison
     paidCpm: 14,
-    // Vues moyennes par clip et plage de CPM réaliste, selon la niche. Le CPM
-    // facturé à la marque (€ pour 1 000 vues) est borné par niche : le curseur
-    // se recale sur `cpmDefault` et ses propres bornes dès qu'on change de
-    // niche, plutôt que de laisser une plage unique valable pour toutes.
-    //
-    // `cpmDefault` est le prix d'appel : ~20-25 % de marge sur le coût
-    // d'achat, volontairement proche du plancher pour accrocher un prospect
-    // qui compare des prix — pas le point médian de la plage. `cpmMax` reste
-    // à ~65-67 % : le tarif d'un client récurrent, qui n'a pas besoin d'être
-    // visible en premier. `cpmMin` est un plancher soutenable (~15 % de
-    // marge), jamais en dessous du coût d'achat. Le coût d'achat lui-même
-    // n'apparaît nulle part dans ce dépôt — il n'a rien à faire dans un code
-    // source, a fortiori public : seul le CPM facturé à la marque est une
-    // donnée du site.
-    nichePresets: [
-      {
-        key: "business",
-        label: "Business & finance",
-        viewsPerClip: 9_000,
-        cpmMin: 1.7,
-        cpmMax: 4.5,
-        cpmDefault: 1.95,
-      },
-      {
-        key: "divertissement",
-        label: "Divertissement",
-        viewsPerClip: 18_000,
-        cpmMin: 1.15,
-        cpmMax: 3.0,
-        cpmDefault: 1.3,
-      },
-      {
-        key: "musique",
-        label: "Musique",
-        viewsPerClip: 24_000,
-        cpmMin: 0.75,
-        cpmMax: 1.95,
-        cpmDefault: 0.85,
-      },
-      {
-        key: "tech",
-        label: "Tech & SaaS",
-        viewsPerClip: 11_000,
-        cpmMin: 1.7,
-        cpmMax: 4.5,
-        cpmDefault: 1.95,
-      },
-      {
-        key: "sport",
-        label: "Sport",
-        viewsPerClip: 16_000,
-        cpmMin: 1.15,
-        cpmMax: 3.0,
-        cpmDefault: 1.3,
-      },
-    ],
+
+    // Vues moyennes par clip sur l'audience la plus large (Monde, tous
+    // genres, tous âges). Les facteurs de ciblage ci-dessous la réduisent :
+    // plus l'audience est resserrée, moins un même clip rassemble de vues.
+    viewsPerClipBase: 22_000,
+
+    // ── Ciblage d'audience ────────────────────────────────────────────────
+    //   `reach` = part de l'audience de base encore atteignable une fois ce
+    //   filtre appliqué. 1 = aucune restriction. Les trois axes se
+    //   multiplient entre eux (cf. `simulator.tsx`).
+    audience: {
+      countries: [
+        { key: "monde", label: "Monde", reach: 1 },
+        { key: "fr", label: "France", reach: 0.42 },
+        { key: "eu", label: "Europe", reach: 0.72 },
+        { key: "us", label: "États-Unis", reach: 0.68 },
+        { key: "uk", label: "Royaume-Uni", reach: 0.4 },
+        { key: "ca", label: "Canada", reach: 0.34 },
+      ],
+      genders: [
+        { key: "tous", label: "Tous", reach: 1 },
+        { key: "femmes", label: "Femmes", reach: 0.55 },
+        { key: "hommes", label: "Hommes", reach: 0.55 },
+      ],
+      ages: [
+        { key: "all", label: "Tous âges", reach: 1 },
+        { key: "13-17", label: "13-17", reach: 0.28 },
+        { key: "18-24", label: "18-24", reach: 0.45 },
+        { key: "25-34", label: "25-34", reach: 0.4 },
+        { key: "35-44", label: "35-44", reach: 0.26 },
+        { key: "45+", label: "45+", reach: 0.18 },
+      ],
+    },
   },
 
   // ── Mur de preuves (PLACEHOLDERS) ─────────────────────────────────────────
