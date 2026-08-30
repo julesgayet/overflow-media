@@ -52,7 +52,7 @@ export function Nav() {
         style={{ transform: `scaleX(${progress})` }}
       />
 
-      <nav className="container-x flex h-[72px] items-center justify-between gap-6">
+      <nav className="container-x flex h-[72px] items-center justify-between gap-3 sm:gap-6">
         <a href="#top" className="flex shrink-0 items-center gap-2.5" aria-label={site.name}>
           <Logo />
         </a>
@@ -81,6 +81,21 @@ export function Nav() {
             Lancer une campagne
           </Button>
         </div>
+
+        {/*  CTA compact, visible en permanence sur mobile (le bloc `md:flex`
+            ci-dessus est masqué sous md). Entre le logo et le bouton menu.
+            Libellé « Lancer » seul sous sm : « Lancer une campagne » en
+            entier ne tient pas sur 375 px à côté du logo « Omniflux » et du
+            menu. Le mot « campagne » réapparaît dès qu'il y a la place.     */}
+        <Button
+          href="/reserver"
+          variant="light"
+          className="h-9 shrink-0 whitespace-nowrap px-3.5 text-[13px] md:hidden"
+        >
+          <span>
+            Lancer<span className="hidden min-[420px]:inline"> une campagne</span>
+          </span>
+        </Button>
 
         <button
           type="button"
@@ -126,10 +141,9 @@ export function Nav() {
               {l.label}
             </a>
           ))}
-          <div className="mt-4 flex flex-col gap-3">
-            <Button href="/reserver" variant="light" size="lg" arrow>
-              Lancer une campagne
-            </Button>
+          {/*  Pas de « Lancer une campagne » ici : le CTA est désormais
+              toujours visible dans la barre, le répéter serait redondant. */}
+          <div className="mt-4">
             <Button href={`mailto:${site.email}`} variant="outline" size="lg">
               Nous écrire
             </Button>
