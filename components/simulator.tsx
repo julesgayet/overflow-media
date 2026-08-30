@@ -21,12 +21,6 @@ const nfCpm = new Intl.NumberFormat("fr-FR", {
   minimumFractionDigits: 2,
 });
 
-function compact(n: number) {
-  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(n >= 10_000_000 ? 0 : 1).replace(".", ",")} M`;
-  if (n >= 1_000) return `${Math.round(n / 1_000)} K`;
-  return nf.format(Math.round(n));
-}
-
 function Slider({
   label,
   value,
@@ -157,22 +151,11 @@ export function Simulator() {
   const [age, setAge] = useState<string>(A.ages[0].key);
 
   const brand = useMemo(() => {
-    const reach =
-      (A.countries.find((c) => c.key === country)?.reach ?? 1) *
-      (A.genders.find((g) => g.key === gender)?.reach ?? 1) *
-      (A.ages.find((a) => a.key === age)?.reach ?? 1);
-
-    /*  Le ciblage ne change pas le nombre de vues achetées — celui-ci ne
-        dépend que du budget et du CPM — mais il change le nombre de clips
-        nécessaires : sur une audience resserrée, un même clip rassemble
-        moins de vues, donc il en faut davantage pour le même volume.      */
     const estViews = (budget / cpm) * 1000;
-    const viewsPerClip = Math.max(1200, S.viewsPerClipBase * reach);
-    const clips = Math.max(1, Math.round(estViews / viewsPerClip));
     const paidEquivalent = (estViews / 1000) * S.paidCpm;
     const multiplier = S.paidCpm / cpm;
-    return { estViews, clips, paidEquivalent, multiplier };
-  }, [budget, cpm, country, gender, age]);
+    return { estViews, paidEquivalent, multiplier };
+  }, [budget, cpm]);
 
   return (
     <section id="simulateur" className="relative overflow-hidden py-24 md:py-32">
@@ -271,13 +254,15 @@ export function Simulator() {
                   <div className="relative">
                     <Eyebrow className="mb-7">Estimation</Eyebrow>
 
-                    <div className="nums text-5xl font-semibold leading-none tracking-tight text-ink sm:text-6xl">
-                      {compact(brand.estViews)}
+                    {/*  En toutes lettres, pas en « 2,4 M » : la marque doit pouvoir
+                        comparer ce chiffre à un devis, où les vues sont
+                        toujours données au chiffre près.                     */}
+                    <div className="nums text-4xl font-semibold leading-none tracking-tight text-ink sm:text-5xl">
+                      {nf.format(Math.round(brand.estViews))}
                     </div>
                     <p className="mt-3 text-sm text-mist">vues estimées sur la campagne</p>
 
-                    <div className="mt-8 grid grid-cols-2 gap-6 border-t border-line pt-7">
-                      <Result value={`~ ${nf.format(brand.clips)}`} label="clips publiés" />
+                    <div className="mt-8 border-t border-line pt-7">
                       <Result
                         value={`×${brand.multiplier.toFixed(0)}`}
                         label="moins cher que la pub payante"
@@ -287,7 +272,7 @@ export function Simulator() {
 
                     <div className="mt-7 rounded-xl border border-line bg-surface p-4">
                       <p className="text-sm leading-relaxed text-mist">
-                        Pour ces {compact(brand.estViews)} vues, une campagne publicitaire
+                        Pour ces {nf.format(Math.round(brand.estViews))} vues, une campagne publicitaire
                         classique à {nfCpm.format(S.paidCpm)} de CPM coûterait{" "}
                         <span className="nums font-semibold text-ink">
                           {nfEur.format(brand.paidEquivalent)}

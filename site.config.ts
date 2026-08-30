@@ -86,15 +86,12 @@ export const site = {
     // CPM moyen d'une campagne publicitaire classique, pour la comparaison
     paidCpm: 14,
 
-    // Vues moyennes par clip sur l'audience la plus large (Monde, tous
-    // genres, tous âges). Les facteurs de ciblage ci-dessous la réduisent :
-    // plus l'audience est resserrée, moins un même clip rassemble de vues.
-    viewsPerClipBase: 22_000,
-
     // ── Ciblage d'audience ────────────────────────────────────────────────
-    //   `reach` = part de l'audience de base encore atteignable une fois ce
-    //   filtre appliqué. 1 = aucune restriction. Les trois axes se
-    //   multiplient entre eux (cf. `simulator.tsx`).
+    //   Affiné pour le devis, sans effet sur l'estimation de vues affichée
+    //   ici : à budget et CPM égaux, le volume de vues acheté ne change pas
+    //   selon l'audience visée. `reach` n'est donc pas consommé pour
+    //   l'instant — gardé pour documenter la taille relative de chaque
+    //   segment si un futur calcul en a besoin.
     audience: {
       countries: [
         { key: "monde", label: "Monde", reach: 1 },
