@@ -35,10 +35,10 @@ function TestimonialCard({ quote, author, role }: (typeof site.testimonials)[num
 }
 
 /*  Colonnes : la 1re et la 3e défilent vers le bas, la 2e et la 4e vers le
- *  haut (`reverse`). `repeat={4}` (au lieu de 3 dans la démo d'origine) :
- *  avec seulement 2 avis réels, chaque copie est deux fois plus courte que
- *  dans l'original à 9 avis — il faut plus de copies pour couvrir la
- *  hauteur de la boîte sans laisser de trou pendant la boucle.             */
+ *  haut (`reverse`). Le `repeat` par défaut de `Marquee` (4) suffit à
+ *  couvrir la hauteur de la boîte sans trou pendant la boucle : chaque
+ *  copie contient les six avis. Le baisser redeviendrait risqué si la
+ *  liste retombait à deux ou trois entrées.                               */
 const columns = [{ reverse: false }, { reverse: true }, { reverse: false }, { reverse: true }];
 
 export function Testimonials() {
@@ -62,8 +62,9 @@ export function Testimonials() {
             décorative (le même contenu y tourne en boucle et en double sur
             4 colonnes) et masquée aux lecteurs d'écran.                     */}
         <ul className="sr-only">
-          {/*  Clé par index : les auteurs sont des placeholders qui portent
-              tous le même nom, `author` ne peut donc pas servir de clé.   */}
+          {/*  Clé suffixée par l'index : `author` seul suffirait tant que
+              les noms sont distincts, mais deux homonymes casseraient le
+              rendu — l'index garantit l'unicité quoi qu'il arrive.        */}
           {site.testimonials.map((t, i) => (
             <li key={t.author + i}>
               « {t.quote} » — {t.author}, {t.role}

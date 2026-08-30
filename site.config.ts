@@ -242,19 +242,62 @@ export const site = {
     },
   ],
 
-  // ── Témoignages (PLACEHOLDERS) ────────────────────────────────────────────
+  // ── Témoignages ───────────────────────────────────────────────────────────
+  //  Avis réels, recueillis sous l'enseigne précédente. Citations reproduites
+  //  mot pour mot : ne rien réécrire, ne rien « améliorer ». Seules deux
+  //  coquilles de FONCTION ont été corrigées à la saisie (« hote podcast »,
+  //  « head of grothw »).
+  //
+  //  ⚠️ Deux vérifications avant mise en ligne :
+  //   · l'accord de publication doit couvrir le nom Omniflux, pas seulement
+  //     l'ancienne enseigne ;
+  //   · si l'ancienne agence est une autre entité juridique, situer les avis
+  //     (mention « recueillis avant le changement de nom ») — sinon ils
+  //     laissent croire à des campagnes Omniflux.
+  //
+  //  Les profils couverts ici (podcast/stream, B2B & personal branding,
+  //  médias) ne recouvrent pas les cinq `niches` annoncées plus haut : rien
+  //  en D2C, SaaS, label ni sport. Combler avec de vrais retours, ou aligner
+  //  la liste des audiences sur le portefeuille réel.
   testimonials: [
+    // ── Podcasteurs & streamers
     {
       quote:
-        "On est passés de 40K à 3,2M de vues mensuelles en six semaines. Le vrai gain, c'est de ne plus rien avoir à coordonner : un seul interlocuteur, une seule facture.",
-      author: "Prénom N.",
-      role: "Créateur, 400K abonnés",
+        "Une efficacité redoutable. Ils extraient les meilleurs moments de nos podcasts d'une heure pour en faire des formats courts ultra-dynamiques. Le montage maintient l'audience jusqu'au bout : notre watch-time a explosé, ce qui a fait décoller le CPM de notre chaîne YouTube sur la monétisation.",
+      author: "Thomas Lemaire",
+      role: "Hôte de podcast",
     },
     {
       quote:
-        "Le tracking est transparent : je vois le CPM réel, les vues validées et ce que ça me coûte, en direct.",
-      author: "Prénom N.",
-      role: "Head of Growth, marque D2C",
+        "L'agence gère tout le clipping de mes VODs Twitch. Ils ont l'œil pour repérer la séquence qui va fonctionner. L'engagement sur mes TikToks et Shorts est tel que mon RPM/CPM sur les programmes de monétisation créateurs a doublé en trois mois. Un gain de temps massif.",
+      author: "Julien Vasseur",
+      role: "Créateur de contenu",
+    },
+    // ── B2B & personal branding
+    {
+      quote:
+        "On leur confie l'intégralité de nos conférences et webinaires. Ils savent exactement comment isoler la valeur d'un discours technique de 45 minutes pour en faire un clip percutant de 30 secondes. Notre portée organique sur LinkedIn n'a jamais été aussi haute.",
+      author: "Sarah Dubois",
+      role: "Head of Growth",
+    },
+    {
+      quote:
+        "Un service de clipping d'une précision chirurgicale. Ils comprennent les enjeux de mon secteur et ne dénaturent jamais le message initial. L'augmentation de la rétention sur mes Reels a attiré de nouveaux sponsors avec des offres au CPM bien plus avantageuses pour moi.",
+      author: "Antoine Mercier",
+      role: "Consultant",
+    },
+    // ── Médias & intervenants
+    {
+      quote:
+        "Réactivité, sens du rythme et maîtrise parfaite de la narration courte. Leurs sous-titres et animations captent l'attention dès la première seconde. C'est le partenaire idéal pour maximiser ses revenus organiques.",
+      author: "Maxime Ribeiro",
+      role: "Vidéaste indépendant",
+    },
+    {
+      quote:
+        "Travail de très haute qualité sur la découpe de nos interviews. L'équipe sait créer des \"hooks\" visuels qui retiennent l'audience et poussent les algorithmes à nous mettre en avant.",
+      author: "Claire Fontaine",
+      role: "Directrice de la communication",
     },
   ],
 
