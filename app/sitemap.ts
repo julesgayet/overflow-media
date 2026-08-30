@@ -9,6 +9,7 @@ const BASE = `https://${site.domain}`;
 const routes: { path: string; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number }[] = [
   { path: "", changeFrequency: "weekly", priority: 1 },
   { path: "/reserver", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/prix-clipping", changeFrequency: "monthly", priority: 0.9 },
   { path: "/mentions-legales", changeFrequency: "yearly", priority: 0.2 },
   { path: "/cgv", changeFrequency: "yearly", priority: 0.2 },
   { path: "/confidentialite", changeFrequency: "yearly", priority: 0.2 },

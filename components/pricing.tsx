@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/site.config";
 import { Button, Reveal } from "./ui";
 
@@ -39,6 +40,18 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
+              {/*  Lien contextuel vers la page de fond sur le prix : c'est le
+                  maillage interne le plus fort du site — depuis la section
+                  tarif elle-même, avec une ancre qui porte le mot-clé.    */}
+              <p className="mt-7 text-sm text-white/70">
+                <Link
+                  href="/prix-clipping"
+                  className="underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
+                >
+                  Comment se calcule le prix du clipping
+                </Link>{" "}
+                — CPM, budget et exemples chiffrés.
+              </p>
             </div>
 
             <div className="shrink-0">

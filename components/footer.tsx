@@ -18,6 +18,10 @@ const cols = [
     links: [
       { href: "#simulateur", label: "Simulateur" },
       { href: "#tarifs", label: "Tarifs" },
+      /*  Seule entrée de cette colonne qui pointe vers une page et non une
+          ancre : c'est le lien interne qui sort `/prix-clipping` de son
+          statut de page orpheline, sur toutes les pages du site.          */
+      { href: "/prix-clipping", label: "Prix du clipping" },
       { href: "#mecanique", label: "La mécanique" },
       { href: "#pour-qui", label: "Pour qui" },
       { href: "#methode", label: "Méthode" },

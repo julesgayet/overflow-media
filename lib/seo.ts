@@ -61,10 +61,16 @@ const service = {
   },
 };
 
-export function faqPage(entries: readonly { readonly q: string; readonly a: string }[]) {
+/*  `path` est indispensable : deux pages qui portent chacune leur FAQ ne
+ *  peuvent pas partager le même `@id`, sinon elles déclarent deux contenus
+ *  différents sous une seule identité — et le moteur en retient un seul.    */
+export function faqPage(
+  entries: readonly { readonly q: string; readonly a: string }[],
+  path = "",
+) {
   return {
     "@type": "FAQPage",
-    "@id": `${BASE}/#faq`,
+    "@id": `${BASE}${path}/#faq`,
     inLanguage: "fr-FR",
     isPartOf: { "@id": ID.website },
     about: { "@id": ID.service },
