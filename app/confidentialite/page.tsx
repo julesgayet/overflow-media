@@ -4,6 +4,9 @@ import { Identity, LegalPage, LegalSection } from "@/components/legal";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
+  description:
+    "Comment Omniflux collecte, utilise et conserve vos données personnelles : finalités, base légale, durées de conservation et exercice de vos droits RGPD.",
+  alternates: { canonical: "/confidentialite" },
   robots: { index: false, follow: true },
 };
 

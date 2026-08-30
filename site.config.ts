@@ -337,7 +337,10 @@ export const site = {
     host: "Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, USA",
     hostRegion: "Union européenne",
     court: "Tribunal de commerce de Limoges",
-    lastUpdated: "26 août 2026",
+    /*  ISO 8601, et pas « 26 août 2026 » : c'est la forme qu'exigent les
+        balises `dateModified` du schema. L'affichage français en est dérivé
+        (`formatDate`), pour qu'une seule date fasse foi.                   */
+    lastUpdated: "2026-08-26",
   },
 } as const;
 

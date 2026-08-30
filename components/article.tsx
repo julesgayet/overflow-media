@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { formatDate } from "@/lib/format";
 import { Nav } from "./nav";
 import { Footer } from "./footer";
 
@@ -34,7 +35,11 @@ export function ArticlePage({
           {/*  Le chapô est la portion la plus souvent extraite telle quelle
               par un moteur de réponse : il doit se suffire à lui-même.    */}
           <p className="mt-6 text-pretty text-lg leading-relaxed text-ink">{lede}</p>
-          <p className="nums mt-4 text-xs text-mist-2">Mis à jour le {updated}</p>
+          {/*  <time dateTime> : la date lisible par la machine, à côté de la
+              date lisible par l'humain. C'est le signal de fraîcheur.    */}
+          <p className="nums mt-4 text-xs text-mist-2">
+            Mis à jour le <time dateTime={updated}>{formatDate(updated)}</time>
+          </p>
 
           <div className="mt-14 space-y-12 text-[15px] leading-relaxed text-mist">
             {children}

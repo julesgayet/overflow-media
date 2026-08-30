@@ -70,7 +70,7 @@ export function faqPage(
 ) {
   return {
     "@type": "FAQPage",
-    "@id": `${BASE}${path}/#faq`,
+    "@id": `${BASE}${path || "/"}#faq`,
     inLanguage: "fr-FR",
     isPartOf: { "@id": ID.website },
     about: { "@id": ID.service },
@@ -79,6 +79,67 @@ export function faqPage(
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
+  };
+}
+
+/*  Un nœud `WebPage` par page, rattaché au site et à l'entité. Sans lui, les
+ *  blocs FAQ/Article flottent : rien ne dit de QUELLE page ils proviennent,
+ *  ni qui en répond. `dateModified` est le signal de fraîcheur que Google et
+ *  les moteurs de réponse regardent avant de reprendre un chiffre.          */
+export function webPage({
+  path,
+  name,
+  description,
+  modified,
+}: {
+  path: string;
+  name: string;
+  description: string;
+  modified: string;
+}) {
+  return {
+    "@type": "WebPage",
+    "@id": `${BASE}${path || "/"}#webpage`,
+    url: `${BASE}${path}`,
+    name,
+    description,
+    inLanguage: "fr-FR",
+    isPartOf: { "@id": ID.website },
+    about: { "@id": ID.service },
+    publisher: { "@id": ID.org },
+    dateModified: modified,
+  };
+}
+
+/*  Pour les pages éditoriales. `author` explicite : une page de conseil sans
+ *  auteur identifiable est systématiquement dépriorisée — c'est le cœur des
+ *  critères E-E-A-T, et c'est aussi ce qu'un LLM cherche pour attribuer.    */
+export function article({
+  path,
+  headline,
+  description,
+  published,
+  modified,
+}: {
+  path: string;
+  headline: string;
+  description: string;
+  published: string;
+  modified: string;
+}) {
+  return {
+    "@type": "Article",
+    "@id": `${BASE}${path}#article`,
+    headline,
+    description,
+    inLanguage: "fr-FR",
+    isPartOf: { "@id": `${BASE}${path}#webpage` },
+    mainEntityOfPage: { "@id": `${BASE}${path}#webpage` },
+    about: { "@id": ID.service },
+    author: { "@id": ID.org },
+    publisher: { "@id": ID.org },
+    datePublished: published,
+    dateModified: modified,
   };
 }
 

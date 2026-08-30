@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site } from "@/site.config";
+import { formatDate } from "@/lib/format";
 import { Footer } from "./footer";
 import { Arrow } from "./icons";
 
@@ -30,7 +31,7 @@ export function LegalPage({
 
         <div className="mt-10 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
           <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">{title}</h1>
-          <span className="nums text-xs text-mist-2">Mis à jour le {site.legal.lastUpdated}</span>
+          <span className="nums text-xs text-mist-2">Mis à jour le {formatDate(site.legal.lastUpdated)}</span>
         </div>
 
         <div className="mt-12 max-w-2xl space-y-10 text-sm leading-relaxed text-mist">

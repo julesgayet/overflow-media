@@ -4,6 +4,9 @@ import { LegalPage, LegalSection } from "@/components/legal";
 
 export const metadata: Metadata = {
   title: "Conditions générales de vente",
+  description:
+    "Conditions générales de vente d'Omniflux : objet des campagnes de clipping, facturation au CPM, budget plafonné, délais de lancement et droits sur les contenus.",
+  alternates: { canonical: "/cgv" },
   robots: { index: false, follow: true },
 };
 

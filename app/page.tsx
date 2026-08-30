@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { site } from "@/site.config";
 import { listSectionMedia } from "@/lib/media";
-import { breadcrumbs, faqPage, graph, jsonLdScript } from "@/lib/seo";
+import { breadcrumbs, faqPage, graph, jsonLdScript, webPage } from "@/lib/seo";
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { ProofArc } from "@/components/proof-arc";
@@ -25,7 +25,13 @@ export const metadata: Metadata = {
 /*  Le @graph de la page d'accueil : socle d'entités (`lib/seo.ts`) + la FAQ,
  *  qui est le seul bloc éligible à un rich result ici, + le fil d'Ariane.    */
 const jsonLd = graph(
-  faqPage(site.faq),
+  webPage({
+    path: "/",
+    name: `${site.name} — agence de clipping`,
+    description: site.description,
+    modified: site.legal.lastUpdated,
+  }),
+  faqPage(site.faq, ""),
   breadcrumbs([{ name: "Accueil", path: "/" }]),
 );
 

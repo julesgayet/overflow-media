@@ -4,6 +4,9 @@ import { Host, Identity, LegalPage, LegalSection } from "@/components/legal";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
+  description:
+    "Identité de l'éditeur du site omniflux.fr, hébergeur et contact, conformément à la LCEN.",
+  alternates: { canonical: "/mentions-legales" },
   robots: { index: false, follow: true },
 };
 

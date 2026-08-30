@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/site.config";
-import { breadcrumbs, faqPage, graph, jsonLdScript } from "@/lib/seo";
+import { article, breadcrumbs, faqPage, graph, jsonLdScript, webPage } from "@/lib/seo";
 import { ArticlePage, ArticleCta, DataTable, KeyAnswer, Section } from "@/components/article";
 
 /*  Page cible de « prix clipping » / « cpm clipping » / « combien coûte le
@@ -77,11 +77,33 @@ export const metadata: Metadata = {
   },
 };
 
+const PATH = "/prix-clipping";
+
+/*  Dates propres à cette page, pas celles des mentions légales : une page de
+ *  contenu et un document juridique ne se mettent pas à jour au même rythme.
+ *  À réviser dès que les chiffres bougent — `dateModified` est ce que Google
+ *  et les moteurs de réponse regardent avant de reprendre un prix.          */
+const PUBLISHED = "2026-08-30";
+const UPDATED = "2026-08-30";
+
 const jsonLd = graph(
-  faqPage(faq, "/prix-clipping"),
+  webPage({
+    path: PATH,
+    name: TITLE,
+    description: metadata.description as string,
+    modified: UPDATED,
+  }),
+  article({
+    path: PATH,
+    headline: TITLE,
+    description: metadata.description as string,
+    published: PUBLISHED,
+    modified: UPDATED,
+  }),
+  faqPage(faq, PATH),
   breadcrumbs([
     { name: "Accueil", path: "/" },
-    { name: "Prix du clipping", path: "/prix-clipping" },
+    { name: "Prix du clipping", path: PATH },
   ]),
 );
 
@@ -92,7 +114,7 @@ export default function PrixClipping() {
       <ArticlePage
         title={"Prix du clipping\u00A0: combien coûte une campagne en France\u00A0?"}
         lede={`Le clipping se facture au CPM — un prix fixe pour 1 000 vues générées. En France, comptez entre ${eur(cpmMin)} € et ${eur(cpmMax)} € pour 1 000 vues selon l'audience visée, sur un budget plafonné à l'avance. Cette page détaille ce qui fait varier ce prix, ce qu'un budget donné rapporte en vues, et comment le clipping se compare à la publicité payante.`}
-        updated={site.legal.lastUpdated}
+        updated={UPDATED}
       >
         <KeyAnswer>
           <strong className="font-semibold">En résumé.</strong> Une campagne de clipping se
