@@ -139,7 +139,6 @@ export function Simulator() {
                 <span className="text-gradient">votre budget</span> ?
               </>
             }
-            subtitle="Bouge les curseurs. Le calcul est le même que celui qu'on applique en campagne."
           />
         </Reveal>
 
