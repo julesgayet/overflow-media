@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { site } from "@/site.config";
 import { listSectionMedia } from "@/lib/media";
+import { breadcrumbs, faqPage, graph, jsonLdScript } from "@/lib/seo";
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { ProofArc } from "@/components/proof-arc";
@@ -15,31 +17,23 @@ import { Faq } from "@/components/faq";
 import { Cta } from "@/components/cta";
 import { Footer } from "@/components/footer";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: site.name,
-  description: site.description,
-  url: `https://${site.domain}`,
-  email: site.email,
-  areaServed: "FR",
-  serviceType: "Agence de clipping / marketing d'influence",
-  mainEntity: {
-    "@type": "FAQPage",
-    mainEntity: site.faq.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  },
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
 };
+
+/*  Le @graph de la page d'accueil : socle d'entités (`lib/seo.ts`) + la FAQ,
+ *  qui est le seul bloc éligible à un rich result ici, + le fil d'Ariane.    */
+const jsonLd = graph(
+  faqPage(site.faq),
+  breadcrumbs([{ name: "Accueil", path: "/" }]),
+);
 
 export default function Home() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={jsonLdScript(jsonLd)}
       />
       <Nav />
       {/*  L'ordre des sections est la seule chose que ce fichier décide.

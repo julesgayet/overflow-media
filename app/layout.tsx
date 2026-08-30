@@ -8,34 +8,44 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${site.domain}`),
+  /*  Le mot-clé passe AVANT la marque : Google tronque autour de 60 signes et
+   *  pondère les premiers mots du <title>. « Omniflux » ne se cherche pas
+   *  encore — « agence de clipping », si.                                    */
   title: {
-    default: `${site.name} — Agence de clipping française`,
+    default: "Agence de clipping pour marques — CPM fixe, vues vérifiées | Omniflux",
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  alternates: { canonical: "/" },
   keywords: [
     "agence de clipping",
     "clipping France",
     "campagne de clipping pour marque",
     "campagne UGC",
-    "TikTok",
+    "clipping TikTok",
     "Instagram Reels",
     "YouTube Shorts",
+    "prix clipping CPM",
+    "agence clipping TikTok",
   ],
   openGraph: {
     type: "website",
     locale: "fr_FR",
     url: `https://${site.domain}`,
     siteName: site.name,
-    title: `${site.name} — Agence de clipping française`,
+    title: "Agence de clipping pour marques — CPM fixe, vues vérifiées",
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Agence de clipping française`,
+    title: "Agence de clipping pour marques — CPM fixe, vues vérifiées",
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
+  },
 };
 
 export const viewport: Viewport = {
