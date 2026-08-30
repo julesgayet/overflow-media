@@ -6,6 +6,7 @@ import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { ProofArc } from "@/components/proof-arc";
 import { FeedMath } from "@/components/feed-math";
+import { OrganicMath } from "@/components/organic-math";
 import { Audiences } from "@/components/audiences";
 import { How } from "@/components/how";
 import { Simulator } from "@/components/simulator";
@@ -41,6 +42,7 @@ export default function Home() {
           colonne « Agence » du footer, sinon la navigation contredit la page. */}
       <main>
         <Hero />
+        <OrganicMath />
         <Simulator />
         <Pricing />
         <FeedMath
