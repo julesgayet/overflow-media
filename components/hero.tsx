@@ -1,7 +1,7 @@
 import { site } from "@/site.config";
 import { Button, CountUp, Reveal } from "./ui";
 import { TikTok, Instagram, YouTube } from "./icons";
-import { ParticleField } from "./particle-field";
+import { GlobeField } from "./globe-field";
 
 /*  Calculé plutôt que codé en dur : le multiplicateur affiché ne peut jamais
  *  se désynchroniser du CPM affiché juste à côté (`site.pricing.from`). Arrondi
@@ -11,11 +11,11 @@ const cheaperMultiplier = Math.floor(site.simulator.paidCpm / site.pricing.fromV
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-[72px]">
-      {/*  Décor : le seul réseau de particules cobalt. La grille pâle qui se
-          trouvait ici entrait en conflit avec le maillage — deux trames
-          régulières superposées, illisibles.                                 */}
+      {/*  Décor : globe filaire cobalt (essai en place du réseau de
+          particules, `particle-field.tsx`, conservé). Une seule trame ici —
+          la grille pâle d'origine en superposait deux, illisibles.          */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <ParticleField />
+        <GlobeField />
       </div>
 
       <div className="container-x pb-14 pt-20 md:pt-28">
@@ -29,7 +29,9 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={160}>
-            <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-relaxed text-mist md:text-lg">
+            {/*  `text-ink` et non `text-mist` comme les autres chapôs : c'est
+                le seul paragraphe du site posé sur un décor animé.        */}
+            <p className="mx-auto mt-7 max-w-2xl text-pretty text-base leading-relaxed text-ink md:text-lg">
               {site.name} transforme votre contenu en millions de vues, diffusées en continu sur
               TikTok, Reels et Shorts. Votre marque est partout — à partir de {site.pricing.from} de
               CPM, {cheaperMultiplier}x moins cher que la pub payante.
